@@ -65,10 +65,19 @@ public class Game
     {
         int numPlayers = gui.getUserInteger("Vælg antal spillere",2,6);
         player=new Player[numPlayers];
+        int minAge = 999;
+        int minAgeIndex = 0;
+        int age;
         for (int i = 0; i < numPlayers; i++)
         {
             player[i] = new Player(gui);
             gui.addPlayer(player[i].getGuiPlayer());
+            age = gui.getUserInteger("Hvad er "+ player[i].getName()+"'s alder?");
+            if (age < minAge)
+            {
+                minAge=age;
+                minAgeIndex=i;
+            }
             if (numPlayers == 2){
                 player[i].addPoints(20);
             }
@@ -79,12 +88,8 @@ public class Game
                 player[i].addPoints(16);
             }
         }
-        do
-        {
-            this.dice.rollDice();
-        }
-        while(this.dice.getDice1()>numPlayers);
-        currentPlayer = player[this.dice.getDice1()-1];
+
+        currentPlayer = player[minAgeIndex];
     }
 
     public boolean isGameOver() {
