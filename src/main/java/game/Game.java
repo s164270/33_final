@@ -78,14 +78,8 @@ public class Game
                 minAge=age;
                 minAgeIndex=i;
             }
-            if (numPlayers == 2){
-                player[i].addPoints(20);
-            }
-            else if (numPlayers == 3){
-                player[i].addPoints(18);
-            }
-            else if (numPlayers == 4){
-                player[i].addPoints(16);
+            {
+                player[i].addPoints(30000);
             }
         }
 

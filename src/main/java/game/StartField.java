@@ -5,8 +5,7 @@ import player.Player;
 public class StartField extends Field{
 
     @Override
-    public void visitField(Player player) {
-        player.addPoints(2);
+    public void visitField(Player player) { player.addPoints(4000);
      }
 
     @Override
