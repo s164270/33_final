@@ -103,7 +103,7 @@ public class Game
     public void rollDice()
     {
         dice.rollDice();
-        gui.setDie(dice.getDice1());
+        gui.setDice(dice.getDice1(), dice.getDice2());
     }
 
     public void turn(Player player)
@@ -122,7 +122,7 @@ public class Game
             if(!gameOver)
             {
                 rollDice();
-                board.movePlayer(player, dice.getDice1());
+                board.movePlayer(player, dice.getSum());
             }
         }
         gameOver();
