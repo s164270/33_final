@@ -88,15 +88,22 @@ public class GameBoard
 
     private void createFields()
     {
+        PropertyField temp_neighbor;
+
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", 1200,50);
-        fields[3] = new PropertyField("PropertyField 3", 1200, 50, (PropertyField) fields[1]);
+        fields[1] = new PropertyField("PropertyField 1", 1200, new int[]{50, 2, 3});
+        temp_neighbor =new PropertyField("PropertyField 3", 1200, new int[]{50, 2, 3});
+        temp_neighbor.setNeighbor(new PropertyField[]{(PropertyField) fields[1],temp_neighbor});
+        fields[3] = temp_neighbor;
+
         fields[4] = new ParkingField();
         fields[5] = new ParkingField();
 
-        fields[6] = new PropertyField("PropertyField 6", 2000,100);
-        fields[8] = new PropertyField("PropertyField 8", 2000, 100,(PropertyField) fields[6]);
-        fields[9] = new PropertyField("PropertyField 9", 2400,150,(PropertyField) fields[6]);
+        fields[6] = new PropertyField("PropertyField 6", 2000, new int[]{50, 2, 3});
+        fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{100, 2, 3},(PropertyField) fields[6]);
+        temp_neighbor = new PropertyField("PropertyField 9", 2400, new int[]{100, 2, 3},(PropertyField) fields[6]);
+        temp_neighbor.setNeighbor(new PropertyField[]{(PropertyField) fields[6], (PropertyField) fields[8], temp_neighbor});
+        fields[9] = temp_neighbor;
 
         fields[10] = new JailField("felt nummer 10", 0,false);
 
