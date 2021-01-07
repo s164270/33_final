@@ -8,6 +8,7 @@ import player.Player;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Game
 {
@@ -64,26 +65,16 @@ public class Game
     private void createPlayers()
     {
         int numPlayers = gui.getUserInteger("Vælg antal spillere",2,6);
-        player=new Player[numPlayers];
-        int minAge = 999;
-        int minAgeIndex = 0;
-        int age;
+        player = new Player[numPlayers];
         for (int i = 0; i < numPlayers; i++)
         {
             player[i] = new Player(gui);
             gui.addPlayer(player[i].getGuiPlayer());
-            age = gui.getUserInteger("Hvad er "+ player[i].getName()+"'s alder?");
-            if (age < minAge)
-            {
-                minAge=age;
-                minAgeIndex=i;
-            }
-            {
-                player[i].addPoints(30000);
-            }
+            player[i].addPoints(30000);
         }
 
-        currentPlayer = player[minAgeIndex];
+        //The starting player is chosen randomly
+        currentPlayer = player[new Random().nextInt(numPlayers)];
     }
 
     public boolean isGameOver() {
