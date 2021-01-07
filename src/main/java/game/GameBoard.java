@@ -13,9 +13,10 @@ import java.util.Arrays;
 
 public class GameBoard
 {
-    private final int NFIELDS = 40;
-    private Field[] fields;
-    private GUI_Field[] guiFields;
+    public static final int NFIELDS = 40;
+
+    private final Field[] fields;
+    private final GUI_Field[] guiFields;
     private GUI gui;
 
     public GameBoard()

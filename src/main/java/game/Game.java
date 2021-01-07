@@ -63,7 +63,7 @@ public class Game
 
     private void createPlayers()
     {
-        int numPlayers = gui.getUserInteger("Vælg antal spillere",2,6);
+        int numPlayers = gui.getUserInteger("Vælg antal spillere (min: 2, max: 4)",2,6);
         player=new Player[numPlayers];
         int minAge = 999;
         int minAgeIndex = 0;
@@ -124,9 +124,10 @@ public class Game
     }
 
     public void gameOver() {
-        for (int i = 0; i < player.length; i++) {
-            if (player[i].isBroke()) {
+        for (Player player : player) {
+            if (player.isBroke()) {
                 this.gameOver = true;
+                break;
             }
         }
     }
