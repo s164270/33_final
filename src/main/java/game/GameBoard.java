@@ -31,7 +31,7 @@ public class GameBoard
         this.gui = gui;
     }
 
-    public void movePlayer(Player player, int distance){
+    public void movePlayer(Player player, int distance) {
         String msg;
         int tempPosition = player.getPosition();
         while(distance > 0)
@@ -90,7 +90,7 @@ public class GameBoard
         fields[0] = new StartField();
         fields[1] = new PropertyField("PropertyField 1", 1200,50, gui);
         fields[3] = new PropertyField("PropertyField 3", 1200, 50, (PropertyField) fields[1], gui);
-        fields[4] = new ParkingField();
+        fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
 
         fields[6] = new PropertyField("PropertyField 6", 2000,100, gui);
@@ -130,7 +130,7 @@ public class GameBoard
         fields[35] = new ParkingField();
 
         fields[37] = new PropertyField("PropertyField 37", 7000,700, gui);
-        fields[39] = new ParkingField();
+        fields[39] = new TaxField("", 2000, false, gui);
         fields[39] = new PropertyField("PropertyField 39", 8000,1000,(PropertyField) fields[37], gui);
 
 
