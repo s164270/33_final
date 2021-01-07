@@ -62,6 +62,17 @@ public class PropertyField extends Field{
         }
     }
 
+    public void buyProperty(Player player, int auctionPrice)
+    {
+        player.addPoints(-auctionPrice);
+        setOwner(player);
+        if(neighbor.getOwner() == this.owner)
+        {
+            paired = true;
+            neighbor.setPaired(true);
+        }
+    }
+
     @Override
     public String landOnField(Player player) {
 
@@ -78,7 +89,6 @@ public class PropertyField extends Field{
                 default:
                     System.out.println("FEJL");
             }
-
         }
         else if(owner != player)
         {
