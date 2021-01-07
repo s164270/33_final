@@ -1,6 +1,7 @@
 package game;
 
 import gui_fields.GUI_Ownable;
+import gui_main.GUI;
 import player.Player;
 import gui_fields.GUI_Field;
 
@@ -16,15 +17,15 @@ public class PropertyField extends Field{
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost)
+    public PropertyField(String name, GUI gui, int cost)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
     }
 
-    public PropertyField(String name, int cost, PropertyField neighbor)
+    public PropertyField(String name, GUI gui, int cost, PropertyField neighbor)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
         this.neighbor = neighbor;
         neighbor.setNeighbor(this);
