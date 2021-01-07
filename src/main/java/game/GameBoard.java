@@ -24,7 +24,6 @@ public class GameBoard
         fields = new Field[NFIELDS];
         guiFields = new GUI_Field[NFIELDS];
         createGuiFields();
-        createFields();
     }
 
     public void setGui(GUI gui)
@@ -86,53 +85,53 @@ public class GameBoard
         fields[fieldIndex] = field;
     }
 
-    private void createFields()
+    public void createFields()
     {
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", 1200,50);
-        fields[3] = new PropertyField("PropertyField 3", 1200, 50, (PropertyField) fields[1]);
+        fields[1] = new PropertyField("PropertyField 1", 1200,50, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, 50, (PropertyField) fields[1], gui);
         fields[4] = new ParkingField();
         fields[5] = new ParkingField();
 
-        fields[6] = new PropertyField("PropertyField 6", 2000,100);
-        fields[8] = new PropertyField("PropertyField 8", 2000, 100,(PropertyField) fields[6]);
-        fields[9] = new PropertyField("PropertyField 9", 2400,150,(PropertyField) fields[6]);
+        fields[6] = new PropertyField("PropertyField 6", 2000,100, gui);
+        fields[8] = new PropertyField("PropertyField 8", 2000, 100,(PropertyField) fields[6], gui);
+        fields[9] = new PropertyField("PropertyField 9", 2400,150,(PropertyField) fields[6], gui);
 
         fields[10] = new JailField("felt nummer 10", 0,false);
 
-        fields[11] = new PropertyField("PropertyField 11", 2800,200);
+        fields[11] = new PropertyField("PropertyField 11", 2800,200, gui);
         fields[12] = new ParkingField();
-        fields[13] = new PropertyField("PropertyField 13", 2800, 200, (PropertyField) fields[11]);
-        fields[14] = new PropertyField("PropertyField 14", 3200,250,(PropertyField) fields[11]);
+        fields[13] = new PropertyField("PropertyField 13", 2800, 200, (PropertyField) fields[11], gui);
+        fields[14] = new PropertyField("PropertyField 14", 3200,250,(PropertyField) fields[11], gui);
 
         fields[15] = new ParkingField();
-        fields[16] = new PropertyField("PropertyField 16", 3600,300);
-        fields[18] = new PropertyField("PropertyField 18", 3600,300, (PropertyField) fields[16]);
-        fields[19] = new PropertyField("PropertyField 19", 4000,350, (PropertyField) fields[16]);
+        fields[16] = new PropertyField("PropertyField 16", 3600,300, gui);
+        fields[18] = new PropertyField("PropertyField 18", 3600,300, (PropertyField) fields[16], gui);
+        fields[19] = new PropertyField("PropertyField 19", 4000,350, (PropertyField) fields[16], gui);
 
         fields[20] = new ParkingField();
-        fields[21] = new PropertyField("PropertyField 21",4400,350);
-        fields[23] = new PropertyField("PropertyField 23", 4400,350,(PropertyField) fields[21]);
-        fields[24] = new PropertyField("PropertyField 24", 4800,400, (PropertyField) fields[21]);
+        fields[21] = new PropertyField("PropertyField 21", 4400,350, gui);
+        fields[23] = new PropertyField("PropertyField 23", 4400,350,(PropertyField) fields[21], gui);
+        fields[24] = new PropertyField("PropertyField 24", 4800,400, (PropertyField) fields[21], gui);
 
         fields[25] = new ParkingField();
 
-        fields[26] = new PropertyField("PropertyField 26", 5200,450);
-        fields[27] = new PropertyField("PropertyField 27",5200,450,(PropertyField) fields[26]);
+        fields[26] = new PropertyField("PropertyField 26", 5200,450, gui);
+        fields[27] = new PropertyField("PropertyField 27",5200,450,(PropertyField) fields[26], gui);
         fields[28] = new ParkingField();
-        fields[29] = new PropertyField("PropertyField 29",5600,500, (PropertyField) fields[26]);
+        fields[29] = new PropertyField("PropertyField 29",5600,500, (PropertyField) fields[26], gui);
 
         fields[30] = new JailField("felt nummber 30", 1000, true);
 
-        fields[31] = new PropertyField("PropertyField 31", 6000,550);
-        fields[32] = new PropertyField("PropertyField 32", 6000,550,(PropertyField) fields[31]);
-        fields[34] = new PropertyField("PropertyField 34", 6400,600,(PropertyField) fields[31]);
+        fields[31] = new PropertyField("PropertyField 31", 6000,550, gui);
+        fields[32] = new PropertyField("PropertyField 32", 6000,550,(PropertyField) fields[31], gui);
+        fields[34] = new PropertyField("PropertyField 34", 6400,600,(PropertyField) fields[31], gui);
 
         fields[35] = new ParkingField();
 
-        fields[37] = new PropertyField("PropertyField 37", 7000,700);
+        fields[37] = new PropertyField("PropertyField 37", 7000,700, gui);
         fields[39] = new ParkingField();
-        fields[39] = new PropertyField("PropertyField 39", 8000,1000,(PropertyField) fields[37]);
+        fields[39] = new PropertyField("PropertyField 39", 8000,1000,(PropertyField) fields[37], gui);
 
 
 

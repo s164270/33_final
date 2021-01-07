@@ -30,6 +30,7 @@ public class Game
         board = new GameBoard();
         gui = new GUI(board.getGuiFields(), Color.WHITE);
         board.setGui(gui);
+        board.createFields();
         gameOver = false;
 
         gui.showMessage("Velkomment til spillet!\n");
@@ -37,6 +38,7 @@ public class Game
         chanceCards=new ChanceCards(board, gui, player);
         chanceCards.createChance();
         board.createChanceFields(chanceCards);
+
         gui.showMessage("Okay " + currentPlayer.getName() + ", du starter.");
     }
 
@@ -49,6 +51,7 @@ public class Game
         board = new GameBoard();
         gui = new GUI(board.getGuiFields(), Color.WHITE);
         board.setGui(gui);
+        board.createFields();
         gameOver = false;
 
         player=new Player[2];

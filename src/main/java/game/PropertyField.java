@@ -1,6 +1,7 @@
 package game;
 
 import gui_fields.GUI_Ownable;
+import gui_main.GUI;
 import player.Player;
 import gui_fields.GUI_Field;
 
@@ -17,16 +18,16 @@ public class PropertyField extends Field{
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost, int rent)
+    public PropertyField(String name, int cost, int rent, GUI gui)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
         this.rent = rent;
     }
 
-    public PropertyField(String name, int cost, int rent, PropertyField neighbor)
+    public PropertyField(String name, int cost, int rent, PropertyField neighbor, GUI gui)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
         this.rent = rent;
         this.neighbor = neighbor;
@@ -50,19 +51,34 @@ public class PropertyField extends Field{
         this.neighbor = neighbor;
     }
 
+    private void buyProperty(Player player)
+    {
+        player.addPoints(-cost);
+        setOwner(player);
+        if(neighbor.getOwner() == this.owner)
+        {
+            paired = true;
+            neighbor.setPaired(true);
+        }
+    }
+
     @Override
     public String landOnField(Player player) {
 
         if(owner == null) //player has to buy the property
         {
-            player.addPoints(-cost);
-            setOwner(player);
-
-            if(neighbor.getOwner() == this.owner)
+            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + "for " + cost + "?", "JA", "NEJ"))
             {
-                paired = true;
-                neighbor.setPaired(true);
+                case "JA":
+                    buyProperty(player);
+                    break;
+                case "NEJ":
+                    System.out.println("Ejendommen sættes på auktion");
+                    break;
+                default:
+                    System.out.println("FEJL");
             }
+
         }
         else if(owner != player)
         {
