@@ -6,6 +6,7 @@ import gui_fields.GUI_Field;
 
 public class PropertyField extends Field{
     private int cost;
+    private int rent;
     private boolean paired = false;
 
     private PropertyField neighbor;
@@ -16,16 +17,18 @@ public class PropertyField extends Field{
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost)
+    public PropertyField(String name, int cost, int rent)
     {
         super(name);
         this.cost = cost;
+        this.rent = rent;
     }
 
-    public PropertyField(String name, int cost, PropertyField neighbor)
+    public PropertyField(String name, int cost, int rent, PropertyField neighbor)
     {
         super(name);
         this.cost = cost;
+        this.rent = rent;
         this.neighbor = neighbor;
         neighbor.setNeighbor(this);
     }
@@ -65,11 +68,11 @@ public class PropertyField extends Field{
         {
             if(paired)
             {
-                player.sendPoints(owner, 2*cost);
+                player.sendPoints(owner, 2*rent);
             }
             else
             {
-                player.sendPoints(owner, cost);
+                player.sendPoints(owner,rent);
             }
         }
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
