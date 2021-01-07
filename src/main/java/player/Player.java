@@ -1,6 +1,7 @@
 package player;
 
 import chancecard.ChanceMovePlayer;
+import game.GameBoard;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -53,15 +54,12 @@ public class Player
             Color i = (Color) Color.class.getDeclaredField(col).get(null);
             GUI_Car car = new GUI_Car();
             car.setPrimaryColor(i);
-            List<String> list = new ArrayList<String>(Arrays.asList(colors));
+            List<String> list = new ArrayList<>(Arrays.asList(colors));
             list.removeAll(Collections.singleton((col)));
             colors = new String[list.size()];
             colors = list.toArray(colors);
             gui_player = new GUI_Player(playerName, account.getBalance(), car);
-        } catch (IllegalAccessException e)
-        {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e)
+        } catch (IllegalAccessException | NoSuchFieldException e)
         {
             e.printStackTrace();
         }
@@ -99,12 +97,12 @@ public class Player
 
     public void move(int distance)
     {
-        if(distance < 0 || distance > 24)
-            throw new IllegalArgumentException("distance can't be <0 or be >24");
-        if(position + distance < 24)
+        if(distance < 0 || distance > GameBoard.NFIELDS)
+            throw new IllegalArgumentException("distance can't be <0 or be >" +  GameBoard.NFIELDS);
+        if(position + distance < GameBoard.NFIELDS)
             position = position + distance;
         else
-            position = (position + distance) - 24;
+            position = (position + distance) - GameBoard.NFIELDS;
     }
 
     public void setPosition(int position) {
