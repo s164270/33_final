@@ -9,7 +9,7 @@ public class ChanceField extends Field {
     private ChanceCards cards;
     public ChanceField(String name)
     {
-        super(name);
+        super(name, null);
     }
     public ChanceField(String name, ChanceCards cards)
     {

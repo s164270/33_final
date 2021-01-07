@@ -9,7 +9,7 @@ public class JailField extends Field {
     private final boolean jailType;
     public JailField(String name, int jailCost, boolean jailType)
     {
-        super(name);
+        super(name, null);
         this.jailCost = jailCost;
         this.jailType = jailType;
 

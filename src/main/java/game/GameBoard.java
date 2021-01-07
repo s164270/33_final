@@ -6,9 +6,13 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Shipping;
 import gui_main.GUI;
 import player.Player;
-
+import javax.swing.plaf.basic.BasicListUI;
 import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GameBoard
@@ -24,7 +28,7 @@ public class GameBoard
         fields = new Field[NFIELDS];
         guiFields = new GUI_Field[NFIELDS];
         createGuiFields();
-        createFields();
+        String e;
     }
 
     public void setGui(GUI gui)
@@ -86,60 +90,53 @@ public class GameBoard
         fields[fieldIndex] = field;
     }
 
-    private void createFields()
+    public void createFields()
     {
-        PropertyField temp_neighbor;
-
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", 1200, new int[]{50, 2, 3});
-        temp_neighbor =new PropertyField("PropertyField 3", 1200, new int[]{50, 2, 3});
-        temp_neighbor.setNeighbor(new PropertyField[]{(PropertyField) fields[1],temp_neighbor});
-        fields[3] = temp_neighbor;
 
+        fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 2, 3}, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 2, 3},  new PropertyField[]{(PropertyField) fields[1]}, gui);
         fields[4] = new ParkingField();
         fields[5] = new ParkingField();
-
-        fields[6] = new PropertyField("PropertyField 6", 2000, new int[]{50, 2, 3});
-        fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{100, 2, 3},(PropertyField) fields[6]);
-        temp_neighbor = new PropertyField("PropertyField 9", 2400, new int[]{100, 2, 3},(PropertyField) fields[6]);
-        temp_neighbor.setNeighbor(new PropertyField[]{(PropertyField) fields[6], (PropertyField) fields[8], temp_neighbor});
-        fields[9] = temp_neighbor;
+        fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100}, gui);
+        fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{ 100}, gui);
+        fields[9] = new PropertyField("PropertyField 9", 2400,new int[]{ 150},new PropertyField[]{(PropertyField) fields[6],(PropertyField) fields[8]}, gui);
 
         fields[10] = new JailField("felt nummer 10", 0,false);
 
-        fields[11] = new PropertyField("PropertyField 11", 2800,200);
+        fields[11] = new PropertyField("PropertyField 11", 2800,new int[]{ 200}, gui);
         fields[12] = new ParkingField();
-        fields[13] = new PropertyField("PropertyField 13", 2800, 200, (PropertyField) fields[11]);
-        fields[14] = new PropertyField("PropertyField 14", 3200,250,(PropertyField) fields[11]);
+        fields[13] = new PropertyField("PropertyField 13", 2800, new int[]{ 200}, gui);
+        fields[14] = new PropertyField("PropertyField 14", 3200,new int[]{ 250},new PropertyField[]{(PropertyField) fields[11], (PropertyField) fields[13]}, gui);
 
         fields[15] = new ParkingField();
-        fields[16] = new PropertyField("PropertyField 16", 3600,300);
-        fields[18] = new PropertyField("PropertyField 18", 3600,300, (PropertyField) fields[16]);
-        fields[19] = new PropertyField("PropertyField 19", 4000,350, (PropertyField) fields[16]);
+        fields[16] = new PropertyField("PropertyField 16", 3600,new int[]{ 300}, gui);
+        fields[18] = new PropertyField("PropertyField 18", 3600,new int[]{ 300}, gui);
+        fields[19] = new PropertyField("PropertyField 19", 4000,new int[]{ 350},new PropertyField[]{ (PropertyField) fields[16], (PropertyField) fields[18]}, gui);
 
         fields[20] = new ParkingField();
-        fields[21] = new PropertyField("PropertyField 21",4400,350);
-        fields[23] = new PropertyField("PropertyField 23", 4400,350,(PropertyField) fields[21]);
-        fields[24] = new PropertyField("PropertyField 24", 4800,400, (PropertyField) fields[21]);
+        fields[21] = new PropertyField("PropertyField 21", 4400,new int[]{ 350}, gui);
+        fields[23] = new PropertyField("PropertyField 23", 4400,new int[]{ 350}, gui);
+        fields[24] = new PropertyField("PropertyField 24", 4800,new int[]{ 400},new PropertyField[]{ (PropertyField) fields[21],(PropertyField) fields[23]}, gui);
 
         fields[25] = new ParkingField();
 
-        fields[26] = new PropertyField("PropertyField 26", 5200,450);
-        fields[27] = new PropertyField("PropertyField 27",5200,450,(PropertyField) fields[26]);
+        fields[26] = new PropertyField("PropertyField 26", 5200,new int[]{ 450}, gui);
+        fields[27] = new PropertyField("PropertyField 27",5200,new int[]{ 450}, gui);
         fields[28] = new ParkingField();
-        fields[29] = new PropertyField("PropertyField 29",5600,500, (PropertyField) fields[26]);
+        fields[29] = new PropertyField("PropertyField 29",5600,new int[]{ 500}, new PropertyField[]{(PropertyField) fields[26],(PropertyField) fields[27]}, gui);
 
         fields[30] = new JailField("felt nummber 30", 1000, true);
 
-        fields[31] = new PropertyField("PropertyField 31", 6000,550);
-        fields[32] = new PropertyField("PropertyField 32", 6000,550,(PropertyField) fields[31]);
-        fields[34] = new PropertyField("PropertyField 34", 6400,600,(PropertyField) fields[31]);
+        fields[31] = new PropertyField("PropertyField 31", 6000,new int[]{ 550}, gui);
+        fields[32] = new PropertyField("PropertyField 32", 6000,new int[]{ 550}, gui);
+        fields[34] = new PropertyField("PropertyField 34", 6400,new int[]{ 600},new PropertyField[]{(PropertyField) fields[31],(PropertyField) fields[32]}, gui);
 
         fields[35] = new ParkingField();
 
-        fields[37] = new PropertyField("PropertyField 37", 7000,700);
-        fields[39] = new ParkingField();
-        fields[39] = new PropertyField("PropertyField 39", 8000,1000,(PropertyField) fields[37]);
+        fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700}, gui);
+        fields[38] = new ParkingField();
+        fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000},new PropertyField[]{(PropertyField) fields[37]}, gui);
 
 
 

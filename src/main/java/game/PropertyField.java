@@ -1,8 +1,11 @@
 package game;
 
 import gui_fields.GUI_Ownable;
+import gui_main.GUI;
 import player.Player;
 import gui_fields.GUI_Field;
+
+import java.util.ArrayList;
 
 public class PropertyField extends Field{
     private int cost;
@@ -18,28 +21,27 @@ public class PropertyField extends Field{
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost, int rent[])
+    public PropertyField(String name, int cost, int rent[], GUI gui)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
         this.rent = rent;
         this.num_houses = 0;
     }
 
-    public PropertyField(String name, int cost, int rent[], PropertyField neighbor[])
+    public PropertyField(String name, int cost, int rent[], PropertyField neighbor[], GUI gui)
     {
-        super(name);
+        super(name, gui);
         this.cost = cost;
         this.rent = rent;
-
-        boolean self_neighbor =true;
+        this.num_houses = 0;
+        PropertyField temp_neighbor[] = new PropertyField[neighbor.length+1];
         for (int i = 0; i < neighbor.length; i++)
         {
-            self_neighbor = self_neighbor && neighbor[i] == this;
+            temp_neighbor[i]=neighbor[i];
         }
-
-        this.setNeighbor(neighbor);
-        this.num_houses = 0;
+        temp_neighbor[neighbor.length]=this;
+        this.setNeighbors(temp_neighbor);
     }
 
     public Player getOwner() {
@@ -63,24 +65,62 @@ public class PropertyField extends Field{
             neighbor[i].setNeighbor(neighbor);
         }
     }
+
+    private void buyProperty(Player player)
+    {
+        player.addPoints(-cost);
+        setOwner(player);
+        boolean pair =true;
+        for (int i = 0; i < neighbor.length; i++)
+        {
+            pair = pair && neighbor[i].getOwner() == this.getOwner();
+            neighbor[i].setPaired(true);
+        }
+        for (int i = 0; i < neighbor.length; i++)
+        {
+            neighbor[i].setPaired(pair);
+        }
+    }
+
+    public void buyHouse()
+    {
+        // TODO make housePrice part of constructer so it is defined when the property is created
+        int housePrice = 2000;
+       this.getOwner().addPoints(-housePrice);
+        // TODO make sure that all prices are added before this is implemented
+       this.num_houses+=1;
+    }
+
+    public void buyProperty(Player player, int auctionPrice)
+    {
+        player.addPoints(-auctionPrice);
+        setOwner(player);
+        boolean pair =true;
+        for (int i = 0; i < neighbor.length; i++)
+        {
+            pair = pair && neighbor[i].getOwner() == this.getOwner();
+            neighbor[i].setPaired(true);
+        }
+        for (int i = 0; i < neighbor.length; i++)
+        {
+            neighbor[i].setPaired(pair);
+        }
+    }
+
     @Override
     public String landOnField(Player player) {
-
-
         if(owner == null) //player has to buy the property
         {
-            player.addPoints(-cost);
-            setOwner(player);
-            boolean pair =true;
-            for (int i = 0; i < neighbor.length; i++)
+            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + "for " + cost + "?", "JA", "NEJ"))
             {
-                pair = pair &&neighbor[i].getOwner() == this.owner;
-                neighbor[i].setPaired(true);
-            }
-
-            for (int i = 0; i < neighbor.length; i++)
-            {
-                neighbor[i].setPaired(pair);
+                case "JA":
+                    buyProperty(player);
+                    break;
+                case "NEJ":
+                    System.out.println("Ejendommen sættes på auktion");
+                    break;
+                default:
+                    System.out.println("FEJL");
             }
         }
         else if(owner != player)
