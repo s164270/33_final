@@ -13,9 +13,10 @@ import java.util.Arrays;
 
 public class GameBoard
 {
-    private final int NFIELDS = 40;
-    private Field[] fields;
-    private GUI_Field[] guiFields;
+    public static final int NFIELDS = 40;
+
+    private final Field[] fields;
+    private final GUI_Field[] guiFields;
     private GUI gui;
 
     public GameBoard()
@@ -88,50 +89,50 @@ public class GameBoard
     private void createFields()
     {
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", gui, 1200);
-        fields[3] = new PropertyField("PropertyField 3", gui, 1200, (PropertyField) fields[1]);
+        fields[1] = new PropertyField("PropertyField 1", 1200,50);
+        fields[3] = new PropertyField("PropertyField 3", 1200, 50, (PropertyField) fields[1]);
         fields[4] = new ParkingField();
         fields[5] = new ParkingField();
 
-        fields[6] = new PropertyField("PropertyField 6", gui, 2000);
-        fields[8] = new PropertyField("PropertyField 8", gui, 2000, (PropertyField) fields[6]);
-        fields[9] = new PropertyField("PropertyField 9", gui, 2400,(PropertyField) fields[6]);
+        fields[6] = new PropertyField("PropertyField 6", 2000,100);
+        fields[8] = new PropertyField("PropertyField 8", 2000, 100,(PropertyField) fields[6]);
+        fields[9] = new PropertyField("PropertyField 9", 2400,150,(PropertyField) fields[6]);
 
         fields[10] = new JailField("felt nummer 10", 0,false);
 
-        fields[11] = new PropertyField("PropertyField 11", gui, 2800);
+        fields[11] = new PropertyField("PropertyField 11", 2800,200);
         fields[12] = new ParkingField();
-        fields[13] = new PropertyField("PropertyField 13", gui, 2800, (PropertyField) fields[11]);
-        fields[14] = new PropertyField("PropertyField 14", gui, 3200,(PropertyField) fields[11]);
+        fields[13] = new PropertyField("PropertyField 13", 2800, 200, (PropertyField) fields[11]);
+        fields[14] = new PropertyField("PropertyField 14", 3200,250,(PropertyField) fields[11]);
 
         fields[15] = new ParkingField();
-        fields[16] = new PropertyField("PropertyField 16", gui, 3600);
-        fields[18] = new PropertyField("PropertyField 18", gui, 3600, (PropertyField) fields[16]);
-        fields[19] = new PropertyField("PropertyField 19", gui, 4000, (PropertyField) fields[16]);
+        fields[16] = new PropertyField("PropertyField 16", 3600,300);
+        fields[18] = new PropertyField("PropertyField 18", 3600,300, (PropertyField) fields[16]);
+        fields[19] = new PropertyField("PropertyField 19", 4000,350, (PropertyField) fields[16]);
 
         fields[20] = new ParkingField();
-        fields[21] = new PropertyField("PropertyField 21", gui, 4400);
-        fields[23] = new PropertyField("PropertyField 23", gui,4400,(PropertyField) fields[21]);
-        fields[24] = new PropertyField("PropertyField 24", gui,4800, (PropertyField) fields[21]);
+        fields[21] = new PropertyField("PropertyField 21",4400,350);
+        fields[23] = new PropertyField("PropertyField 23", 4400,350,(PropertyField) fields[21]);
+        fields[24] = new PropertyField("PropertyField 24", 4800,400, (PropertyField) fields[21]);
 
         fields[25] = new ParkingField();
 
-        fields[26] = new PropertyField("PropertyField 26", gui,5200);
-        fields[27] = new PropertyField("PropertyField 27", gui,5200,(PropertyField) fields[26]);
+        fields[26] = new PropertyField("PropertyField 26", 5200,450);
+        fields[27] = new PropertyField("PropertyField 27",5200,450,(PropertyField) fields[26]);
         fields[28] = new ParkingField();
-        fields[29] = new PropertyField("PropertyField 29", gui,5600, (PropertyField) fields[26]);
+        fields[29] = new PropertyField("PropertyField 29",5600,500, (PropertyField) fields[26]);
 
         fields[30] = new JailField("felt nummber 30", 1000, true);
 
-        fields[31] = new PropertyField("PropertyField 31", gui, 6000);
-        fields[32] = new PropertyField("PropertyField 32", gui, 6000,(PropertyField) fields[31]);
-        fields[34] = new PropertyField("PropertyField 34", gui, 6400,(PropertyField) fields[31]);
+        fields[31] = new PropertyField("PropertyField 31", 6000,550);
+        fields[32] = new PropertyField("PropertyField 32", 6000,550,(PropertyField) fields[31]);
+        fields[34] = new PropertyField("PropertyField 34", 6400,600,(PropertyField) fields[31]);
 
         fields[35] = new ParkingField();
 
-        fields[37] = new PropertyField("PropertyField 37", gui, 6000);
+        fields[37] = new PropertyField("PropertyField 37", 7000,700);
         fields[39] = new ParkingField();
-        fields[39] = new PropertyField("PropertyField 39", gui, 6000,(PropertyField) fields[37]);
+        fields[39] = new PropertyField("PropertyField 39", 8000,1000,(PropertyField) fields[37]);
 
 
 
@@ -174,7 +175,7 @@ public class GameBoard
         guiFields[7] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[8] = new GUI_Shipping(IMAGE_DIR_PATH+"","Valby Langgade", "kr. 2000", "", "", Color.ORANGE, Color.BLACK);
         guiFields[9] = new GUI_Shipping(IMAGE_DIR_PATH+"","Allegade", "kr. 2400", "", "", Color.ORANGE, Color.BLACK);
-        guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 2000", "", "", Color.BLACK, Color.WHITE);
+        guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 1000", "", "", Color.BLACK, Color.WHITE);
         guiFields[11] = new GUI_Shipping(IMAGE_DIR_PATH+"","Frederiksberg Alle","kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
         guiFields[13] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
@@ -201,7 +202,7 @@ public class GameBoard
         guiFields[34] = new GUI_Shipping("","Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
         guiFields[35] = new GUI_Shipping("","Scandilines","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
         guiFields[36] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[37] = new GUI_Shipping("","Frederiksberg-gade","kr. 7.00 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[37] = new GUI_Shipping("","Frederiksberg-gade","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Shipping("","Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
 

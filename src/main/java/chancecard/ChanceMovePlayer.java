@@ -59,7 +59,7 @@ public class ChanceMovePlayer extends Chance
             }
         }
 
-        if(array.size()==0)
+        if(array.isEmpty())
         {
             for (int i = 0; i < board.getField().length; i++)
             {
