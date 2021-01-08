@@ -89,7 +89,7 @@ public class GameBoard
     {
         fields[0] = new StartField();
         fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 250, 750,2250,4000,6000}, gui);
-        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 250, 750,22500, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 250, 750,2250, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
         fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
         fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100,600,1800,5400,8000,11000}, gui);
@@ -109,7 +109,7 @@ public class GameBoard
         fields[19] = new PropertyField("PropertyField 19", 4000,new int[]{ 350,1600,4400,12000,16000,20000},new PropertyField[]{ (PropertyField) fields[16], (PropertyField) fields[18]}, gui);
 
         fields[20] = new ParkingField();
-        fields[21] = new PropertyField("PropertyField 21", 4400,new int[]{ 350,1800,5000,14000,17500}, gui);
+        fields[21] = new PropertyField("PropertyField 21", 4400,new int[]{ 350,1800,5000,14000,17500,21000}, gui);
         fields[23] = new PropertyField("PropertyField 23", 4400,new int[]{ 350,1800,5000,14000,17500,21000}, gui);
         fields[24] = new PropertyField("PropertyField 24", 4800,new int[]{ 400,2000,6000,15000,18500,22000},new PropertyField[]{ (PropertyField) fields[21],(PropertyField) fields[23]}, gui);
 
