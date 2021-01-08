@@ -7,21 +7,21 @@ import player.Player;
 
 import java.awt.*;
 
-public class ChanceMoveColor extends Chance
+public class ChanceMove extends Chance
 {
     String options[];
 
-    public ChanceMoveColor(GameBoard board, GUI gui, Player[] player)
+    public ChanceMove(GameBoard board, GUI gui, Player[] player)
     {
         super(board,gui,player);
     }
 
-    public ChanceMoveColor(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChanceMove(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
     {
         super(board, gui, player, text, col1, col2);
     }
 
-    public ChanceMoveColor(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, String[] options)
+    public ChanceMove(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, String[] options)
     {
         super(board, gui, player, text, col1, col2);
         this.options=options;
@@ -50,4 +50,3 @@ public class ChanceMoveColor extends Chance
         }
     }
 }
-

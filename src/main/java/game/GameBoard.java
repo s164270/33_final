@@ -169,7 +169,7 @@ public class GameBoard
         guiFields[2] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[3] = new GUI_Shipping(IMAGE_DIR_PATH+"","Hvidovrevej", "kr. 1200", "", "", Color.BLUE, Color.BLACK);
         guiFields[4] = new GUI_Shipping(IMAGE_DIR_PATH+"","Skat", "", "", "", Color.CYAN, Color.BLACK);
-        guiFields[5] = new GUI_Shipping(IMAGE_DIR_PATH+"","Scandilines", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
+        guiFields[5] = new GUI_Shipping(IMAGE_DIR_PATH+"","Rederiet Lindinger", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
         guiFields[6] = new GUI_Shipping(IMAGE_DIR_PATH+"","Roskildevej", "kr. 2.000", "", "", Color.ORANGE, Color.BLACK);
         guiFields[7] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[8] = new GUI_Shipping(IMAGE_DIR_PATH+"","Valby Langgade", "kr. 2000", "", "", Color.ORANGE, Color.BLACK);
@@ -179,7 +179,7 @@ public class GameBoard
         guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
         guiFields[13] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[14] = new GUI_Shipping(IMAGE_DIR_PATH+"","Gl. Kongevej", "kr. 3.200", "", "", Color.PINK, Color.BLACK);
-        guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Mols-Linien", "kr. 4.000", "", "", Color.RED, Color.BLUE);
+        guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Grenaa-Hundested", "kr. 4.000", "", "", Color.RED, Color.BLUE);
         guiFields[16] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bernstorffsvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
         guiFields[17] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[18] = new GUI_Shipping(IMAGE_DIR_PATH+"","Hellerupvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
@@ -189,7 +189,7 @@ public class GameBoard
         guiFields[22] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[23] = new GUI_Shipping(IMAGE_DIR_PATH+"","Østerbrogade", "kr. 4.400", "", "", Color.RED, Color.BLACK);
         guiFields[24] = new GUI_Shipping(IMAGE_DIR_PATH+"","Grønningen", "kr 4.800", "", "", Color.RED, Color.BLACK);
-        guiFields[25] = new GUI_Shipping(IMAGE_DIR_PATH+"","Scandilines", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
+        guiFields[25] = new GUI_Shipping(IMAGE_DIR_PATH+"","Mols-Linien", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
         guiFields[26] = new GUI_Shipping("","Bredgade","kr. 5.200","","",Color.WHITE,Color.BLACK);
         guiFields[27] = new GUI_Shipping("","Kgs. Nytorv","kr. 5.200","","",Color.WHITE,Color.BLACK);
         guiFields[28] = new GUI_Shipping("","Coca Cola","","","",Color.RED,Color.WHITE);
@@ -199,9 +199,9 @@ public class GameBoard
         guiFields[32] = new GUI_Shipping("","Vimmelskaftet","kr. 6.000 ","","",Color.YELLOW,Color.BLACK);
         guiFields[33] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[34] = new GUI_Shipping("","Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
-        guiFields[35] = new GUI_Shipping("","Scandilines","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
+        guiFields[35] = new GUI_Shipping("","Skandinavisk Linietrafik","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
         guiFields[36] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[37] = new GUI_Shipping("","Frederiksberg-gade","kr. 7.00 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[37] = new GUI_Shipping("","Frederiksberg Alle","kr. 7.00 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Shipping("","Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
 
