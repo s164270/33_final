@@ -5,6 +5,7 @@ import gui_main.GUI;
 import player.Player;
 
 public class ChanceField extends Field {
+
     private String name;
     private ChanceCards cards;
     public ChanceField(String name)
@@ -23,4 +24,5 @@ public class ChanceField extends Field {
         cards.getRandomChance().executeChance(player);
         return player.getName() + " " + "landede på " + name;
     }
+
 }

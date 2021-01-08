@@ -6,13 +6,9 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Shipping;
 import gui_main.GUI;
 import player.Player;
-import javax.swing.plaf.basic.BasicListUI;
+
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GameBoard
@@ -28,7 +24,6 @@ public class GameBoard
         fields = new Field[NFIELDS];
         guiFields = new GUI_Field[NFIELDS];
         createGuiFields();
-        String e;
     }
 
     public void setGui(GUI gui)
@@ -93,10 +88,9 @@ public class GameBoard
     public void createFields()
     {
         fields[0] = new StartField();
-
         fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 2, 3}, gui);
         fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 2, 3},  new PropertyField[]{(PropertyField) fields[1]}, gui);
-        fields[4] = new ParkingField();
+        fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
         fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100}, gui);
         fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{ 100}, gui);
@@ -135,7 +129,7 @@ public class GameBoard
         fields[35] = new ParkingField();
 
         fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700}, gui);
-        fields[38] = new ParkingField();
+        fields[38] = new TaxField("", 2000, false, gui);
         fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000},new PropertyField[]{(PropertyField) fields[37]}, gui);
 
 

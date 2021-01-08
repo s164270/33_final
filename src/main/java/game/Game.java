@@ -33,7 +33,7 @@ public class Game
         board.createFields();
         gameOver = false;
 
-        gui.showMessage("Velkomment til spillet!\n");
+        gui.showMessage("Velkommen til spillet!\n");
         createPlayers();
         chanceCards=new ChanceCards(board, gui, player);
         chanceCards.createChance();

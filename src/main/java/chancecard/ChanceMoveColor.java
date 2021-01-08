@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class ChanceMoveColor extends Chance
 {
-    String options[];
+    String[] options;
 
     public ChanceMoveColor(GameBoard board, GUI gui, Player[] player)
     {
