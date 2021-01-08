@@ -20,10 +20,8 @@ public class TaxField extends Field {
     @Override
     public String landOnField(Player player) {
 
-        String option = null;
-
         if (TaxType) {
-            option = gui.getUserSelection("Vælg hvad du vil betale af","10%","kr. 4.000");
+            String option = gui.getUserSelection("Vælg hvad du vil betale af","10%","kr. 4.000");
             {
                 if(option.equals("10%")) {
                     player.addPoints(-(int) (player.getPoints() * 0.1));
@@ -31,12 +29,13 @@ public class TaxField extends Field {
                 } else {
                     player.addPoints(-4000);
                 }
-
+                return option.equals("10%") ? "Du valgte at betale 10% af din balance" : "Du valgte at betale 4000 kr.";
             }
-
         }
-
-        assert option != null;
-        return option.equals("10%") ? "Du valgte at betale 10% af din balance" : "Du valgte at betale 4000 kr.";
+        else
+        {
+            player.addPoints(-2000);
+            return "Du skal betale ekstraordinær skat på 2000 kr.";
+        }
     }
 }
