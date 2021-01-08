@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class ChanceMove extends Chance
 {
-    String options[];
+    String[] options;
 
     public ChanceMove(GameBoard board, GUI gui, Player[] player)
     {

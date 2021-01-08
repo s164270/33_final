@@ -1,11 +1,14 @@
 package game;
 
 import gui_fields.GUI_Field;
+import gui_main.GUI;
 import player.Player;
 
 public abstract class Field {
+    
     private String name;
     protected GUI_Field guiField;
+    protected GUI gui;
 
     public void setGuiField(GUI_Field guiField) {
         this.guiField = guiField;
@@ -16,9 +19,10 @@ public abstract class Field {
         name = "default";
     }
 
-    public Field(String name)
+    public Field(String name, GUI gui)
     {
         this.name = name;
+        this.gui = gui;
     }
 
     public String landOnField(Player player)

@@ -1,15 +1,15 @@
 package game;
 
 import player.Player;
-import chancecard.ChanceFreeJail;
 
 public class JailField extends Field {
+
     private int jailCost;
     private String name;
-    private boolean jailType;
+    private final boolean jailType;
     public JailField(String name, int jailCost, boolean jailType)
     {
-        super(name);
+        super(name, null);
         this.jailCost = jailCost;
         this.jailType = jailType;
 
@@ -20,8 +20,9 @@ public class JailField extends Field {
     public String landOnField(Player player) {
         if(jailType)
         {
-            player.setPosition(6);
+            player.setPosition(10);
             player.setInPrison(true);
+            System.out.println(player.getName() + " blev sendt til fængsel");
             return player.getName() + " " + "landede på fængselsfeltet og blev sendt til fængslet";
         }
         else

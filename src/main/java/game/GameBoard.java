@@ -13,9 +13,10 @@ import java.util.Arrays;
 
 public class GameBoard
 {
-    private final int NFIELDS = 40;
-    private Field[] fields;
-    private GUI_Field[] guiFields;
+    public static final int NFIELDS = 40;
+
+    private final Field[] fields;
+    private final GUI_Field[] guiFields;
     private GUI gui;
 
     public GameBoard()
@@ -23,7 +24,6 @@ public class GameBoard
         fields = new Field[NFIELDS];
         guiFields = new GUI_Field[NFIELDS];
         createGuiFields();
-        createFields();
     }
 
     public void setGui(GUI gui)
@@ -85,53 +85,52 @@ public class GameBoard
         fields[fieldIndex] = field;
     }
 
-    private void createFields()
+    public void createFields()
     {
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", 1200);
-        fields[3] = new PropertyField("PropertyField 3", 1200, (PropertyField) fields[1]);
-        fields[4] = new ParkingField();
+        fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 250, 750,2250,4000,6000}, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 250, 750,2250, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
+        fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
-
-        fields[6] = new PropertyField("PropertyField 6", 2000);
-        fields[8] = new PropertyField("PropertyField 8", 2000, (PropertyField) fields[6]);
-        fields[9] = new PropertyField("PropertyField 9", 2400,(PropertyField) fields[6]);
+        fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100,600,1800,5400,8000,11000}, gui);
+        fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{ 100,600,1800,5400,8000,11000}, gui);
+        fields[9] = new PropertyField("PropertyField 9", 2400,new int[]{ 150,800,2000,6000,9000,12000},new PropertyField[]{(PropertyField) fields[6],(PropertyField) fields[8]}, gui);
 
         fields[10] = new JailField("felt nummer 10", 0,false);
 
-        fields[11] = new PropertyField("PropertyField 11", 2800);
+        fields[11] = new PropertyField("PropertyField 11", 2800,new int[]{ 200,1000,3000,9000,12500,15000}, gui);
         fields[12] = new ParkingField();
-        fields[13] = new PropertyField("PropertyField 13", 2800, (PropertyField) fields[11]);
-        fields[14] = new PropertyField("PropertyField 14", 3200,(PropertyField) fields[11]);
+        fields[13] = new PropertyField("PropertyField 13", 2800, new int[]{ 200,1000,3000,9000,12500,15000}, gui);
+        fields[14] = new PropertyField("PropertyField 14", 3200,new int[]{ 250,1250,3750,10000,14000,18000},new PropertyField[]{(PropertyField) fields[11], (PropertyField) fields[13]}, gui);
 
         fields[15] = new ParkingField();
-        fields[16] = new PropertyField("PropertyField 16", 3600);
-        fields[18] = new PropertyField("PropertyField 18", 3600, (PropertyField) fields[16]);
-        fields[19] = new PropertyField("PropertyField 19", 4000, (PropertyField) fields[16]);
+        fields[16] = new PropertyField("PropertyField 16", 3600,new int[]{ 300,1400,4000,11000,15000,19000}, gui);
+        fields[18] = new PropertyField("PropertyField 18", 3600,new int[]{ 300,1400,4000,11000,15000,19000}, gui);
+        fields[19] = new PropertyField("PropertyField 19", 4000,new int[]{ 350,1600,4400,12000,16000,20000},new PropertyField[]{ (PropertyField) fields[16], (PropertyField) fields[18]}, gui);
 
         fields[20] = new ParkingField();
-        fields[21] = new PropertyField("PropertyField 21",4400);
-        fields[23] = new PropertyField("PropertyField 23", 4400,(PropertyField) fields[21]);
-        fields[24] = new PropertyField("PropertyField 24", 4800, (PropertyField) fields[21]);
+        fields[21] = new PropertyField("PropertyField 21", 4400,new int[]{ 350,1800,5000,14000,17500,21000}, gui);
+        fields[23] = new PropertyField("PropertyField 23", 4400,new int[]{ 350,1800,5000,14000,17500,21000}, gui);
+        fields[24] = new PropertyField("PropertyField 24", 4800,new int[]{ 400,2000,6000,15000,18500,22000},new PropertyField[]{ (PropertyField) fields[21],(PropertyField) fields[23]}, gui);
 
         fields[25] = new ParkingField();
 
-        fields[26] = new PropertyField("PropertyField 26", 5200);
-        fields[27] = new PropertyField("PropertyField 27",5200,(PropertyField) fields[26]);
+        fields[26] = new PropertyField("PropertyField 26", 5200,new int[]{ 450,2200,6600,16000,19500,23000}, gui);
+        fields[27] = new PropertyField("PropertyField 27",5200,new int[]{ 450,2200,6600,16000,19500,23000}, gui);
         fields[28] = new ParkingField();
-        fields[29] = new PropertyField("PropertyField 29",5600, (PropertyField) fields[26]);
+        fields[29] = new PropertyField("PropertyField 29",5600,new int[]{ 500,2400,7200,17000,20500,24000}, new PropertyField[]{(PropertyField) fields[26],(PropertyField) fields[27]}, gui);
 
         fields[30] = new JailField("felt nummber 30", 1000, true);
 
-        fields[31] = new PropertyField("PropertyField 31", 6000);
-        fields[32] = new PropertyField("PropertyField 32", 6000,(PropertyField) fields[31]);
-        fields[34] = new PropertyField("PropertyField 34", 6400,(PropertyField) fields[31]);
+        fields[31] = new PropertyField("PropertyField 31", 6000,new int[]{ 550,2600,7800,18000,22000,25000}, gui);
+        fields[32] = new PropertyField("PropertyField 32", 6000,new int[]{ 550,2600,7800,18000,22000,25000}, gui);
+        fields[34] = new PropertyField("PropertyField 34", 6400,new int[]{ 600,3000,9000,20000,24000,28000},new PropertyField[]{(PropertyField) fields[31],(PropertyField) fields[32]}, gui);
 
         fields[35] = new ParkingField();
 
-        fields[37] = new PropertyField("PropertyField 37", 6000);
-        fields[39] = new ParkingField();
-        fields[39] = new PropertyField("PropertyField 39", 6000,(PropertyField) fields[37]);
+        fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700,3500,10000,22000,26000,30000}, gui);
+        fields[38] = new TaxField("", 2000, false, gui);
+        fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000,4000,12000,28000,34000,40000},new PropertyField[]{(PropertyField) fields[37]}, gui);
 
 
 
@@ -174,7 +173,7 @@ public class GameBoard
         guiFields[7] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[8] = new GUI_Shipping(IMAGE_DIR_PATH+"","Valby Langgade", "kr. 2000", "", "", Color.ORANGE, Color.BLACK);
         guiFields[9] = new GUI_Shipping(IMAGE_DIR_PATH+"","Allegade", "kr. 2400", "", "", Color.ORANGE, Color.BLACK);
-        guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 2000", "", "", Color.BLACK, Color.WHITE);
+        guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 1000", "", "", Color.BLACK, Color.WHITE);
         guiFields[11] = new GUI_Shipping(IMAGE_DIR_PATH+"","Frederiksberg Alle","kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
         guiFields[13] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
@@ -201,7 +200,7 @@ public class GameBoard
         guiFields[34] = new GUI_Shipping("","Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
         guiFields[35] = new GUI_Shipping("","Skandinavisk Linietrafik","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
         guiFields[36] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[37] = new GUI_Shipping("","Frederiksberg Alle","kr. 7.00 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[37] = new GUI_Shipping("","Frederiksberg Alle","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Shipping("","Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
 
