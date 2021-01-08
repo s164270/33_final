@@ -89,7 +89,7 @@ public class GameBoard
     {
         fields[0] = new StartField();
         fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 250, 750,2250,4000,6000}, gui);
-        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 750,22500, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 250, 750,22500, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
         fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
         fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100,600,1800,5400,8000,11000}, gui);
