@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.33_del3</groupId>
-    <artifactId>33_del3</artifactId>
+    <groupId>org.33_final</groupId>
+    <artifactId>33_final</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
