@@ -88,8 +88,8 @@ public class GameBoard
     public void createFields()
     {
         fields[0] = new StartField();
-        fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 2, 3}, gui);
-        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 2, 3},  new PropertyField[]{(PropertyField) fields[1]}, gui);
+        fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 250, 750,2250,4000,6000}, gui);
+        fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 750,22500, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui);
         fields[4] = new TaxField("", 0, true, gui);
         fields[5] = new ParkingField();
         fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100}, gui);
@@ -128,9 +128,9 @@ public class GameBoard
 
         fields[35] = new ParkingField();
 
-        fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700}, gui);
+        fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700,3500,10000,22000,26000,30000}, gui);
         fields[38] = new TaxField("", 2000, false, gui);
-        fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000},new PropertyField[]{(PropertyField) fields[37]}, gui);
+        fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000,4000,12000,28000,34000,40000},new PropertyField[]{(PropertyField) fields[37]}, gui);
 
 
 
