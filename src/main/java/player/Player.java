@@ -67,7 +67,7 @@ public class Player
     public Player(String playerName)
     {
         this.playerName=playerName;
-        account = new Account(20);
+        account = new Account(30000);
         GUI_Car car = new GUI_Car();
         car.setPrimaryColor(Color.RED);
         gui_player = new GUI_Player(playerName, account.getBalance(), car);
