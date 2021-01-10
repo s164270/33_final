@@ -17,6 +17,7 @@ public class Game
     private final DiceCup dice;
     private final GameBoard board;
     private GUI gui;
+    private Auction auction;
     private Player[] player;
     private Player currentPlayer;
     private ChanceCards chanceCards;
@@ -30,7 +31,6 @@ public class Game
         board = new GameBoard();
         gui = new GUI(board.getGuiFields(), Color.WHITE);
         board.setGui(gui);
-        board.createFields();
         gameOver = false;
 
         gui.showMessage("Velkommen til spillet!\n");
@@ -38,6 +38,9 @@ public class Game
         chanceCards=new ChanceCards(board, gui, player);
         chanceCards.createChance();
         board.createChanceFields(chanceCards);
+
+        auction = new Auction(gui, player);
+        board.createFields(auction);
 
         gui.showMessage("Okay " + currentPlayer.getName() + ", du starter.");
     }
@@ -51,7 +54,7 @@ public class Game
         board = new GameBoard();
         gui = new GUI(board.getGuiFields(), Color.WHITE);
         board.setGui(gui);
-        board.createFields();
+
         gameOver = false;
 
         player=new Player[2];
@@ -63,6 +66,9 @@ public class Game
         chanceCards=new ChanceCards(board, gui, player);
         chanceCards.createChance();
         board.createChanceFields(chanceCards);
+        auction = new Auction(gui, player);
+        board.createFields(auction);
+
     }
 
     private void createPlayers()

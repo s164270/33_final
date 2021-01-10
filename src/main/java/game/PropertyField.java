@@ -15,26 +15,29 @@ public class PropertyField extends Field{
 
     private PropertyField neighbor[];
     private Player owner;
+    private Auction auction;
 
     public PropertyField()
     {
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost, int rent[], GUI gui)
+    public PropertyField(String name, int cost, int rent[], GUI gui, Auction auction)
     {
         super(name, gui);
         this.cost = cost;
         this.rent = rent;
         this.num_houses = 0;
+        this.auction = auction;
     }
 
-    public PropertyField(String name, int cost, int rent[], PropertyField neighbor[], GUI gui)
+    public PropertyField(String name, int cost, int rent[], PropertyField neighbor[], GUI gui, Auction auction)
     {
         super(name, gui);
         this.cost = cost;
         this.rent = rent;
         this.num_houses = 0;
+        this.auction = auction;
         PropertyField temp_neighbor[] = new PropertyField[neighbor.length+1];
         for (int i = 0; i < neighbor.length; i++)
         {
@@ -117,7 +120,7 @@ public class PropertyField extends Field{
                     buyProperty(player);
                     break;
                 case "NEJ":
-                    System.out.println("Ejendommen sættes på auktion");
+                    auction.startAuction(this);
                     break;
                 default:
                     System.out.println("FEJL");

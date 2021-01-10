@@ -94,13 +94,10 @@ public class Auction {
                 bidderIndex--;
             }
             //next bidder
-            System.out.println("Index: " + bidderIndex + "   |   arraylength: " + remainingParticipants.length);
             bidderIndex = nextBidderIndex(bidderIndex, remainingParticipants);
-            System.out.println("Index after nextBidderIndex: " + bidderIndex);
-            System.out.println("------------------------");
         }
         gui.showMessage(remainingParticipants[0].getName() + " købte grunden for " + currentBid);
-        //property.buyProperty(remainingParticipants[0], currentBid);
+        property.buyProperty(remainingParticipants[0], currentBid);
     }
 
 }
