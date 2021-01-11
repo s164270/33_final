@@ -2,14 +2,12 @@ package game;
 
 import chancecard.ChanceCards;
 import gui_fields.GUI_Field;
-import gui_fields.GUI_Player;
 import gui_fields.GUI_Shipping;
 import gui_main.GUI;
 import player.Player;
 
 import java.awt.*;
 import java.io.File;
-import java.util.Arrays;
 
 public class GameBoard
 {

@@ -1,7 +1,6 @@
 package game;
 
 import chancecard.ChanceCards;
-import gui_main.GUI;
 import player.Player;
 
 public class ChanceField extends Field {
