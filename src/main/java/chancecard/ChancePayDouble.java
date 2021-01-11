@@ -16,14 +16,14 @@ public class ChancePayDouble extends Chance
         super(board,gui,player);
     }
 
-    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
     }
 
-    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, String[] options)
+    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text, String[] options)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
         this.options=options;
     }
 

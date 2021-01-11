@@ -16,14 +16,14 @@ public class ChancePayOrGet extends Chance
         super(board,gui,player);
     }
 
-    public ChancePayOrGet(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChancePayOrGet(GameBoard board, GUI gui, Player[] player, String text)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
     }
 
-    public ChancePayOrGet(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, int money)
+    public ChancePayOrGet(GameBoard board, GUI gui, Player[] player, String text, int money)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
         this.money=money;
     }
 

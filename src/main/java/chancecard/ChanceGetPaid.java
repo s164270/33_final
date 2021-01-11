@@ -15,14 +15,14 @@ public class ChanceGetPaid extends Chance
         super(board,gui,player);
     }
 
-    public ChanceGetPaid(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChanceGetPaid(GameBoard board, GUI gui, Player[] player, String text)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
     }
 
-    public ChanceGetPaid(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, int getpaid)
+    public ChanceGetPaid(GameBoard board, GUI gui, Player[] player, String text, int getpaid)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
         this.getpaid=getpaid;
     }
 

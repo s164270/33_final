@@ -14,9 +14,9 @@ public class ChanceFreeJail extends Chance
         super(board,gui,player);
     }
 
-    public ChanceFreeJail(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChanceFreeJail(GameBoard board, GUI gui, Player[] player, String text)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
     }
 
 

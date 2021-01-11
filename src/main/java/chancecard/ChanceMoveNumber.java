@@ -16,14 +16,14 @@ public class ChanceMoveNumber extends Chance
         super(board,gui,player);
     }
 
-    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
     }
 
-    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2, int distance)
+    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text, int distance)
     {
-        super(board, gui, player, text, col1, col2);
+        super(board, gui, player, text);
         this.distance=distance;
     }
 
