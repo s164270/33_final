@@ -102,42 +102,120 @@ public class Game
 
     public void turn(Player player)
     {
-        gui.showMessage("Det er " + player.getName() + "'s tur");
+        boolean turnDone = false;
+        boolean mustRoll = true; //rolling the dice is compulsory
+        int twoOfAKindCounter = 0;
+        //gui.showMessage("Det er " + player.getName() + "'s tur");
+        while (!turnDone)
+        {
+            String btnChoice;
 
-        if(player.getChanceCard()!=null)
-        {
-            player.getChanceCard().executeChance();
-            player.setChanceCard(null);
-        }
-        else
-        {
-            checkJail(player);
-            gameOver();
-            if(!gameOver)
+            if(player.isInPrison() && mustRoll)
             {
-                rollDice();
-                board.movePlayer(player, dice.getSum());
+                btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
+                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt");
+            }
+            else if(mustRoll)
+            {
+                btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
+                        "Slå", "Byg", "Pantsæt");
+            }
+            else
+            {
+                btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
+                        "Afslut tur", "Byg", "Pantsæt");
+            }
+
+            switch (btnChoice)
+            {
+                case "Slå":
+                    rollDice();
+                    if(dice.isSimiliar())
+                    {
+                        twoOfAKindCounter++;
+                        if(twoOfAKindCounter == 3)
+                        {
+                            mustRoll = false;
+                            twoOfAKindCounter = 0;
+                            player.setInPrison(true);
+                        }
+                        else
+                        {
+                            board.movePlayer(player, dice.getSum());
+                        }
+                    }
+                    else
+                    {
+                        mustRoll = false;
+                        board.movePlayer(player, dice.getSum());
+                    }
+                    break;
+                case "Byg":
+                    gui.showMessage("Byg er ikke implementeret endnu");
+                    break;
+                case "Pantsæt":
+                    gui.showMessage("Pantsæt er ikke implementeret endnu");
+                    break;
+                case "Afslut tur":
+                    turnDone = true;
+                    break;
+                case "Slå dig fri":
+                    rollDice();
+                    if(dice.isSimiliar())
+                    {
+                        player.setInPrison(false);
+                        board.movePlayer(player, dice.getSum());
+                    }
+                    else
+                    {
+                        mustRoll = false;
+                    }
+                    break;
+                case "Betal dig fri":
+                    if(player.getPoints() < 1000)
+                    {
+                        gui.showMessage("Det har du ikke råd til");
+                    }
+                    else
+                    {
+                        player.addPoints(-1000);
+                        player.setInPrison(false);
+                    }
+                    break;
+                case "Brug chancekort":
+                    if(player.getFreePrison())
+                    {
+                        player.setInPrison(false);
+                        player.setFreePrison(false);
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ikke det chancekort");
+                    }
+                    break;
+                default:
+                    System.out.println("ERROR IN SWITCH");
+            }
+            if(player.isBroke())
+            {
+                turnDone = true;
             }
         }
         gameOver();
         changePlayer();
+/*        if(player.getChanceCard()!=null)
+        {
+            player.getChanceCard().executeChance();
+            player.setChanceCard(null);
+        }
+        else*/
+
     }
 
     public void gameOver() {
         for (int i = 0; i < player.length; i++) {
             if (player[i].isBroke()) {
                 this.gameOver = true;
-            }
-        }
-    }
-
-    public void checkJail(Player player) {
-        if (player.isInPrison()) {
-            if (player.getFreePrison()) {
-                player.setInPrison(false);
-                player.setFreePrison(false);
-            } else {
-                player.addPoints(-1);
             }
         }
     }
@@ -176,12 +254,6 @@ public class Game
         {
             currentPlayer=player[index+1];
         }
-    }
-
-
-    private void loadBoard()
-    {
-
     }
 
     public void testFunction()
