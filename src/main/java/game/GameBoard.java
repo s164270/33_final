@@ -283,6 +283,10 @@ public class GameBoard
         }
         return null;
     }
+    public Field getFieldFromString(String name)
+    {
+        return null;
+    }
 
     @Override
     public String toString() {
