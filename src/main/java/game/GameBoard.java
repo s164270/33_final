@@ -7,6 +7,7 @@ import gui_main.GUI;
 import player.Player;
 
 import java.awt.*;
+import java.beans.PropertyEditorSupport;
 import java.io.File;
 
 public class GameBoard
@@ -285,7 +286,15 @@ public class GameBoard
     }
     public Field getFieldFromString(String name)
     {
-        return null;
+        Field result;
+        for (int i = 0; i < NFIELDS; i++)
+        {
+            if(guiFields[i].getTitle().equals(name))
+            {
+                result=fields[i];
+            }
+        }
+        return result;
     }
 
     @Override
