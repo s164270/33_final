@@ -59,6 +59,10 @@ public class PropertyField extends Field{
         this.paired = paired;
     }
 
+    public boolean isPaired() {
+        return paired;
+    }
+
     public void setNeighbor(PropertyField neighbor[]) {
         this.neighbor=neighbor;
     }

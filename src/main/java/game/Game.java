@@ -151,7 +151,7 @@ public class Game
                     }
                     break;
                 case "Byg":
-                    gui.showMessage("Byg er ikke implementeret endnu");
+                    buildOnProperty(player);
                     break;
                 case "Pantsæt":
                     gui.showMessage("Pantsæt er ikke implementeret endnu");
@@ -210,6 +210,47 @@ public class Game
         }
         else*/
 
+    }
+
+    public void buildOnProperty(Player player)
+    {
+        if(player.getPoints() < 1000)
+        {
+            gui.showMessage("Du har ikke råd til noget");
+        }
+        else
+        {
+            gui.showMessage("Ved at blive implementeret");
+
+            String[] properties;
+            int propertyCount = 0;
+            for(int i = 0; i < board.getField().length; i++)
+            {
+                if(board.getField()[i] instanceof PropertyField)
+                {
+                    if(true)//(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
+                    {
+                        propertyCount++;
+                    }
+                }
+            }
+
+            int j = 0;
+            properties = new String[propertyCount];
+            for(int i = 0; i < board.getField().length; i++)
+            {
+                if(board.getField()[i] instanceof PropertyField)
+                {
+                    if(true)//(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
+                    {
+                        properties[j] = ((PropertyField)board.getField()[i]).getName();
+                        j++;
+                    }
+                }
+            }
+
+            String propSelection = gui.getUserButtonPressed("Vælg hvilken grund der skal bygges på", properties);
+        }
     }
 
     public void gameOver() {
