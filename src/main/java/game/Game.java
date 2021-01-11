@@ -224,11 +224,13 @@ public class Game
             PropertyField[] properties;
             String[] userOptions;
             int propertyCount = 0;
+
+            //count the number of properties owned by the player (that can be build on)
             for(int i = 0; i < board.getField().length; i++)
             {
                 if(board.getField()[i] instanceof PropertyField)
                 {
-                    if(true)//(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
+                    if(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
                     {
                         propertyCount++;
                     }
@@ -246,7 +248,7 @@ public class Game
                 {
                     if(board.getField()[i] instanceof PropertyField)
                     {
-                        if(true)//(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
+                        if(((PropertyField)board.getField()[i]).getOwner() == player) // && ((PropertyField)board.getField()[i]).isPaired()
                         {
                             properties[j] = (PropertyField)board.getField()[i];
                             userOptions[j] = properties[j].getName();
@@ -258,20 +260,19 @@ public class Game
                 int selectionIndex = userOptions.length - 1;
                 String propSelection = gui.getUserSelection("Vælg hvilken grund der skal bygges på", userOptions);
 
+                System.out.println("SELECTION : " + propSelection);
                 for (int i = 0; i < properties.length; i++) {
+                    System.out.println(i + "   " + properties[i].getName());
                     if (properties[i].getName().equals(propSelection)) {
                         selectionIndex = i;
                         break;
                     }
                 }
                 System.out.println(selectionIndex);
-                if(selectionIndex < userOptions.length)
+                if(selectionIndex < properties.length)
                 {
                     int numberOfHouses = gui.getUserInteger("Hvor mange vil du købe?", 0, 4);
-                    for(int i = 0; i < numberOfHouses; i++) //lidt fjollet måde at gøre det på
-                    {
-                        properties[selectionIndex].buyHouse();
-                    }
+                    properties[selectionIndex].buyHouse(numberOfHouses);
 
                 }
             }

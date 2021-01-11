@@ -1,6 +1,7 @@
 package game;
 
 import gui_fields.GUI_Ownable;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 import player.Player;
 import gui_fields.GUI_Field;
@@ -89,13 +90,29 @@ public class PropertyField extends Field{
         }
     }
 
-    public void buyHouse()
+    public void buyHouse(int numberToBuy)
     {
         // TODO make housePrice part of constructer so it is defined when the property is created
         int housePrice = 2000;
-       this.getOwner().addPoints(-housePrice);
         // TODO make sure that all prices are added before this is implemented
-       this.num_houses+=1;
+        if(numberToBuy < 0 || numberToBuy > 4)
+        {
+            gui.showMessage("Ugyldigt antal");
+        }
+        else if(this.num_houses + numberToBuy > 4)
+        {
+            gui.showMessage("Så mange er der ikke plads til");
+        }
+        else if(housePrice * numberToBuy > this.getOwner().getPoints())
+        {
+            gui.showMessage("Det har du ikke råd til");
+        }
+        else
+        {
+            this.getOwner().addPoints(-housePrice * numberToBuy);
+            this.num_houses+=numberToBuy;
+            ((GUI_Street)guiField).setHouses(this.num_houses);
+        }
     }
 
     public void buyProperty(Player player, int auctionPrice)
