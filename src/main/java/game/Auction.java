@@ -64,7 +64,7 @@ public class Auction {
         while (remainingParticipants.length > 1)
         {
             String btnAnswer = gui.getUserButtonPressed("Højeste bud er på " + currentBid + "kr. Det er " + remainingParticipants[bidderIndex].getName() + " til at byde.", "Byd", "Drop ud");
-            if(btnAnswer.equalsIgnoreCase("Byd")){
+            if(btnAnswer.equals("Byd")){
                 //update currentBid
                 newBid = getBid(remainingParticipants[bidderIndex], currentBid);
             }
