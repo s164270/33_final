@@ -96,6 +96,8 @@ public class Game
     public void rollDice()
     {
         dice.rollDice();
+        currentPlayer.setDiceSum(dice.getSum());
+
         gui.setDice(dice.getDice1(), dice.getDice2());
     }
 
