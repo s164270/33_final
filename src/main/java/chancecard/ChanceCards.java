@@ -25,7 +25,7 @@ public class ChanceCards
     public void createChance()
     {
         chances[0] = new ChanceMove(board, gui, player,"Tag ind på Rådhuspladsen", Color.BLUE,Color.ORANGE, new String[]{"Rådhuspladsen"});
-        chances[1] = new ChanceMove(board, gui, player,"Gå i fængsel, Hvis du passerer start mødtager du ikke 4000kr", Color.BLUE,Color.ORANGE, new String[]{"I Fængsel"});
+        chances[1] = new ChanceJail(board, gui, player, "Gå i fængsel, Hvis du passerer start mødtager du ikke 4000kr", Color.BLUE,Color.ORANGE);
         chances[2] = new ChanceMove(board, gui, player,"Du tager Mols-Linien, hvis du passerer start, mødtag 4000kr", Color.BLUE,Color.ORANGE, new String[]{"Mols-Linien"});
         chances[3] = new ChanceMove(board, gui, player,"Ryk frem til Grønningen", Color.BLUE,Color.ORANGE, new String[]{"Grønningen"});
         chances[4] = new ChanceMove(board, gui, player,"Ryk Brikken til den nærmeste dampskibselskab og betal ejeren to gange den leje ejeren er beretet til\n hvis den ikke ejes af nogen må du købe den", Color.BLUE,Color.ORANGE, new String[]{"Rederiet Lindinger","Mols-Linien","Grenaa-Hundested","Skandinavisk Linietrafik"});
