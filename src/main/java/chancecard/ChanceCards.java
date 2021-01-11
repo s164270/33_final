@@ -57,12 +57,6 @@ public class ChanceCards
         chances[30] = new ChancePayOrGet(board, gui, player,"De har været udenlands og købt for mange smøger, betal kr 200 i told.", Color.BLUE,Color.ORANGE, -200);
         chances[31] = new ChancePayOrGet(board, gui, player,"Tandlægeregning, betal kr 2000.", Color.BLUE,Color.ORANGE, -2000);
         chances[32] = new ChanceFreeJail(board, gui, player,"Du løslades uden omkostninger\n Behold dette kort intil du får brug for det.", Color.BLUE,Color.ORANGE);
-        for (int i = 15; i < chances.length; i++)
-        {
-           int j = i % player.length;
-            chances[i] = new ChanceMovePlayer(board, gui, player,"Giv dette kort til "+ player[j].getName(), Color.BLUE,Color.ORANGE, player[j]);
-
-        }
     }
 
     public Chance getRandomChance() {

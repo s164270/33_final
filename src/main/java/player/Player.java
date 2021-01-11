@@ -1,6 +1,5 @@
 package player;
 
-import chancecard.ChanceMovePlayer;
 import game.GameBoard;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
@@ -17,7 +16,6 @@ public class Player
     private int position = 0;
     private Account account;
     private String playerName;
-    private ChanceMovePlayer chanceCard;
     private GUI_Player gui_player;
     private boolean FreePrison;
     private boolean inPrison;
@@ -155,13 +153,4 @@ public class Player
         return gui_player;
     }
 
-    public ChanceMovePlayer getChanceCard()
-    {
-        return chanceCard;
-    }
-
-    public void setChanceCard(ChanceMovePlayer chanceCard)
-    {
-        this.chanceCard = chanceCard;
-    }
 }
