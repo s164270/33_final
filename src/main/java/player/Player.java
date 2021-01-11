@@ -1,7 +1,9 @@
 package player;
 
 import chancecard.ChanceMovePlayer;
+import game.CompanyField;
 import game.GameBoard;
+import game.ShippingField;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -14,6 +16,12 @@ import java.util.List;
 
 public class Player
 {
+
+    private final ArrayList<ShippingField> redderier = new ArrayList<>();
+    private final ArrayList<CompanyField>  company = new ArrayList<>();
+
+    private int diceSum;
+
     private int position = 0;
     private Account account;
     private String playerName;
@@ -163,5 +171,21 @@ public class Player
     public void setChanceCard(ChanceMovePlayer chanceCard)
     {
         this.chanceCard = chanceCard;
+    }
+
+    public ArrayList<CompanyField> getCompany() {
+        return company;
+    }
+
+    public ArrayList<ShippingField> getRedderier() {
+        return redderier;
+    }
+
+    public int getDiceSum() {
+        return diceSum;
+    }
+
+    public void setDiceSum(int sum) {
+        this.diceSum = sum;
     }
 }

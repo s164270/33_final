@@ -8,84 +8,63 @@ public class Auction {
     private GUI gui;
     private Player[] players;
 
-    public Auction(GUI gui, Player[] players)
-    {
+    public Auction(GUI gui, Player[] players) {
         this.gui = gui;
         this.players = players;
     }
 
 
-    private int nextBidderIndex(int currentIndex, Object[] bidders)
-    {
+    private int nextBidderIndex(int currentIndex, Object[] bidders) {
         currentIndex++;
-        if(currentIndex >= bidders.length)
-        {
+        if (currentIndex >= bidders.length) {
             currentIndex = 0;
         }
         return currentIndex;
     }
 
-    private int getBid(Player bidder, int currentMaxBid)
-    {
+    private int getBid(Player bidder, int currentMaxBid) {
         int bid = 0;
         boolean validBid = false;
-        while(!validBid)
-        {
+        while (!validBid) {
             bid = gui.getUserInteger("Byd 0 for at droppe ud. Nuværende bud er på " + currentMaxBid);
 
-            if(bid == 0)
-            {
+            if (bid == 0) {
                 validBid = true;
-            }
-            else if(bid > bidder.getPoints())
-            {
+            } else if (bid > bidder.getPoints()) {
                 gui.showMessage("Det har du ikke råd til");
-            }
-            else if(bid <= currentMaxBid)
-            {
+            } else if (bid <= currentMaxBid) {
                 gui.showMessage("Dit bud er for lavt");
-            }
-            else
-            {
+            } else {
                 validBid = true;
             }
         }
         return bid;
     }
 
-    public void startAuction(PropertyField property)
-    {
+    public void startAuction(PropertyField property) {
         Player[] remainingParticipants = players.clone();
         int currentBid = 0;
         int bidderIndex = 0;
         int newBid = 0;
 
         boolean sold = false;
-        while (remainingParticipants.length > 1)
-        {
+        while (remainingParticipants.length > 1) {
             String btnAnswer = gui.getUserButtonPressed("Højeste bud er på " + currentBid + "kr. Det er " + remainingParticipants[bidderIndex].getName() + " til at byde.", "Byd", "Drop ud");
-            if(btnAnswer.equalsIgnoreCase("Byd")){
+            if (btnAnswer.equalsIgnoreCase("Byd")) {
                 //update currentBid
                 newBid = getBid(remainingParticipants[bidderIndex], currentBid);
-            }
-            else
-            {
+            } else {
                 newBid = 0;
             }
 
-            if(newBid > currentBid)
-            {
+            if (newBid > currentBid) {
                 currentBid = newBid;
-            }
-            else
-            {
+            } else {
                 //remove player from the remaining participants
                 Player[] tempArray = new Player[remainingParticipants.length - 1];
                 int j = 0;
-                for(int i = 0; i < remainingParticipants.length; i++)
-                {
-                    if(i != bidderIndex)
-                    {
+                for (int i = 0; i < remainingParticipants.length; i++) {
+                    if (i != bidderIndex) {
                         tempArray[j] = remainingParticipants[i];
                         j++;
                     }
@@ -100,4 +79,80 @@ public class Auction {
         property.buyProperty(remainingParticipants[0], currentBid);
     }
 
+    public void startAuction(ShippingField property) {
+        Player[] remainingParticipants = players.clone();
+        int currentBid = 0;
+        int bidderIndex = 0;
+        int newBid = 0;
+
+        boolean sold = false;
+        while (remainingParticipants.length > 1) {
+            String btnAnswer = gui.getUserButtonPressed("Højeste bud er på " + currentBid + "kr. Det er " + remainingParticipants[bidderIndex].getName() + " til at byde.", "Byd", "Drop ud");
+            if (btnAnswer.equalsIgnoreCase("Byd")) {
+                //update currentBid
+                newBid = getBid(remainingParticipants[bidderIndex], currentBid);
+            } else {
+                newBid = 0;
+            }
+
+            if (newBid > currentBid) {
+                currentBid = newBid;
+            } else {
+                //remove player from the remaining participants
+                Player[] tempArray = new Player[remainingParticipants.length - 1];
+                int j = 0;
+                for (int i = 0; i < remainingParticipants.length; i++) {
+                    if (i != bidderIndex) {
+                        tempArray[j] = remainingParticipants[i];
+                        j++;
+                    }
+                }
+                remainingParticipants = tempArray;
+                bidderIndex--;
+            }
+            //next bidder
+            bidderIndex = nextBidderIndex(bidderIndex, remainingParticipants);
+        }
+        gui.showMessage(remainingParticipants[0].getName() + " købte grunden for " + currentBid);
+        property.buyProperty(remainingParticipants[0], currentBid);
+    }
+
+    public void startAuction(CompanyField property) {
+        Player[] remainingParticipants = players.clone();
+        int currentBid = 0;
+        int bidderIndex = 0;
+        int newBid = 0;
+
+        boolean sold = false;
+        while (remainingParticipants.length > 1) {
+            String btnAnswer = gui.getUserButtonPressed("Højeste bud er på " + currentBid + "kr. Det er " + remainingParticipants[bidderIndex].getName() + " til at byde.", "Byd", "Drop ud");
+            if (btnAnswer.equalsIgnoreCase("Byd")) {
+                //update currentBid
+                newBid = getBid(remainingParticipants[bidderIndex], currentBid);
+            } else {
+                newBid = 0;
+            }
+
+            if (newBid > currentBid) {
+                currentBid = newBid;
+            } else {
+                //remove player from the remaining participants
+                Player[] tempArray = new Player[remainingParticipants.length - 1];
+                int j = 0;
+                for (int i = 0; i < remainingParticipants.length; i++) {
+                    if (i != bidderIndex) {
+                        tempArray[j] = remainingParticipants[i];
+                        j++;
+                    }
+                }
+                remainingParticipants = tempArray;
+                bidderIndex--;
+            }
+            //next bidder
+            bidderIndex = nextBidderIndex(bidderIndex, remainingParticipants);
+        }
+        gui.showMessage(remainingParticipants[0].getName() + " købte grunden for " + currentBid);
+        property.buyProperty(remainingParticipants[0], currentBid);
+    }
 }
+
