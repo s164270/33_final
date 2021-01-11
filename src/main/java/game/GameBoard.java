@@ -210,6 +210,80 @@ public class GameBoard
 
     }
 
+    public PropertyField[] getPlayerProperties(Player player) {
+
+        PropertyField temp[] = new PropertyField[NFIELDS];
+        int counter = 0;
+        for (int i = 0; i < fields.length; i++)
+        {
+            if(fields[i].getName().contains("PropertyField"))
+            {
+                PropertyField field = (PropertyField) fields[i];
+                if (field.getOwner()==player)
+                {
+                   temp[counter]= field;
+                   counter++;
+                }
+            }
+        }
+
+        if (counter>0)
+        {
+            PropertyField result[] = new PropertyField[counter+1];
+            for (int i = 0; i < counter; i++)
+            {
+                result[i] = temp[i];
+            }
+            return result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public PropertyField[] getPlayerPawnableProperties(Player player) {
+        PropertyField temp[] = new PropertyField[NFIELDS];
+        int counter = 0;
+        for (int i = 0; i < fields.length; i++)
+        {
+            if(fields[i].getName().contains("PropertyField"))
+            {
+                PropertyField field = (PropertyField) fields[i];
+                if (field.getOwner()==player && field.getNumHouses()==0 && !field.isPawned())
+                {
+                    temp[counter]= field;
+                    counter++;
+                }
+            }
+        }
+        if (counter>0)
+        {
+            PropertyField result[] = new PropertyField[counter];
+            for (int i = 0; i < counter; i++)
+            {
+                result[i] = temp[i];
+            }
+            return result;
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public String[] getPropertyStrings(PropertyField[] props) {
+        if(props!=null)
+        {
+            String result[] = new String[props.length];
+            for (int i = 0; i < props.length; i++)
+            {
+                result[i] = props[i].getName();
+            }
+            return result;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         for(int i=0; i<fields.length; i++)

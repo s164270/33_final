@@ -153,7 +153,7 @@ public class Game
                     gui.showMessage("Byg er ikke implementeret endnu");
                     break;
                 case "Pantsæt":
-                    gui.showMessage("Pantsæt er ikke implementeret endnu");
+                    String prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",board.getPropertyStrings(board.getPlayerPawnableProperties(currentPlayer)));
                     break;
                 case "Afslut tur":
                     turnDone = true;

@@ -9,6 +9,7 @@ public class PropertyField extends Field{
     private int rent[];
     private int num_houses;
     private boolean paired = false;
+    private boolean pawned = false;
 
     private PropertyField neighbor[];
     private Player owner;
@@ -54,6 +55,26 @@ public class PropertyField extends Field{
 
     public void setPaired(boolean paired) {
         this.paired = paired;
+    }
+
+    public void pawnOff() {
+        if(!pawned && num_houses==0)
+        {
+            owner.addPoints(cost/2);
+            pawned=true;
+        }
+    }
+
+    public void rebuy() {
+        if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
+        {
+            owner.addPoints((int) ((cost/2)*1.1));
+            pawned=false;
+        }
+    }
+
+    public int getNumHouses() {
+        return num_houses;
     }
 
     public void setNeighbor(PropertyField neighbor[]) {
@@ -125,15 +146,22 @@ public class PropertyField extends Field{
         }
         else if(owner != player)
         {
-            if(paired)
+            if(!pawned)
             {
-                player.sendPoints(owner, 2*rent[num_houses]);
-            }
-            else
-            {
-                player.sendPoints(owner,rent[num_houses]);
+                if (paired)
+                {
+                    player.sendPoints(owner, 2 * rent[num_houses]);
+                } else
+                {
+                    player.sendPoints(owner, rent[num_houses]);
+                }
             }
         }
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
+    }
+
+    public boolean isPawned()
+    {
+        return pawned;
     }
 }
