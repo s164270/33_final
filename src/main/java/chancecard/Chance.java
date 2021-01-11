@@ -1,7 +1,6 @@
 package chancecard;
 
 import game.GameBoard;
-import gui_fields.GUI_Chance;
 import gui_main.GUI;
 import player.Player;
 

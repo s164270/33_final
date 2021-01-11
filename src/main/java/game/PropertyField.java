@@ -3,9 +3,6 @@ package game;
 import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
-import gui_fields.GUI_Field;
-
-import java.util.ArrayList;
 
 public class PropertyField extends Field{
     private int cost;

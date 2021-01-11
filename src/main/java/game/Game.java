@@ -3,7 +3,6 @@ package game;
 import chancecard.*;
 import dice.DiceCup;
 import gui_main.GUI;
-import player.Account;
 import player.Player;
 
 import java.awt.*;
