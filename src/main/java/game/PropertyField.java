@@ -111,7 +111,7 @@ public class PropertyField extends Field{
     public String landOnField(Player player) {
         if(owner == null) //player has to buy the property
         {
-            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + "for " + cost + "?", "JA", "NEJ"))
+            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + " for " + cost + "?", "JA", "NEJ"))
             {
                 case "JA":
                     buyProperty(player);
