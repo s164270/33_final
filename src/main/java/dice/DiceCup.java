@@ -15,6 +15,7 @@ public class DiceCup {
     public void rollDice() {
         dice1 = random(6) + 1;
         dice2 = random(6) + 1;
+
     }
 
     // Siden vores dice1 variabel er erklæret private anvender vi os af public int get()
