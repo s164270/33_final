@@ -29,7 +29,6 @@ public class ShippingField extends Field {
             if (option.toLowerCase().equals("ja")) {
                 if (player.getPoints() >= cost) {
                     setOwner(player);
-                    player.addPoints(-cost);
                     return player.getName() + " har købt " + name;
                 } else {
                     return player.getName() + " har ikke råd til at købe " + name;
@@ -72,6 +71,7 @@ public class ShippingField extends Field {
 
     public void setOwner(Player player) {
         owner = player;
+        owner.addPoints(-cost);
         owner.getRedderier().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
