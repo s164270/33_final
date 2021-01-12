@@ -88,20 +88,20 @@ public class GameBoard
         fields[0] = new StartField();
         fields[1] = new PropertyField("PropertyField 1", 1200,new int[]{50, 250, 750,2250,4000,6000}, gui, auction);
         fields[3] = new PropertyField("PropertyField 3", 1200, new int[]{50, 250, 750,2250, 4000,6000},  new PropertyField[]{(PropertyField) fields[1]}, gui, auction);
-        fields[4] = new TaxField("", 0, true, gui);
-        fields[5] = new ShippingField("Rederiet Lindinger", 4000, gui,auction, 500, 1000, 2000, 4000);
+        fields[4] = new TaxField("TaxField 4", 0, true, gui);
+        fields[5] = new ShippingField("ShippingField Rederiet Lindinger", 4000, gui,auction, 500, 1000, 2000, 4000);
         fields[6] = new PropertyField("PropertyField 6", 2000,new int[]{ 100,600,1800,5400,8000,11000}, gui, auction);
         fields[8] = new PropertyField("PropertyField 8", 2000, new int[]{ 100,600,1800,5400,8000,11000}, gui, auction);
         fields[9] = new PropertyField("PropertyField 9", 2400,new int[]{ 150,800,2000,6000,9000,12000},new PropertyField[]{(PropertyField) fields[6],(PropertyField) fields[8]}, gui, auction);
 
-        fields[10] = new JailField("felt nummer 10", 0,false);
+        fields[10] = new JailField("JailField 10", 0,false);
 
         fields[11] = new PropertyField("PropertyField 11", 2800,new int[]{ 200,1000,3000,9000,12500,15000}, gui, auction);
-        fields[12] = new CompanyField("Squash",  gui,auction,3000);
+        fields[12] = new CompanyField("CompanyField Squash",  gui,auction,3000);
         fields[13] = new PropertyField("PropertyField 13", 2800, new int[]{ 200,1000,3000,9000,12500,15000}, gui, auction);
         fields[14] = new PropertyField("PropertyField 14", 3200,new int[]{ 250,1250,3750,10000,14000,18000},new PropertyField[]{(PropertyField) fields[11], (PropertyField) fields[13]}, gui, auction);
 
-        fields[15] = new ShippingField("Grenaa-Hundested", 4000, gui, auction, 500, 1000, 2000, 4000);
+        fields[15] = new ShippingField("ShippingField Grenaa-Hundested", 4000, gui, auction, 500, 1000, 2000, 4000);
         fields[16] = new PropertyField("PropertyField 16", 3600,new int[]{ 300,1400,4000,11000,15000,19000}, gui, auction);
         fields[18] = new PropertyField("PropertyField 18", 3600,new int[]{ 300,1400,4000,11000,15000,19000}, gui, auction);
         fields[19] = new PropertyField("PropertyField 19", 4000,new int[]{ 350,1600,4400,12000,16000,20000},new PropertyField[]{ (PropertyField) fields[16], (PropertyField) fields[18]}, gui, auction);
@@ -111,23 +111,23 @@ public class GameBoard
         fields[23] = new PropertyField("PropertyField 23", 4400,new int[]{ 350,1800,5000,14000,17500,21000}, gui, auction);
         fields[24] = new PropertyField("PropertyField 24", 4800,new int[]{ 400,2000,6000,15000,18500,22000},new PropertyField[]{ (PropertyField) fields[21],(PropertyField) fields[23]}, gui, auction);
 
-        fields[25] = new ShippingField("Mols-Linien", 4000, gui, auction, 500, 1000, 2000, 4000);
+        fields[25] = new ShippingField("ShippingField Mols-Linien", 4000, gui, auction, 500, 1000, 2000, 4000);
 
         fields[26] = new PropertyField("PropertyField 26", 5200,new int[]{ 450,2200,6600,16000,19500,23000}, gui, auction);
         fields[27] = new PropertyField("PropertyField 27",5200,new int[]{ 450,2200,6600,16000,19500,23000}, gui, auction);
-        fields[28] = new CompanyField("Coca Cola",  gui, auction,3000);
+        fields[28] = new CompanyField("CompanyField Coca Cola",  gui, auction,3000);
         fields[29] = new PropertyField("PropertyField 29",5600,new int[]{ 500,2400,7200,17000,20500,24000}, new PropertyField[]{(PropertyField) fields[26],(PropertyField) fields[27]}, gui, auction);
 
-        fields[30] = new JailField("felt nummber 30", 1000, true);
+        fields[30] = new JailField("JailField 30", 1000, true);
 
         fields[31] = new PropertyField("PropertyField 31", 6000,new int[]{ 550,2600,7800,18000,22000,25000}, gui, auction);
         fields[32] = new PropertyField("PropertyField 32", 6000,new int[]{ 550,2600,7800,18000,22000,25000}, gui, auction);
         fields[34] = new PropertyField("PropertyField 34", 6400,new int[]{ 600,3000,9000,20000,24000,28000},new PropertyField[]{(PropertyField) fields[31],(PropertyField) fields[32]}, gui, auction);
 
-        fields[35] = new ShippingField("Skandinavisk Linietrafik", 4000, gui,  auction, 500, 1000, 2000, 4000);
+        fields[35] = new ShippingField("ShippingField Skandinavisk Linietrafik", 4000, gui,  auction, 500, 1000, 2000, 4000);
 
         fields[37] = new PropertyField("PropertyField 37", 7000,new int[]{ 700,3500,10000,22000,26000,30000}, gui, auction);
-        fields[38] = new TaxField("", 2000, false, gui);
+        fields[38] = new TaxField("TaxField 38", 2000, false, gui);
         fields[39] = new PropertyField("PropertyField 39", 8000,new int[]{ 1000,4000,12000,28000,34000,40000},new PropertyField[]{(PropertyField) fields[37]}, gui, auction);
 
 
@@ -201,13 +201,34 @@ public class GameBoard
         guiFields[37] = new GUI_Shipping("","Frederiksberg Gade","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Shipping("","Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
+    }
 
 
 
+    public String[] getFieldString(Field[] props) {
+        if(props!=null)
+        {
+            String result[] = new String[props.length];
+            for (int i = 0; i < props.length; i++)
+            {
+                result[i] = props[i].guiField.getTitle();
+            }
+            return result;
+        }
+        return null;
+    }
 
-
-        //guiFields[12].setForeGroundColor(Color.RED);
-
+    public Field getFieldFromString(String name)
+    {
+        Field result = null;
+        for (int i = 0; i < NFIELDS; i++)
+        {
+            if(guiFields[i].getTitle().equals(name))
+            {
+                result=fields[i];
+            }
+        }
+        return result;
     }
 
     @Override

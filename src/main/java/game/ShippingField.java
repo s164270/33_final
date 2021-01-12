@@ -4,7 +4,7 @@ import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
 
-public class ShippingField extends Field {
+public class ShippingField extends Field implements Ownable{
 
     private final String name;
     private final int cost;
@@ -14,6 +14,7 @@ public class ShippingField extends Field {
 
     private Player owner;
     private Auction auction;
+    private boolean pawned;
 
     ShippingField(String name, int cost, GUI gui, Auction auction,  int... rent) {
         this.name = name;
@@ -21,6 +22,7 @@ public class ShippingField extends Field {
         this.gui = gui;
         this.rent = rent;
         this.auction = auction;
+        this.pawned=false;
     }
     private void buyProperty(Player player) {
         player.addPoints(-cost);
@@ -29,7 +31,8 @@ public class ShippingField extends Field {
     }
     public void setOwner(Player player) {
         owner=player;
-        owner.getRedderier().add(this);
+        owner.getShipping().add(this);
+        owner.getOwnedFields().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
     public void buyProperty(Player player, int auctionPrice) {
@@ -55,8 +58,8 @@ public class ShippingField extends Field {
         }
 
         else if (owner != player) {
-            player.sendPoints(owner, rent[owner.getRedderier().size() - 1]);
-            return player.getName() + " landede på " + owner.getName() + "'s felt: " + name + " og skal betale " + rent[owner.getRedderier().size() - 1] + " kr";
+            player.sendPoints(owner, rent[owner.getShipping().size() - 1]);
+            return player.getName() + " landede på " + owner.getName() + "'s felt: " + name + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr";
         }
 
         return player.getName() + " landede på feltet" + " " + guiField.getTitle();
@@ -66,6 +69,36 @@ public class ShippingField extends Field {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void pawnOff() {
+        owner.addPoints(cost/2);
+        pawned=true;
+    }
+
+    @Override
+    public void rebuy() {
+        owner.addPoints(- (int) ((cost/2)*1.1));
+        pawned=false;
+    }
+
+    @Override
+    public int getPrice()
+    {
+        return cost;
+    }
+
+    @Override
+    public boolean isPawned()
+    {
+        return pawned;
+    }
+
+    @Override
+    public boolean isPawnable()
+    {
+        return !pawned;
     }
 
 }

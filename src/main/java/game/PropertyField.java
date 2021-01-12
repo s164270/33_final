@@ -4,11 +4,12 @@ import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
 
-public class PropertyField extends Field{
+public class PropertyField extends Field implements Ownable{
     private int cost;
     private int rent[];
     private int num_houses;
     private boolean paired = false;
+    private boolean pawned = false;
 
     private PropertyField neighbor[];
     private Player owner;
@@ -49,11 +50,50 @@ public class PropertyField extends Field{
     }
     public void setOwner(Player player) {
         owner=player;
+        player.getOwnedFields().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
 
     public void setPaired(boolean paired) {
         this.paired = paired;
+    }
+
+    @Override
+    public void pawnOff() {
+        if(!pawned && num_houses==0)
+        {
+            owner.addPoints(cost/2);
+            pawned=true;
+            System.out.println(pawned);
+        }
+    }
+
+    @Override
+    public void rebuy() {
+        owner.addPoints(- (int) ((cost/2)*1.1));
+        pawned=false;
+    }
+
+    @Override
+    public int getPrice()
+    {
+        return cost;
+    }
+
+    @Override
+    public boolean isPawned()
+    {
+        return pawned;
+    }
+
+    @Override
+    public boolean isPawnable()
+    {
+        return (num_houses==0) && !pawned;
+    }
+
+    public int getNumHouses() {
+        return num_houses;
     }
 
     public void setNeighbor(PropertyField neighbor[]) {
@@ -95,6 +135,7 @@ public class PropertyField extends Field{
     {
         player.addPoints(-auctionPrice);
         setOwner(player);
+
         boolean pair =true;
         for (int i = 0; i < neighbor.length; i++)
         {
@@ -125,15 +166,18 @@ public class PropertyField extends Field{
         }
         else if(owner != player)
         {
-            if(paired)
+            if(!pawned)
             {
-                player.sendPoints(owner, 2*rent[num_houses]);
-            }
-            else
-            {
-                player.sendPoints(owner,rent[num_houses]);
+                if (paired)
+                {
+                    player.sendPoints(owner, 2 * rent[num_houses]);
+                } else
+                {
+                    player.sendPoints(owner, rent[num_houses]);
+                }
             }
         }
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }
+
 }

@@ -110,21 +110,24 @@ public class Game
         while (!turnDone)
         {
             String btnChoice;
+            String prop;
+            String selection[];
+            Ownable f;
 
             if(player.isInPrison() && mustRoll)
             {
                 btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
-                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt");
+                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt", "Genkøb");
             }
             else if(mustRoll)
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Slå", "Byg", "Pantsæt");
+                        "Slå", "Byg", "Pantsæt", "Genkøb");
             }
             else
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Afslut tur", "Byg", "Pantsæt");
+                        "Afslut tur", "Byg", "Pantsæt", "Genkøb");
             }
 
             switch (btnChoice)
@@ -155,7 +158,30 @@ public class Game
                     gui.showMessage("Byg er ikke implementeret endnu");
                     break;
                 case "Pantsæt":
-                    gui.showMessage("Pantsæt er ikke implementeret endnu");
+                    selection = board.getFieldString(player.getPawnableProperties());
+                    if (selection!= null)
+                    {
+                        prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
+                        f = (Ownable) board.getFieldFromString(prop);
+                        f.pawnOff();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
+                    }
+                    break;
+                case "Genkøb":
+                    selection = board.getFieldString(player.getPawnedProperties());
+                    if (selection!= null)
+                    {
+                        prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",selection);
+                        f = (Ownable) board.getFieldFromString(prop);
+                        f.rebuy();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen pantsatte ejendomme");
+                    }
                     break;
                 case "Afslut tur":
                     turnDone = true;
@@ -204,13 +230,6 @@ public class Game
         }
         gameOver();
         changePlayer();
-/*        if(player.getChanceCard()!=null)
-        {
-            player.getChanceCard().executeChance();
-            player.setChanceCard(null);
-        }
-        else*/
-
     }
 
     public void gameOver() {
