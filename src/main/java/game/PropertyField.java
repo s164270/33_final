@@ -64,16 +64,14 @@ public class PropertyField extends Field implements Ownable{
         {
             owner.addPoints(cost/2);
             pawned=true;
+            System.out.println(pawned);
         }
     }
 
     @Override
     public void rebuy() {
-        if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
-        {
-            owner.addPoints((int) ((cost/2)*1.1));
-            pawned=false;
-        }
+        owner.addPoints(- (int) ((cost/2)*1.1));
+        pawned=false;
     }
 
     @Override
@@ -91,7 +89,7 @@ public class PropertyField extends Field implements Ownable{
     @Override
     public boolean isPawnable()
     {
-        return (num_houses>0) && !pawned;
+        return (num_houses==0) && !pawned;
     }
 
     public int getNumHouses() {
@@ -137,6 +135,7 @@ public class PropertyField extends Field implements Ownable{
     {
         player.addPoints(-auctionPrice);
         setOwner(player);
+
         boolean pair =true;
         for (int i = 0; i < neighbor.length; i++)
         {

@@ -187,15 +187,17 @@ public class Player
     }
 
     public Field[] getPawnableProperties(){
-            Field temp[] = new Field[NFIELDS];
-            Field result[] =null;
-            int counter = 0;
-
+        Field temp[] = new Field[NFIELDS];
+        Field result[] =null;
+        int counter = 0;
+        System.out.println("start");
             for (int i = 0; i < ownedFields.size(); i++)
             {
+                System.out.println(ownedFields.get(i).getName());
                 Ownable f = (Ownable)ownedFields.get(i);
                 if (f.isPawnable())
                 {
+                    System.out.println("Pawnable "+ownedFields.get(i).getName());
                     temp[counter]= ownedFields.get(i);
                     counter++;
                 }
@@ -206,10 +208,11 @@ public class Player
                 for (int i = 0; i < counter; i++)
                 {
                     result[i] = temp[i];
+                    System.out.println(result[i]);
                 }
             }
-            return result;
-        }
+        return result;
+    }
 
     public Field[] getPawnedProperties() {
             Field temp[] = new Field[NFIELDS];
@@ -219,7 +222,7 @@ public class Player
             for (int i = 0; i < ownedFields.size(); i++)
             {
                 Ownable f = (Ownable)ownedFields.get(i);
-                if (f.isPawned())
+                if (f.isPawned() && getPoints()> (int) ((f.getPrice()/2)*1.1))
                 {
                     temp[counter]= ownedFields.get(i);
                     counter++;

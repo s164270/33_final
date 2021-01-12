@@ -32,6 +32,7 @@ public class ShippingField extends Field implements Ownable{
     public void setOwner(Player player) {
         owner=player;
         owner.getShipping().add(this);
+        owner.getOwnedFields().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
     public void buyProperty(Player player, int auctionPrice) {
@@ -72,20 +73,14 @@ public class ShippingField extends Field implements Ownable{
 
     @Override
     public void pawnOff() {
-        if(!pawned )
-        {
-            owner.addPoints(cost/2);
-            pawned=true;
-        }
+        owner.addPoints(cost/2);
+        pawned=true;
     }
 
     @Override
     public void rebuy() {
-        if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
-        {
-            owner.addPoints((int) ((cost/2)*1.1));
-            pawned=false;
-        }
+        owner.addPoints(- (int) ((cost/2)*1.1));
+        pawned=false;
     }
 
     @Override

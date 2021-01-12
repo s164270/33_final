@@ -36,6 +36,7 @@ public class CompanyField extends Field implements Ownable{
     public void setOwner(Player player) {
         owner = player;
         owner.getCompany().add(this);
+        owner.getOwnedFields().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
 
@@ -78,11 +79,8 @@ public class CompanyField extends Field implements Ownable{
 
     @Override
     public void rebuy() {
-        if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
-        {
-            owner.addPoints((int) ((cost/2)*1.1));
-            pawned=false;
-        }
+        owner.addPoints(- (int) ((cost/2)*1.1));
+        pawned=false;
     }
 
     @Override

@@ -111,6 +111,7 @@ public class Game
         {
             String btnChoice;
             String prop;
+            String selection[];
             Ownable f;
 
             if(player.isInPrison() && mustRoll)
@@ -157,14 +158,30 @@ public class Game
                     gui.showMessage("Byg er ikke implementeret endnu");
                     break;
                 case "Pantsæt":
-                    prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",board.getFieldString(player.getPawnableProperties()));
-                    f = (Ownable) board.getFieldFromString(prop);
-                    f.pawnOff();
+                    selection = board.getFieldString(player.getPawnableProperties());
+                    if (selection!= null)
+                    {
+                        prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
+                        f = (Ownable) board.getFieldFromString(prop);
+                        f.pawnOff();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
+                    }
                     break;
                 case "Genkøb":
-                    prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",board.getFieldString(player.getPawnedProperties()));
-                    f = (Ownable) board.getFieldFromString(prop);
-                    f.rebuy();
+                    selection = board.getFieldString(player.getPawnedProperties());
+                    if (selection!= null)
+                    {
+                        prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",selection);
+                        f = (Ownable) board.getFieldFromString(prop);
+                        f.rebuy();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen pantsatte ejendomme");
+                    }
                     break;
                 case "Afslut tur":
                     turnDone = true;
