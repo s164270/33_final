@@ -4,7 +4,7 @@ import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
 
-public class CompanyField extends Field {
+public class CompanyField extends Field implements Ownable{
 
     private final String name;
     private final int cost;
@@ -13,12 +13,14 @@ public class CompanyField extends Field {
 
     private Player owner;
     private Auction auction;
+    private boolean pawned;
 
     public CompanyField(String name, GUI gui, Auction auction, int cost) {
         this.name = name;
         this.gui = gui;
         this.cost = cost;
         this.auction = auction;
+        this.pawned=false;
 
     }
     private void buyProperty(Player player) {
@@ -65,5 +67,40 @@ public class CompanyField extends Field {
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }
 
+    @Override
+    public void pawnOff() {
+        if(!pawned )
+        {
+            owner.addPoints(cost/2);
+            pawned=true;
+        }
+    }
+
+    @Override
+    public void rebuy() {
+        if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
+        {
+            owner.addPoints((int) ((cost/2)*1.1));
+            pawned=false;
+        }
+    }
+
+    @Override
+    public int getPrice()
+    {
+        return cost;
+    }
+
+    @Override
+    public boolean isPawned()
+    {
+        return pawned;
+    }
+
+    @Override
+    public boolean isPawnable()
+    {
+        return !pawned;
+    }
 
 }

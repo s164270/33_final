@@ -4,7 +4,7 @@ import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
 
-public class PropertyField extends Field{
+public class PropertyField extends Field implements Ownable{
     private int cost;
     private int rent[];
     private int num_houses;
@@ -50,6 +50,7 @@ public class PropertyField extends Field{
     }
     public void setOwner(Player player) {
         owner=player;
+        player.getOwnedFields().add(this);
         ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
     }
 
@@ -57,6 +58,7 @@ public class PropertyField extends Field{
         this.paired = paired;
     }
 
+    @Override
     public void pawnOff() {
         if(!pawned && num_houses==0)
         {
@@ -65,12 +67,31 @@ public class PropertyField extends Field{
         }
     }
 
+    @Override
     public void rebuy() {
         if(!pawned && owner.getPoints() <= ((cost/2)*1.1))
         {
             owner.addPoints((int) ((cost/2)*1.1));
             pawned=false;
         }
+    }
+
+    @Override
+    public int getPrice()
+    {
+        return cost;
+    }
+
+    @Override
+    public boolean isPawned()
+    {
+        return pawned;
+    }
+
+    @Override
+    public boolean isPawnable()
+    {
+        return (num_houses>0) && !pawned;
     }
 
     public int getNumHouses() {
@@ -160,8 +181,4 @@ public class PropertyField extends Field{
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }
 
-    public boolean isPawned()
-    {
-        return pawned;
-    }
 }

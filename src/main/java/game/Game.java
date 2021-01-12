@@ -110,21 +110,23 @@ public class Game
         while (!turnDone)
         {
             String btnChoice;
+            String prop;
+            Ownable f;
 
             if(player.isInPrison() && mustRoll)
             {
                 btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
-                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt");
+                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt", "Genkøb");
             }
             else if(mustRoll)
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Slå", "Byg", "Pantsæt");
+                        "Slå", "Byg", "Pantsæt", "Genkøb");
             }
             else
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Afslut tur", "Byg", "Pantsæt");
+                        "Afslut tur", "Byg", "Pantsæt", "Genkøb");
             }
 
             switch (btnChoice)
@@ -155,7 +157,14 @@ public class Game
                     gui.showMessage("Byg er ikke implementeret endnu");
                     break;
                 case "Pantsæt":
-                    String prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",board.getPropertyStrings(board.getPlayerPawnableProperties(currentPlayer)));
+                    prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",board.getFieldString(player.getPawnableProperties()));
+                    f = (Ownable) board.getFieldFromString(prop);
+                    f.pawnOff();
+                    break;
+                case "Genkøb":
+                    prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",board.getFieldString(player.getPawnedProperties()));
+                    f = (Ownable) board.getFieldFromString(prop);
+                    f.rebuy();
                     break;
                 case "Afslut tur":
                     turnDone = true;
@@ -204,13 +213,6 @@ public class Game
         }
         gameOver();
         changePlayer();
-/*        if(player.getChanceCard()!=null)
-        {
-            player.getChanceCard().executeChance();
-            player.setChanceCard(null);
-        }
-        else*/
-
     }
 
     public void gameOver() {

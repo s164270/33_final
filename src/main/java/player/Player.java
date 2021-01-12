@@ -1,9 +1,7 @@
 package player;
 
 import chancecard.ChanceMovePlayer;
-import game.CompanyField;
-import game.GameBoard;
-import game.ShippingField;
+import game.*;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -14,11 +12,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static game.GameBoard.NFIELDS;
+
 public class Player
 {
 
-    private final ArrayList<ShippingField> redderier = new ArrayList<>();
+    private final ArrayList<ShippingField> shipping = new ArrayList<>();
     private final ArrayList<CompanyField>  company = new ArrayList<>();
+    private final ArrayList<Field>  ownedFields = new ArrayList<>();
 
     private int diceSum;
 
@@ -104,12 +105,12 @@ public class Player
 
     public void move(int distance)
     {
-        if(distance < 0 || distance > GameBoard.NFIELDS)
-            throw new IllegalArgumentException("distance can't be <0 or be >" +  GameBoard.NFIELDS);
-        if(position + distance < GameBoard.NFIELDS)
+        if(distance < 0 || distance > NFIELDS)
+            throw new IllegalArgumentException("distance can't be <0 or be >" +  NFIELDS);
+        if(position + distance < NFIELDS)
             position = position + distance;
         else
-            position = (position + distance) - GameBoard.NFIELDS;
+            position = (position + distance) - NFIELDS;
     }
 
     public void setPosition(int position) {
@@ -177,9 +178,63 @@ public class Player
         return company;
     }
 
-    public ArrayList<ShippingField> getRedderier() {
-        return redderier;
+    public ArrayList<ShippingField> getShipping() {
+        return shipping;
     }
+
+    public ArrayList<Field> getOwnedFields() {
+        return ownedFields;
+    }
+
+    public Field[] getPawnableProperties(){
+            Field temp[] = new Field[NFIELDS];
+            Field result[] =null;
+            int counter = 0;
+
+            for (int i = 0; i < ownedFields.size(); i++)
+            {
+                Ownable f = (Ownable)ownedFields.get(i);
+                if (f.isPawnable())
+                {
+                    temp[counter]= ownedFields.get(i);
+                    counter++;
+                }
+            }
+            if (counter>0)
+            {
+                result = new Field[counter];
+                for (int i = 0; i < counter; i++)
+                {
+                    result[i] = temp[i];
+                }
+            }
+            return result;
+        }
+
+    public Field[] getPawnedProperties() {
+            Field temp[] = new Field[NFIELDS];
+            Field result[] =null;
+            int counter = 0;
+
+            for (int i = 0; i < ownedFields.size(); i++)
+            {
+                Ownable f = (Ownable)ownedFields.get(i);
+                if (f.isPawned())
+                {
+                    temp[counter]= ownedFields.get(i);
+                    counter++;
+                }
+            }
+            if (counter>0)
+            {
+                result = new Field[counter];
+                for (int i = 0; i < counter; i++)
+                {
+                    result[i] = temp[i];
+                }
+            }
+            return result;
+        }
 
     public int getDiceSum() {
         return diceSum;
