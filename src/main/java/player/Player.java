@@ -1,7 +1,8 @@
 package player;
 
-import chancecard.ChanceMovePlayer;
+import game.CompanyField;
 import game.GameBoard;
+import game.ShippingField;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import gui_main.GUI;
@@ -11,14 +12,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 
 public class Player
 {
+
+    private final ArrayList<ShippingField> redderier = new ArrayList<>();
+    private final ArrayList<CompanyField>  company = new ArrayList<>();
+
+    private int diceSum;
+
     private int position = 0;
     private Account account;
     private String playerName;
-    private ChanceMovePlayer chanceCard;
     private GUI_Player gui_player;
     private boolean FreePrison;
     private boolean inPrison;
@@ -156,13 +161,19 @@ public class Player
         return gui_player;
     }
 
-    public ChanceMovePlayer getChanceCard()
-    {
-        return chanceCard;
+    public ArrayList<CompanyField> getCompany() {
+        return company;
     }
 
-    public void setChanceCard(ChanceMovePlayer chanceCard)
-    {
-        this.chanceCard = chanceCard;
+    public ArrayList<ShippingField> getRedderier() {
+        return redderier;
+    }
+
+    public int getDiceSum() {
+        return diceSum;
+    }
+
+    public void setDiceSum(int sum) {
+        this.diceSum = sum;
     }
 }

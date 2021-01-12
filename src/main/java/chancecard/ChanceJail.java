@@ -1,22 +1,25 @@
 package chancecard;
 
 import game.GameBoard;
+import game.PropertyField;
 import gui_main.GUI;
 import player.Player;
 
 import java.awt.*;
 
-public class ChanceFreeJail extends Chance
+public class ChanceJail extends Chance
 {
 
-    public ChanceFreeJail(GameBoard board, GUI gui, Player[] player)
+    public ChanceJail(GameBoard board, GUI gui, Player[] player)
     {
         super(board,gui,player);
     }
 
-    public ChanceFreeJail(GameBoard board, GUI gui, Player[] player, String text)
+
+    public ChanceJail(GameBoard board, GUI gui, Player[] player, String text)
     {
         super(board, gui, player, text);
+
     }
 
 
@@ -24,6 +27,7 @@ public class ChanceFreeJail extends Chance
     public void executeChance(Player currentPlayer)
     {
         gui.showMessage(text);
-        currentPlayer.setFreePrison(true);
+        currentPlayer.setInPrison(true);
+        currentPlayer.setPosition(10);
     }
 }

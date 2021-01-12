@@ -7,21 +7,21 @@ import player.Player;
 
 import java.awt.*;
 
-public class ChanceMove extends Chance
+public class ChancePayDouble extends Chance
 {
     String[] options;
 
-    public ChanceMove(GameBoard board, GUI gui, Player[] player)
+    public ChancePayDouble(GameBoard board, GUI gui, Player[] player)
     {
         super(board,gui,player);
     }
 
-    public ChanceMove(GameBoard board, GUI gui, Player[] player, String text)
+    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text)
     {
         super(board, gui, player, text);
     }
 
-    public ChanceMove(GameBoard board, GUI gui, Player[] player, String text, String[] options)
+    public ChancePayDouble(GameBoard board, GUI gui, Player[] player, String text, String[] options)
     {
         super(board, gui, player, text);
         this.options=options;
@@ -36,6 +36,7 @@ public class ChanceMove extends Chance
         {
             if(board.getGuiFields()[i].getTitle().equals(choice))
             {
+                board.movePlayerPosition(currentPlayer,i);
                 board.movePlayerPosition(currentPlayer,i);
                 return;
             }

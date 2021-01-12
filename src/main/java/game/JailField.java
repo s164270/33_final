@@ -20,8 +20,8 @@ public class JailField extends Field {
     public String landOnField(Player player) {
         if(jailType)
         {
-            player.setPosition(10);
             player.setInPrison(true);
+            player.setPosition(10);
             System.out.println(player.getName() + " blev sendt til fængsel");
             return player.getName() + " " + "landede på fængselsfeltet og blev sendt til fængslet";
         }

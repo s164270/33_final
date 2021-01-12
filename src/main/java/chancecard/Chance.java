@@ -1,7 +1,6 @@
 package chancecard;
 
 import game.GameBoard;
-import gui_fields.GUI_Chance;
 import gui_main.GUI;
 import player.Player;
 
@@ -18,18 +17,15 @@ public abstract class Chance
 
     public Chance(GameBoard board, GUI gui, Player[] player)
     {
-        this.col1 = Color.RED;
-        this.col2 = Color.RED;
         this.text = "";
         this.board=board;
         this.gui=gui;
         this.player=player;
     }
 
-    public Chance(GameBoard board, GUI gui, Player[] player, String text, Color col1, Color col2)
+    public Chance(GameBoard board, GUI gui, Player[] player, String text)
     {
-        this.col1 = col1;
-        this.col2 = col2;
+
         this.text = text;
         this.board=board;
         this.gui=gui;

@@ -3,7 +3,6 @@ package game;
 import chancecard.*;
 import dice.DiceCup;
 import gui_main.GUI;
-import player.Account;
 import player.Player;
 
 import java.awt.*;
@@ -97,6 +96,8 @@ public class Game
     public void rollDice()
     {
         dice.rollDice();
+        currentPlayer.setDiceSum(dice.getSum());
+
         gui.setDice(dice.getDice1(), dice.getDice2());
     }
 

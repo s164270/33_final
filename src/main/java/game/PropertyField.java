@@ -4,9 +4,6 @@ import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 import player.Player;
-import gui_fields.GUI_Field;
-
-import java.util.ArrayList;
 
 public class PropertyField extends Field{
     private int cost;
@@ -135,7 +132,7 @@ public class PropertyField extends Field{
     public String landOnField(Player player) {
         if(owner == null) //player has to buy the property
         {
-            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + "for " + cost + "?", "JA", "NEJ"))
+            switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + " for " + cost + "?", "JA", "NEJ"))
             {
                 case "JA":
                     buyProperty(player);
