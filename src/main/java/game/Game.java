@@ -399,16 +399,46 @@ public class Game
     {
         //Chance card= new ChanceMovePlayer(board, gui, player,"Ryk frem til et orange felt", Color.BLUE,Color.ORANGE, currentPlayer);
         //chanceCards.getRandomChance().executeChance(currentPlayer);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
-        board.movePlayerPosition(currentPlayer,15);
         //currentPlayer.getChanceCard().executeChance();
-        //board.movePlayerPosition(currentPlayer,15);
+        boolean turnDone=true;
+        String btnChoice;
+        int userInt;
+
+        while (turnDone)
+        {
+            btnChoice = gui.getUserSelection(currentPlayer.getName() + " i TEST MODE. Hvad vil du foretage dig?",
+                    "move", "add money", "change player","normal turn", "start normal game", "end");
+
+            switch (btnChoice)
+            {
+                case "move":
+                    userInt = gui.getUserInteger("vælg feltnummer 0 - 39", 0,39);
+                    board.movePlayerPosition(currentPlayer, userInt);
+                    break;
+                case "change player":
+                    changePlayer();
+                    break;
+                case "add money":
+                    userInt = gui.getUserInteger("vælg pengesum");
+                    currentPlayer.addPoints(userInt);
+                    break;
+                case "normal turn":
+                    turn(currentPlayer);
+                    break;
+                case "end":
+                    turnDone=false;
+                    break;
+                case "start normal game":
+                    while(!isGameOver())
+                    {
+                        turn(getCurrentPlayer());
+                    }
+                    endGame();
+                    turnDone=false;
+                    break;
+            }
+        }
+
     }
 
 }

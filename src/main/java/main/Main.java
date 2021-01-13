@@ -4,7 +4,7 @@ import game.Game;
 public class Main {
 
     public static void main(String[] args) {
-        boolean DEBUG=false;
+        boolean DEBUG=true;
         if (DEBUG)
         {
             Game game = new Game("player1", "player2");

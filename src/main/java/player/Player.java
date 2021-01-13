@@ -77,7 +77,14 @@ public class Player
         this.playerName=playerName;
         account = new Account(30000);
         GUI_Car car = new GUI_Car();
-        car.setPrimaryColor(Color.RED);
+        if (playerName.contains("2"))
+        {
+            car.setPrimaryColor(Color.GREEN);
+        }
+        else
+        {
+            car.setPrimaryColor(Color.RED);
+        }
         gui_player = new GUI_Player(playerName, account.getBalance(), car);
     }
 
