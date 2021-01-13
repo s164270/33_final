@@ -118,17 +118,17 @@ public class Game
             {
 
                 btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
-                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg huse", "Byg hotel", "Sælg huse", "Pantsæt", "Genkøb");
+                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg huse", "Byg hotel", "Sælg huse", "Sælg hotel", "Pantsæt", "Genkøb");
             }
             else if(mustRoll)
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Slå", "Byg huse", "Byg hotel", "Sælg huse", "Pantsæt", "Genkøb");
+                        "Slå", "Byg huse", "Byg hotel", "Sælg huse", "Sælg hotel", "Pantsæt", "Genkøb");
             }
             else
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Afslut tur", "Byg huse", "Byg hotel", "Sælg huse", "Pantsæt", "Genkøb");
+                        "Afslut tur", "Byg huse", "Byg hotel", "Sælg huse", "Sælg hotel", "Pantsæt", "Genkøb");
             }
 
             switch (btnChoice)
@@ -160,6 +160,9 @@ public class Game
                     break;
                 case "Byg hotel":
                     buildHotel(player);
+                    break;
+                case "Sælg hotel":
+                    sellHotel(player);
                     break;
                 case "Sælg huse":
                     sellHouses(player);
