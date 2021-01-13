@@ -180,54 +180,50 @@ public class Player
         Field temp[] = new Field[NFIELDS];
         Field result[] =null;
         int counter = 0;
-        System.out.println("start");
-            for (int i = 0; i < ownedFields.size(); i++)
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            Ownable f = (Ownable)ownedFields.get(i);
+            if (f.isPawnable())
             {
-                System.out.println(ownedFields.get(i).getName());
-                Ownable f = (Ownable)ownedFields.get(i);
-                if (f.isPawnable())
-                {
-                    System.out.println("Pawnable "+ownedFields.get(i).getName());
-                    temp[counter]= ownedFields.get(i);
-                    counter++;
-                }
+                temp[counter]= ownedFields.get(i);
+                counter++;
             }
-            if (counter>0)
+        }
+        if (counter>0)
+        {
+            result = new Field[counter];
+            for (int i = 0; i < counter; i++)
             {
-                result = new Field[counter];
-                for (int i = 0; i < counter; i++)
-                {
-                    result[i] = temp[i];
-                    System.out.println(result[i]);
-                }
+                result[i] = temp[i];
             }
+        }
         return result;
     }
 
     public Field[] getPawnedProperties() {
-            Field temp[] = new Field[NFIELDS];
-            Field result[] =null;
-            int counter = 0;
+        Field temp[] = new Field[NFIELDS];
+        Field result[] =null;
+        int counter = 0;
 
-            for (int i = 0; i < ownedFields.size(); i++)
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            Ownable f = (Ownable)ownedFields.get(i);
+            if (f.isPawned() && getPoints()> (int) ((f.getPrice()/2)*1.1))
             {
-                Ownable f = (Ownable)ownedFields.get(i);
-                if (f.isPawned() && getPoints()> (int) ((f.getPrice()/2)*1.1))
-                {
-                    temp[counter]= ownedFields.get(i);
-                    counter++;
-                }
+                temp[counter]= ownedFields.get(i);
+                counter++;
             }
-            if (counter>0)
-            {
-                result = new Field[counter];
-                for (int i = 0; i < counter; i++)
-                {
-                    result[i] = temp[i];
-                }
-            }
-            return result;
         }
+        if (counter>0)
+        {
+            result = new Field[counter];
+            for (int i = 0; i < counter; i++)
+            {
+                result[i] = temp[i];
+            }
+        }
+        return result;
+    }
 
     public int getDiceSum() {
         return diceSum;
