@@ -3,6 +3,7 @@ package game;
 import chancecard.ChanceCards;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Shipping;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 import player.Player;
 
@@ -162,45 +163,45 @@ public class GameBoard
         // Get the absolut file path for images in a way that works cross platform
         String IMAGE_DIR_PATH = System.getProperty("user.dir") + File.separator + "src"  + File.separator + "main"  + File.separator + "resources"  + File.separator+ "img"  + File.separator;
         guiFields[0] = new GUI_Shipping(IMAGE_DIR_PATH+"start.png","Start", "", "Modtag kr. 4000", "", Color.WHITE, Color.BLACK);
-        guiFields[1] = new GUI_Shipping(IMAGE_DIR_PATH+"","Rødovrevej", "kr. 1200", "", "", Color.BLUE, Color.BLACK);
+        guiFields[1] = new GUI_Street("Rødovrevej", "kr. 1200", "", "", Color.BLUE, Color.BLACK);
         guiFields[2] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[3] = new GUI_Shipping(IMAGE_DIR_PATH+"","Hvidovrevej", "kr. 1200", "", "", Color.BLUE, Color.BLACK);
+        guiFields[3] = new GUI_Street("Hvidovrevej", "kr. 1200", "", "", Color.BLUE, Color.BLACK);
         guiFields[4] = new GUI_Shipping(IMAGE_DIR_PATH+"","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[5] = new GUI_Shipping(IMAGE_DIR_PATH+"","Rederiet Lindinger", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
-        guiFields[6] = new GUI_Shipping(IMAGE_DIR_PATH+"","Roskildevej", "kr. 2.000", "", "", Color.ORANGE, Color.BLACK);
+        guiFields[6] = new GUI_Street("Roskildevej", "kr. 2.000", "", "", Color.ORANGE, Color.BLACK);
         guiFields[7] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[8] = new GUI_Shipping(IMAGE_DIR_PATH+"","Valby Langgade", "kr. 2000", "", "", Color.ORANGE, Color.BLACK);
-        guiFields[9] = new GUI_Shipping(IMAGE_DIR_PATH+"","Allegade", "kr. 2400", "", "", Color.ORANGE, Color.BLACK);
+        guiFields[8] = new GUI_Street("Valby Langgade", "kr. 2000", "", "", Color.ORANGE, Color.BLACK);
+        guiFields[9] = new GUI_Street("Allegade", "kr. 2400", "", "", Color.ORANGE, Color.BLACK);
         guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 1000", "", "", Color.BLACK, Color.WHITE);
-        guiFields[11] = new GUI_Shipping(IMAGE_DIR_PATH+"","Frederiksberg Alle","kr. 2.800", "", "", Color.PINK, Color.BLACK);
+        guiFields[11] = new GUI_Street("Frederiksberg Alle","kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
-        guiFields[13] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
-        guiFields[14] = new GUI_Shipping(IMAGE_DIR_PATH+"","Gl. Kongevej", "kr. 3.200", "", "", Color.PINK, Color.BLACK);
+        guiFields[13] = new GUI_Street("Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
+        guiFields[14] = new GUI_Street("Gl. Kongevej", "kr. 3.200", "", "", Color.PINK, Color.BLACK);
         guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Grenaa-Hundested", "kr. 4.000", "", "", Color.RED, Color.BLUE);
-        guiFields[16] = new GUI_Shipping(IMAGE_DIR_PATH+"","Bernstorffsvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
+        guiFields[16] = new GUI_Street("Bernstorffsvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
         guiFields[17] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[18] = new GUI_Shipping(IMAGE_DIR_PATH+"","Hellerupvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
-        guiFields[19] = new GUI_Shipping(IMAGE_DIR_PATH+"","Strandvejen", "kr. 4.000", "", "", Color.GRAY, Color.BLACK);
+        guiFields[18] = new GUI_Street("Hellerupvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
+        guiFields[19] = new GUI_Street("Strandvejen", "kr. 4.000", "", "", Color.GRAY, Color.BLACK);
         guiFields[20] = new GUI_Shipping(IMAGE_DIR_PATH+"","Gratis", "Parkering", "Gratis Parkering", "", Color.WHITE, Color.BLACK);
-        guiFields[21] = new GUI_Shipping(IMAGE_DIR_PATH+"","Trianglen", "kr. 4.400", "", "", Color.RED, Color.BLACK);
+        guiFields[21] = new GUI_Street("Trianglen", "kr. 4.400", "", "", Color.RED, Color.BLACK);
         guiFields[22] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[23] = new GUI_Shipping(IMAGE_DIR_PATH+"","Østerbrogade", "kr. 4.400", "", "", Color.RED, Color.BLACK);
-        guiFields[24] = new GUI_Shipping(IMAGE_DIR_PATH+"","Grønningen", "kr 4.800", "", "", Color.RED, Color.BLACK);
+        guiFields[23] = new GUI_Street("Østerbrogade", "kr. 4.400", "", "", Color.RED, Color.BLACK);
+        guiFields[24] = new GUI_Street("Grønningen", "kr 4.800", "", "", Color.RED, Color.BLACK);
         guiFields[25] = new GUI_Shipping(IMAGE_DIR_PATH+"","Mols-Linien", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
-        guiFields[26] = new GUI_Shipping("","Bredgade","kr. 5.200","","",Color.WHITE,Color.BLACK);
-        guiFields[27] = new GUI_Shipping("","Kgs. Nytorv","kr. 5.200","","",Color.WHITE,Color.BLACK);
+        guiFields[26] = new GUI_Street("Bredgade","kr. 5.200","","",Color.WHITE,Color.BLACK);
+        guiFields[27] = new GUI_Street("Kgs. Nytorv","kr. 5.200","","",Color.WHITE,Color.BLACK);
         guiFields[28] = new GUI_Shipping("","Coca Cola","","","",Color.RED,Color.WHITE);
-        guiFields[29] = new GUI_Shipping("","Østergade","kr. 5.600","","",Color.WHITE,Color.BLACK);
+        guiFields[29] = new GUI_Street("Østergade","kr. 5.600","","",Color.WHITE,Color.BLACK);
         guiFields[30] = new GUI_Shipping("","De fængsles","","","",Color.BLACK,Color.WHITE);
-        guiFields[31] = new GUI_Shipping("","Amagertorv","kr. 6.000","","",Color.YELLOW,Color.BLACK);
-        guiFields[32] = new GUI_Shipping("","Vimmelskaftet","kr. 6.000 ","","",Color.YELLOW,Color.BLACK);
+        guiFields[31] = new GUI_Street("Amagertorv","kr. 6.000","","",Color.YELLOW,Color.BLACK);
+        guiFields[32] = new GUI_Street("Vimmelskaftet","kr. 6.000 ","","",Color.YELLOW,Color.BLACK);
         guiFields[33] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[34] = new GUI_Shipping("","Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
+        guiFields[34] = new GUI_Street("Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
         guiFields[35] = new GUI_Shipping("","Skandinavisk Linietrafik","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
         guiFields[36] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[37] = new GUI_Shipping("","Frederiksberg Gade","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[37] = new GUI_Street("Frederiksberg Alle","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
-        guiFields[39] = new GUI_Shipping("","Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[39] = new GUI_Street("Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
     }
 
 
@@ -218,6 +219,7 @@ public class GameBoard
         return null;
     }
 
+
     public Field getFieldFromString(String name)
     {
         Field result = null;
@@ -229,8 +231,6 @@ public class GameBoard
             }
         }
         return result;
-    }
-
     @Override
     public String toString() {
         for(int i=0; i<fields.length; i++)

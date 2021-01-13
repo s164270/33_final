@@ -12,6 +12,7 @@ public abstract class Field {
 
     public void setGuiField(GUI_Field guiField) {
         this.guiField = guiField;
+        this.name = guiField.getTitle();
     }
 
     public Field()

@@ -116,6 +116,7 @@ public class Game
 
             if(player.isInPrison() && mustRoll)
             {
+
                 btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
                         "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt", "Genkøb");
             }
@@ -155,7 +156,7 @@ public class Game
                     }
                     break;
                 case "Byg":
-                    gui.showMessage("Byg er ikke implementeret endnu");
+                    buildOnProperty(player);
                     break;
                 case "Pantsæt":
                     selection = board.getFieldString(player.getPawnableProperties());
@@ -230,6 +231,75 @@ public class Game
         }
         gameOver();
         changePlayer();
+    }
+
+    public void buildOnProperty(Player player)
+    {
+        if(player.getPoints() < 1000)
+        {
+            gui.showMessage("Du har ikke råd til noget");
+        }
+        else
+        {
+            PropertyField[] properties;
+            String[] userOptions;
+            int propertyCount = 0;
+
+            //count the number of properties owned by the player (that can be build on)
+            for(int i = 0; i < board.getField().length; i++)
+            {
+                if(board.getField()[i] instanceof PropertyField)
+                {
+                    if(((PropertyField)board.getField()[i]).getOwner() == player
+                            && ((PropertyField)board.getField()[i]).isPaired()
+                            && !((PropertyField)board.getField()[i]).isHotelBuild()
+                            && ((PropertyField)board.getField()[i]).getNum_houses() < 4)
+                    {
+                        propertyCount++;
+                    }
+                }
+            }
+            if(propertyCount < 1)
+            {
+                gui.showMessage("Du ejer ikke nogen grunde der kan bygges huse på");
+            }
+            else
+            {
+                properties = new PropertyField[propertyCount];
+                userOptions = new String[propertyCount + 1]; // + 1 to include the option to go back
+                for(int i = 0, j = 0; i < board.getField().length; i++)
+                {
+                    if(board.getField()[i] instanceof PropertyField)
+                    {
+                        if(((PropertyField)board.getField()[i]).getOwner() == player
+                                && ((PropertyField)board.getField()[i]).isPaired()
+                                && !((PropertyField)board.getField()[i]).isHotelBuild()
+                                && ((PropertyField)board.getField()[i]).getNum_houses() < 4)
+                        {
+                            properties[j] = (PropertyField)board.getField()[i];
+                            userOptions[j] = properties[j].getName();
+                            j++;
+                        }
+                    }
+                }
+                userOptions[userOptions.length - 1] = "Tilbage";
+                int selectionIndex = userOptions.length - 1;
+                String propSelection = gui.getUserSelection("Vælg hvilken grund der skal bygges på", userOptions);
+
+                for (int i = 0; i < properties.length; i++) {
+                    if (properties[i].getName().equals(propSelection)) {
+                        selectionIndex = i;
+                        break;
+                    }
+                }
+                if(selectionIndex < properties.length)
+                {
+                    int numberOfHouses = gui.getUserInteger("Hvor mange vil du købe?", 0, 4);
+                    properties[selectionIndex].buyHouse(numberOfHouses);
+
+                }
+            }
+        }
     }
 
     public void gameOver() {
