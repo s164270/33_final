@@ -285,6 +285,45 @@ public class Game
         }
     }
 
+    public void sellHotel(Player player)
+    {
+        int propertyCount = 0;
+        for(int i = 0; i < board.getField().length; i++)
+        {
+            if(board.getField()[i] instanceof PropertyField
+                    && ((PropertyField)board.getField()[i]).getOwner() == player
+                    && ((PropertyField)board.getField()[i]).isHotelBuild()) {
+                propertyCount++;
+            }
+        }
+
+        if(propertyCount < 1) {
+            gui.showMessage("Du ejer ikke nogen hoteller der kan sælges");
+        }
+        else
+        {
+            String[] userOptions = new String[propertyCount + 1]; // + 1 to include the option to go back
+
+            for(int i = 0, j = 0; i < board.getField().length; i++)
+            {
+                if(board.getField()[i] instanceof PropertyField
+                        && ((PropertyField)board.getField()[i]).getOwner() == player
+                        && ((PropertyField)board.getField()[i]).isHotelBuild()) {
+                    userOptions[j] = ((PropertyField)board.getField()[i]).getName();
+                    j++;
+                }
+            }
+            userOptions[userOptions.length - 1] = "Tilbage";
+
+            String hotelSelection = gui.getUserSelection("Vælg hvilket hotel der skal sælges", userOptions);
+            if(!hotelSelection.equals("Tilbage"))
+            {
+                ((PropertyField)board.getFieldFromString(hotelSelection)).sellHotel();
+            }
+        }
+
+    }
+
     public void sellHouses(Player player)
     {
         //count the number of properties with sellable houses owned by the player
@@ -306,7 +345,6 @@ public class Game
         }
         else
         {
-            PropertyField[] properties = new PropertyField[propertyCount];
             String[] userOptions = new String[propertyCount + 1]; // + 1 to include the option to go back
 
             for(int i = 0, j = 0; i < board.getField().length; i++)
@@ -316,8 +354,7 @@ public class Game
                     if(((PropertyField)board.getField()[i]).getOwner() == player
                             && ((PropertyField)board.getField()[i]).housesCanBeSold())
                     {
-                        properties[j] = (PropertyField)board.getField()[i];
-                        userOptions[j] = properties[j].getName();
+                        userOptions[j] = ((PropertyField)board.getField()[i]).getName();
                         j++;
                     }
                 }
