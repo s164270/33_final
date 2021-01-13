@@ -160,6 +160,14 @@ public class PropertyField extends Field implements Ownable{
         ((GUI_Street)guiField).setHotel(true);
     }
 
+    public void sellHotel()
+    {
+        getOwner().addPoints(getHotelPrice() / 2);
+        hotelBuild = false;
+        ((GUI_Street)guiField).setHotel(false);
+        setNum_houses(4);
+    }
+
     public void buyHouse(int numberToBuy)
     {
         // TODO make housePrice part of constructer so it is defined when the property is created
