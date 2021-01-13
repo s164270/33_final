@@ -204,8 +204,6 @@ public class GameBoard
         guiFields[39] = new GUI_Street("Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
     }
 
-
-
     public String[] getFieldString(Field[] props) {
         if(props!=null)
         {
@@ -220,17 +218,16 @@ public class GameBoard
     }
 
 
-    public Field getFieldFromString(String name)
-    {
+    public Field getFieldFromString(String name) {
         Field result = null;
-        for (int i = 0; i < NFIELDS; i++)
-        {
-            if(guiFields[i].getTitle().equals(name))
-            {
-                result=fields[i];
+        for (int i = 0; i < NFIELDS; i++) {
+            if (guiFields[i].getTitle().equals(name)) {
+                result = fields[i];
             }
         }
         return result;
+    }
+
     @Override
     public String toString() {
         for(int i=0; i<fields.length; i++)
