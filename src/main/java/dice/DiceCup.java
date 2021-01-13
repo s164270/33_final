@@ -28,6 +28,16 @@ public class DiceCup {
         return dice2;
     }
 
+    public void setDice1(int dice) {
+        dice1 = dice;
+    }
+
+    // Siden vores dice2 variabel er erklæret private anvender vi os af public int get()
+    public void setDice2(int dice) {
+        dice2 = dice;
+    }
+
+
     public int getSum() {
         return dice1 + dice2;
     }

@@ -25,6 +25,7 @@ public class Player
     private int diceSum;
 
     private int position = 0;
+    private int prisonRolls = 0;
     private Account account;
     private String playerName;
     private GUI_Player gui_player;
@@ -238,5 +239,14 @@ public class Player
 
     public void setDiceSum(int sum) {
         this.diceSum = sum;
+    }
+
+    public void setPrisonRolls(int num)
+    {
+        prisonRolls = num;
+    }
+    public int getPrisonRolls()
+    {
+        return prisonRolls;
     }
 }
