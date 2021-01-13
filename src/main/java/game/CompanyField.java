@@ -60,6 +60,14 @@ public class CompanyField extends Field implements Ownable{
 
         }
 
+        else if (pawned && owner != player) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat";
+        }
+
+        else if (owner.isInPrison()) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel";
+        }
+
         else if (owner != player) {
             int rent = player.getDiceSum() * (owner.getCompany().size() == 2 ? 200 : 100);
             player.sendPoints(owner, rent);

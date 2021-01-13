@@ -312,7 +312,15 @@ public class PropertyField extends Field implements Ownable{
                     System.out.println("FEJL");
             }
         }
-        else if(owner != player && !pawned)
+        else if (pawned && owner != player) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat";
+        }
+
+        else if (owner.isInPrison()) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel";
+        }
+
+        else if(owner != player)
         {
             if(hotelBuild) {
                 player.sendPoints(owner, rent[5]);

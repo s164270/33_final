@@ -57,10 +57,19 @@ public class ShippingField extends Field implements Ownable{
             }
         }
 
+        else if (pawned && owner != player) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat";
+        }
+
+        else if (owner.isInPrison()) {
+            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel";
+        }
+
         else if (owner != player) {
             player.sendPoints(owner, rent[owner.getShipping().size() - 1]);
             return player.getName() + " landede på " + owner.getName() + "'s felt: " + name + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr";
         }
+
 
         return player.getName() + " landede på feltet" + " " + guiField.getTitle();
     }
