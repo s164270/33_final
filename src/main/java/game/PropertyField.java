@@ -62,6 +62,15 @@ public class PropertyField extends Field implements Ownable{
         this.paired = paired;
     }
 
+    public boolean isReadyForHotel()
+    {
+        boolean neighborsReady = true;
+        for(int i = 0; i < neighbor.length; i++)
+        {
+            neighborsReady = neighborsReady && (neighbor[i].hotelBuild || neighbor[i].getNum_houses() == 4);
+        }
+        return neighborsReady;
+    }
 
     @Override
     public void pawnOff() {
@@ -126,6 +135,19 @@ public class PropertyField extends Field implements Ownable{
 
     public boolean isHotelBuild() {
         return hotelBuild;
+    }
+
+    public int getHotelPrice()
+    {
+        return 2000;
+    }
+
+    public void buyHotel()
+    {
+        getOwner().addPoints(-getHotelPrice());
+        num_houses = 0;
+        hotelBuild = true;
+        ((GUI_Street)guiField).setHotel(true);
     }
 
     public void buyHouse(int numberToBuy)

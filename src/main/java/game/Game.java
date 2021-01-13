@@ -118,17 +118,17 @@ public class Game
             {
 
                 btnChoice = gui.getUserSelection(player.getName() + " er i fængsel. Hvad vil du foretage dig?",
-                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg", "Pantsæt", "Genkøb");
+                        "Slå dig fri", "Betal dig fri", "Brug chancekort", "Byg huse", "Byg hotel", "Pantsæt", "Genkøb");
             }
             else if(mustRoll)
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Slå", "Byg", "Pantsæt", "Genkøb");
+                        "Slå", "Byg huse", "Byg hotel", "Pantsæt", "Genkøb");
             }
             else
             {
                 btnChoice = gui.getUserSelection("Det er " + player.getName() + "'s tur. Hvad vil du foretage dig?",
-                        "Afslut tur", "Byg", "Pantsæt", "Genkøb");
+                        "Afslut tur", "Byg huse", "Byg hotel", "Pantsæt", "Genkøb");
             }
 
             switch (btnChoice)
@@ -155,8 +155,11 @@ public class Game
                         board.movePlayer(player, dice.getSum());
                     }
                     break;
-                case "Byg":
-                    buildOnProperty(player);
+                case "Byg huse":
+                    buildHouses(player);
+                    break;
+                case "Byg hotel":
+                    buildHotel(player);
                     break;
                 case "Pantsæt":
                     selection = board.getFieldString(player.getPawnableProperties());
@@ -233,7 +236,53 @@ public class Game
         changePlayer();
     }
 
-    public void buildOnProperty(Player player)
+    public void buildHotel(Player player)
+    {
+        int propertyCount = 0;
+        for(int i = 0; i < board.getField().length; i++)
+        {
+            if(board.getField()[i] instanceof PropertyField
+                    && ((PropertyField)board.getField()[i]).getOwner() == player
+                    && ((PropertyField)board.getField()[i]).isReadyForHotel()) {
+                propertyCount++;
+            }
+        }
+
+        if(propertyCount < 1) {
+            gui.showMessage("Du ejer ikke nogen grunde der kan bygges hoteller på");
+        }
+        else
+        {
+            PropertyField[] properties = new PropertyField[propertyCount];;
+            String[] userOptions = new String[propertyCount + 1]; // + 1 to include the option to go back
+
+            for(int i = 0, j = 0; i < board.getField().length; i++)
+            {
+                if(board.getField()[i] instanceof PropertyField
+                        && ((PropertyField)board.getField()[i]).getOwner() == player
+                        && ((PropertyField)board.getField()[i]).isReadyForHotel()) {
+                    properties[j] = (PropertyField)board.getField()[i];
+                    userOptions[j] = properties[j].getName();
+                    j++;
+                }
+            }
+            userOptions[userOptions.length - 1] = "Tilbage";
+
+            String hotelSelection = gui.getUserSelection("Vælg hvilken grund der skal bygges hotel på", userOptions);
+            if(!hotelSelection.equals("Tilbage"))
+            {
+                PropertyField hotelProperty = (PropertyField)board.getFieldFromString(hotelSelection);
+                if(player.getPoints() < hotelProperty.getHotelPrice()) {
+                    gui.showMessage("Du har ikke råd til at bygge dette hotel");
+                }
+                else {
+                    hotelProperty.buyHotel();
+                }
+            }
+        }
+    }
+
+    public void buildHouses(Player player)
     {
         if(player.getPoints() < 1000)
         {
