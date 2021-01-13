@@ -69,7 +69,7 @@ public class PropertyField extends Field implements Ownable{
         {
             neighborsReady = neighborsReady && (neighbor[i].hotelBuild || neighbor[i].getNum_houses() == 4);
         }
-        return neighborsReady;
+        return neighborsReady && !hotelBuild;
     }
 
     @Override
@@ -169,7 +169,7 @@ public class PropertyField extends Field implements Ownable{
         if(numberToBuy == 0) {
             //go back
         }
-        else if(numberToBuy < 0 || numberToBuy > 4 * neighbor.length) {
+        else if(numberToBuy < 0 || numberToBuy > 12) {
             gui.showMessage("Ugyldigt antal");
         }
         else if(housesInGroup + numberToBuy > 4 * neighbor.length) {

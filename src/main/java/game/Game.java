@@ -343,7 +343,7 @@ public class Game
                 }
                 if(selectionIndex < properties.length)
                 {
-                    int numberOfHouses = gui.getUserInteger("Hvor mange vil du købe?", 0, 4);
+                    int numberOfHouses = gui.getUserInteger("Hvor mange vil du købe?", 0, 12);
                     properties[selectionIndex].buyHouse(numberOfHouses);
 
                 }
