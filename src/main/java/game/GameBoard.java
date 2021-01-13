@@ -199,7 +199,7 @@ public class GameBoard
         guiFields[34] = new GUI_Street("Nygade","kr. 6.400 ","","",Color.YELLOW,Color.BLACK);
         guiFields[35] = new GUI_Shipping("","Skandinavisk Linietrafik","kr. 4.000 ","","",Color.BLUE,Color.BLACK);
         guiFields[36] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
-        guiFields[37] = new GUI_Street("Frederiksberg Alle","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
+        guiFields[37] = new GUI_Street("Frederiksberg gade","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Street("Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
     }
