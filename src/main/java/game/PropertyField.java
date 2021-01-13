@@ -62,6 +62,16 @@ public class PropertyField extends Field implements Ownable{
         this.paired = paired;
     }
 
+    public boolean housesCanBeSold()
+    {
+        boolean hotelsInNeighborhood = false;
+        for(int i = 0; i < neighbor.length; i++)
+        {
+            hotelsInNeighborhood = hotelsInNeighborhood || neighbor[i].isHotelBuild();
+        }
+        return ((num_houses > 0) && (!hotelsInNeighborhood));
+    }
+
     public boolean isReadyForHotel()
     {
         boolean neighborsReady = true;
@@ -150,6 +160,14 @@ public class PropertyField extends Field implements Ownable{
         ((GUI_Street)guiField).setHotel(true);
     }
 
+    public void sellHotel()
+    {
+        getOwner().addPoints(getHotelPrice() / 2);
+        hotelBuild = false;
+        ((GUI_Street)guiField).setHotel(false);
+        setNum_houses(4);
+    }
+
     public void buyHouse(int numberToBuy)
     {
         // TODO make housePrice part of constructer so it is defined when the property is created
@@ -205,6 +223,58 @@ public class PropertyField extends Field implements Ownable{
                     neighbor[minIndex].setNum_houses(currentMin + 1);
                 }
                 housesLeftToBuy--;
+            }
+        }
+    }
+
+    public void sellHouses(int numberToSell)
+    {
+        int housePrice = 2000;
+        int neighborIndex = 0;
+        int housesInGroup = 0;
+        for(int i = 0; i < neighbor.length; i++) {
+            housesInGroup += neighbor[i].getNum_houses();
+            if (neighbor[i] == this) {
+                neighborIndex = i;
+            }
+        }
+
+        if(numberToSell == 0) {
+            //go back
+        }
+        else if(numberToSell < 0 || numberToSell > 12) {
+            gui.showMessage("Ugyldigt antal");
+        }
+        else if(housesInGroup - numberToSell < 0) {
+            gui.showMessage("Så mange huse er der ikke");
+        }
+        else {
+            this.getOwner().addPoints(numberToSell * housePrice / 2);
+
+            // sale houses is distributed evenly among the properties, but the selected property is prioritized
+            int housesLeftToSell = numberToSell;
+            while (housesLeftToSell > 0)
+            {
+                int currentMax = neighbor[0].getNum_houses();
+                int maxIndex = 0;
+                for(int i = 0; i < neighbor.length; i++)
+                {
+                    if(neighbor[i].getNum_houses() >= currentMax)
+                    {
+                        currentMax = neighbor[i].getNum_houses();
+                        maxIndex = i;
+                    }
+                }
+
+                if(neighbor[neighborIndex].getNum_houses() == currentMax)
+                {
+                    neighbor[neighborIndex].setNum_houses(currentMax - 1);
+                }
+                else
+                {
+                    neighbor[maxIndex].setNum_houses(currentMax - 1);
+                }
+                housesLeftToSell--;
             }
         }
     }
