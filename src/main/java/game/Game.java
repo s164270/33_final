@@ -21,6 +21,7 @@ public class Game
     private Player currentPlayer;
     private ChanceCards chanceCards;
     private boolean gameOver;
+    private boolean cheatDice =false;
 
     public Game()
     {
@@ -95,9 +96,16 @@ public class Game
 
     public void rollDice()
     {
-        dice.rollDice();
+        if (!cheatDice)
+        {
+            dice.rollDice();
+        }
+        else
+        {
+            dice.setDice1(gui.getUserInteger("vælg terningslag 1", 1,6));
+            dice.setDice2(gui.getUserInteger("vælg terningslag 2", 1,6));
+        }
         currentPlayer.setDiceSum(dice.getSum());
-
         gui.setDice(dice.getDice1(), dice.getDice2());
     }
 
@@ -140,9 +148,11 @@ public class Game
                         twoOfAKindCounter++;
                         if(twoOfAKindCounter == 3)
                         {
+                            gui.showMessage("Du har slået to ens for mange gange i træk, du ryger derfor i fængsel");
                             mustRoll = false;
                             twoOfAKindCounter = 0;
                             player.setInPrison(true);
+                            board.movePlayerPosition(player,10);
                         }
                         else
                         {
@@ -197,15 +207,23 @@ public class Game
                     turnDone = true;
                     break;
                 case "Slå dig fri":
-                    rollDice();
-                    if(dice.isSimiliar())
+                    if(player.getPrisonRolls()<3)
                     {
-                        player.setInPrison(false);
-                        board.movePlayer(player, dice.getSum());
+                        rollDice();
+                        if (dice.isSimiliar())
+                        {
+                            player.setPrisonRolls(0);
+                            player.setInPrison(false);
+                            board.movePlayer(player, dice.getSum());
+                        } else
+                        {
+                            player.setPrisonRolls(player.getPrisonRolls()+1);
+                            mustRoll = false;
+                        }
                     }
                     else
                     {
-                        mustRoll = false;
+                        gui.showMessage("Du kan ikke slå dig fri længere, du skal betale dig fri");
                     }
                     break;
                 case "Betal dig fri":
@@ -487,9 +505,6 @@ public class Game
 
     public void testFunction()
     {
-        //Chance card= new ChanceMovePlayer(board, gui, player,"Ryk frem til et orange felt", Color.BLUE,Color.ORANGE, currentPlayer);
-        //chanceCards.getRandomChance().executeChance(currentPlayer);
-        //currentPlayer.getChanceCard().executeChance();
         boolean turnDone=true;
         String btnChoice;
         int userInt;
@@ -497,7 +512,16 @@ public class Game
         while (turnDone)
         {
             btnChoice = gui.getUserSelection(currentPlayer.getName() + " i TEST MODE. Hvad vil du foretage dig?",
-                    "move", "add money", "change player","normal turn", "start normal game", "end");
+                    "move",
+                    "add money",
+                    "change player",
+                    "normal turn",
+                    "random chance card",
+                    "activate cheat dice",
+                    "deactivate cheat dice",
+                    "send to prison",
+                    "start normal game",
+                    "end");
 
             switch (btnChoice)
             {
@@ -509,11 +533,23 @@ public class Game
                     changePlayer();
                     break;
                 case "add money":
-                    userInt = gui.getUserInteger("vælg pengesum");
+                    userInt = Integer.parseInt(gui.getUserString("vælg pengesum"));
                     currentPlayer.addPoints(userInt);
+                    break;
+                case "activate cheat dice":
+                    cheatDice=true;
+                    break;
+                case "deactivate cheat dice":
+                    cheatDice=false;
                     break;
                 case "normal turn":
                     turn(currentPlayer);
+                    break;
+                case "send to prison":
+                    board.movePlayerPosition(currentPlayer, 30);
+                    break;
+                case "random chance card":
+                    chanceCards.getRandomChance().executeChance(currentPlayer);
                     break;
                 case "end":
                     turnDone=false;
