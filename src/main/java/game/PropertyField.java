@@ -7,6 +7,7 @@ import player.Player;
 
 public class PropertyField extends Field implements Ownable{
     private int cost;
+    private int housePrice;
     private int rent[];
     private int num_houses;
     private boolean hotelBuild;
@@ -22,20 +23,22 @@ public class PropertyField extends Field implements Ownable{
         this.cost = 0;
     }
 
-    public PropertyField(String name, int cost, int rent[], GUI gui, Auction auction)
+    public PropertyField(String name, int cost, int housePrice, int rent[], GUI gui, Auction auction)
     {
         super(name, gui);
         this.cost = cost;
+        this.housePrice = housePrice;
         this.rent = rent;
         this.num_houses = 0;
         this.hotelBuild = false;
         this.auction = auction;
     }
 
-    public PropertyField(String name, int cost, int rent[], PropertyField neighbor[], GUI gui, Auction auction)
+    public PropertyField(String name, int cost, int housePrice, int rent[], PropertyField neighbor[], GUI gui, Auction auction)
     {
         super(name, gui);
         this.cost = cost;
+        this.housePrice = housePrice;
         this.rent = rent;
         this.num_houses = 0;
         this.hotelBuild = false;
@@ -147,14 +150,14 @@ public class PropertyField extends Field implements Ownable{
         return hotelBuild;
     }
 
-    public int getHotelPrice()
+    public int getHousePrice()
     {
         return 2000;
     }
 
     public void buyHotel()
     {
-        getOwner().addPoints(-getHotelPrice());
+        getOwner().addPoints(-getHousePrice());
         num_houses = 0;
         hotelBuild = true;
         ((GUI_Street)guiField).setHotel(true);
@@ -162,7 +165,7 @@ public class PropertyField extends Field implements Ownable{
 
     public void sellHotel()
     {
-        getOwner().addPoints(getHotelPrice() / 2);
+        getOwner().addPoints(getHousePrice() / 2);
         hotelBuild = false;
         ((GUI_Street)guiField).setHotel(false);
         setNum_houses(4);
@@ -170,8 +173,6 @@ public class PropertyField extends Field implements Ownable{
 
     public void buyHouse(int numberToBuy)
     {
-        // TODO make housePrice part of constructer so it is defined when the property is created
-        int housePrice = 2000;
         int housesInGroup = 0;
         int hotelsInGroup = 0;
         int neighborIndex = 0;
@@ -229,7 +230,6 @@ public class PropertyField extends Field implements Ownable{
 
     public void sellHouses(int numberToSell)
     {
-        int housePrice = 2000;
         int neighborIndex = 0;
         int housesInGroup = 0;
         for(int i = 0; i < neighbor.length; i++) {
