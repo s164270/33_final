@@ -53,6 +53,7 @@ public class PropertyField extends Field implements Ownable{
     public Player getOwner() {
         return owner;
     }
+
     public void setOwner(Player player) {
         owner=player;
         player.getOwnedFields().add(this);
@@ -110,8 +111,11 @@ public class PropertyField extends Field implements Ownable{
     {
         return pawned;
     }
+
     @Override
     public int totalPrice() {
+       //LOL
+
         return cost;
     }
 
@@ -334,4 +338,6 @@ public class PropertyField extends Field implements Ownable{
         }
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }
+
+
 }

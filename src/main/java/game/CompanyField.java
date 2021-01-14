@@ -89,15 +89,11 @@ public class CompanyField extends Field implements Ownable{
     {
         return cost;
     }
+
     @Override
     public int totalPrice() {
-        wealth =+ cost;
-        return wealth;
+        return cost;
     }
-    /*public int totalPrice(Player player, Ownable game){
-        for(int i=0;i<player.getOwnedFields().size();i++)
-    }*/
-
 
     @Override
     public boolean isPawned()
