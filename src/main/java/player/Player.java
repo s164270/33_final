@@ -120,12 +120,14 @@ public class Player
             {
                 brokeMenu(amount);
                 addPoints(-amount);
-                recipient.addPoints(amount);
+                if(recipient!=null)
+                    recipient.addPoints(amount);
             }
             else
             {
                 addPoints(-amount);
-                recipient.addPoints(amount);
+                if(recipient!=null)
+                    recipient.addPoints(amount);
             }
         }
     }
@@ -178,10 +180,6 @@ public class Player
         else
         {
             int temp = account.withdraw(Math.abs(points));
-            if(temp < Math.abs(points))
-            {
-                broke = true;
-            }
         }
         this.gui_player.setBalance(account.getBalance());
     }
@@ -242,10 +240,11 @@ public class Player
         {
             playerReceive.addPoints(getPoints());
             addPoints(-getPoints());
-            broke = true;
         }
         else
             addPoints(-getPoints());
+
+        broke = true;
     }
 
 
@@ -339,11 +338,6 @@ public class Player
                 totalPrice += (temp.totalPrice())/2;
         }
         return totalPrice + getPoints();
-    }
-
-    public boolean isBroke(int cost)
-    {
-        return (getActualWorth()+getPoints())<cost;
     }
 
     public void setDiceSum(int sum) {

@@ -471,23 +471,23 @@ public class Game
     }
 
     public void gameOver() {
+        int brokePlayers=0;
         for (int i = 0; i < player.length; i++) {
             if (player[i].isBroke()) {
-                this.gameOver = true;
+                brokePlayers++;
             }
         }
+        if(brokePlayers== player.length-1)
+        this.gameOver = true;
     }
 
     public void endGame()
     {
         this.gameOver = true;
-        Player currentWinner = player[0];
-        int currentMax = currentWinner.getPoints();
-
-        for (int i = 1; i < player.length; i++) {
-            if (player[i].getPoints() > currentMax)
+        Player currentWinner = null;
+        for (int i = 0; i < player.length; i++) {
+            if (!player[i].isBroke())
             {
-                currentMax = player[i].getPoints();
                 currentWinner = player[i];
             }
         }
@@ -510,6 +510,11 @@ public class Game
         else
         {
             currentPlayer=player[index+1];
+        }
+
+        if(currentPlayer.isBroke())
+        {
+            changePlayer();
         }
     }
 

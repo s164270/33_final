@@ -24,10 +24,10 @@ public class TaxField extends Field {
             {
                 if(option.equals("10%")) {
                     int taxCost= (int) ((player.getTotalWorth())*0.1);
-                    player.sendPoints(null, -taxCost);
+                    player.sendPoints(null, taxCost);
                     gui.showMessage("Det kostede "+taxCost+" kr.");
                 } else {
-                    player.sendPoints(null, -4000);
+                    player.sendPoints(null, 4000);
                 }
                 return option.equals("10%") ? "Du valgte at betale 10% af din balance" : "Du valgte at betale 4000 kr.";
             }
