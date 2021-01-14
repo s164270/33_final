@@ -14,6 +14,7 @@ public class CompanyField extends Field implements Ownable{
     private Player owner;
     private Auction auction;
     private boolean pawned;
+    public int wealth;
 
     public CompanyField(String name, GUI gui, Auction auction, int cost) {
         this.name = name;
@@ -88,6 +89,15 @@ public class CompanyField extends Field implements Ownable{
     {
         return cost;
     }
+    @Override
+    public int totalPrice() {
+        wealth =+ cost;
+        return wealth;
+    }
+    /*public int totalPrice(Player player, Ownable game){
+        for(int i=0;i<player.getOwnedFields().size();i++)
+    }*/
+
 
     @Override
     public boolean isPawned()

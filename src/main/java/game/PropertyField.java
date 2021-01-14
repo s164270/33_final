@@ -16,6 +16,7 @@ public class PropertyField extends Field implements Ownable{
     private PropertyField neighbor[];
     private Player owner;
     private Auction auction;
+    
 
     public PropertyField()
     {
@@ -108,6 +109,10 @@ public class PropertyField extends Field implements Ownable{
     public boolean isPawned()
     {
         return pawned;
+    }
+    @Override
+    public int totalPrice() {
+        return cost;
     }
 
     @Override

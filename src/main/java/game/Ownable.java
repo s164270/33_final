@@ -7,5 +7,6 @@ public interface Ownable
     public void pawnOff();
     public void rebuy() ;
     public int getPrice();
+    public int totalPrice();
 
 }

@@ -90,6 +90,11 @@ public class ShippingField extends Field implements Ownable{
     }
 
     @Override
+    public int totalPrice(){
+        return cost;
+    }
+
+    @Override
     public boolean isPawned()
     {
         return pawned;

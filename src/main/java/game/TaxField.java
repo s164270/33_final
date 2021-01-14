@@ -17,14 +17,13 @@ public class TaxField extends Field {
         this.gui = gui;
     }
 
-    @Override
     public String landOnField(Player player) {
 
         if (TaxType) {
             String option = gui.getUserSelection("Vælg hvad du vil betale af","10%","kr. 4.000");
             {
                 if(option.equals("10%")) {
-                    player.addPoints(-(int) (player.getPoints() * 0.1));
+                    player.addPoints(-(int) (player.getPoints()*0.1));
 
                 } else {
                     player.addPoints(-4000);
