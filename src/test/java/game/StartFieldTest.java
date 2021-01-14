@@ -15,7 +15,7 @@ class StartFieldTest {
     @BeforeEach
     void setUp() {
         start = new StartField();
-        p1 = new Player("P1");
+        p1 = new Player("P1", null);
     }
 
     @AfterEach

@@ -5,6 +5,8 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 import player.Player;
 
+import java.awt.*;
+
 public class PropertyField extends Field implements Ownable{
     private int cost;
     private int housePrice;
@@ -59,8 +61,14 @@ public class PropertyField extends Field implements Ownable{
 
     public void setOwner(Player player) {
         owner=player;
-        player.getOwnedFields().add(this);
-        ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        if(player != null) {
+            player.getOwnedFields().add(this);
+            ((GUI_Ownable) guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        }
+        else
+        {
+            ((GUI_Ownable) guiField).setBorder(Color.BLACK);
+        }
     }
 
     public void setPaired(boolean paired) {

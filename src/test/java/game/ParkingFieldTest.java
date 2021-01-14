@@ -15,7 +15,7 @@ class ParkingFieldTest {
     @BeforeEach
     void setUp() {
         parking = new ParkingField();
-        p1 = new Player("P1");
+        p1 = new Player("P1", null);
     }
 
     @AfterEach

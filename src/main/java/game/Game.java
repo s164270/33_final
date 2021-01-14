@@ -58,8 +58,10 @@ public class Game
         gameOver = false;
 
         player=new Player[2];
-        player[0] = new Player(playerName1);
-        player[1] = new Player(playerName2);
+        player[0] = new Player(playerName1, gui);
+        player[1] = new Player(playerName2, gui);
+        player[0].setGameRef(this);
+        player[1].setGameRef(this);
         gui.addPlayer(player[0].getGuiPlayer());
         gui.addPlayer(player[1].getGuiPlayer());
         currentPlayer = player[0];
@@ -80,10 +82,16 @@ public class Game
             player[i] = new Player(gui);
             gui.addPlayer(player[i].getGuiPlayer());
             player[i].addPoints(30000);
+            player[i].setGameRef(this);
         }
 
         //The starting player is chosen randomly
         currentPlayer = player[new Random().nextInt(numPlayers)];
+    }
+
+    public GameBoard getBoard()
+    {
+        return board;
     }
 
     public boolean isGameOver() {
@@ -258,60 +266,6 @@ public class Game
         }
         gameOver();
         changePlayer();
-    }
-
-    public void brokeMenu(Player player, int cost)
-    {
-        String btnChoice;
-        while (player.getPoints() < cost)
-        {
-            btnChoice = gui.getUserSelection(player.getName() + " skal sølge ud af sine egendomme for at kunne betale "+ cost,
-                    "Pansæt ejendomme", "Sælg huse", "Sælg hoteller");
-
-            switch (btnChoice)
-            {
-                case "Pansæt ejendomme":
-                    String[] selection = board.getFieldString(player.getPawnableProperties());
-                    if (selection!= null)
-                    {
-                        String prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
-                        Ownable f = (Ownable) board.getFieldFromString(prop);
-                        f.pawnOff();
-                    }
-                    else
-                    {
-                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
-                    }
-                    break;
-                case "Sælg huse":
-                    sellHouses(player);
-                    break;
-                case "Sælg hoteller":
-                    sellHotel(player);
-                    break;
-            }
-        }
-    }
-
-    public void goingBroke(Player playerBroke, Player playerReceive)
-    {
-        for (int i = 0; i < playerBroke.getOwnedFields().size(); i++)
-        {
-            if(playerBroke.getOwnedFields().get(i) instanceof PropertyField)
-            {
-                PropertyField prop = (PropertyField) playerBroke.getOwnedFields().get(i);
-                if (prop.isHotelBuild())
-                {
-                    prop.sellHotel();
-                }
-                prop.sellHouses(prop.getTotalHouses());
-            }
-            Ownable field= (Ownable) playerBroke.getOwnedFields().get(i);
-            if (!field.isPawned())
-                field.pawnOff();
-            field.setOwner(playerReceive);
-        }
-        playerBroke.sendPoints(playerReceive, playerBroke.getPoints());
     }
 
     public void buildHotel(Player player)
