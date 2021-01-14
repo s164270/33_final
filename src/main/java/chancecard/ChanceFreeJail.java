@@ -19,7 +19,6 @@ public class ChanceFreeJail extends Chance
         super(board, gui, player, text);
     }
 
-
     @Override
     public void executeChance(Player currentPlayer)
     {
