@@ -1,5 +1,7 @@
 package game;
 
+import player.Player;
+
 public interface Ownable
 {
     public boolean isPawned();
@@ -8,5 +10,6 @@ public interface Ownable
     public void rebuy() ;
     public int getPrice();
     public int totalPrice();
+    public void setOwner(Player p);
 
 }

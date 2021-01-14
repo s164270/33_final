@@ -260,6 +260,60 @@ public class Game
         changePlayer();
     }
 
+    public void brokeMenu(Player player, int cost)
+    {
+        String btnChoice;
+        while (player.getPoints() < cost)
+        {
+            btnChoice = gui.getUserSelection(player.getName() + " skal sølge ud af sine egendomme for at kunne betale "+ cost,
+                    "Pansæt ejendomme", "Sælg huse", "Sælg hoteller");
+
+            switch (btnChoice)
+            {
+                case "Pansæt ejendomme":
+                    String[] selection = board.getFieldString(player.getPawnableProperties());
+                    if (selection!= null)
+                    {
+                        String prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
+                        Ownable f = (Ownable) board.getFieldFromString(prop);
+                        f.pawnOff();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
+                    }
+                    break;
+                case "Sælg huse":
+                    sellHouses(player);
+                    break;
+                case "Sælg hoteller":
+                    sellHotel(player);
+                    break;
+            }
+        }
+    }
+
+    public void goingBroke(Player playerBroke, Player playerReceive)
+    {
+        for (int i = 0; i < playerBroke.getOwnedFields().size(); i++)
+        {
+            if(playerBroke.getOwnedFields().get(i) instanceof PropertyField)
+            {
+                PropertyField prop = (PropertyField) playerBroke.getOwnedFields().get(i);
+                if (prop.isHotelBuild())
+                {
+                    prop.sellHotel();
+                }
+                prop.sellHouses(prop.getTotalHouses());
+            }
+            Ownable field= (Ownable) playerBroke.getOwnedFields().get(i);
+            if (!field.isPawned())
+                field.pawnOff();
+            field.setOwner(playerReceive);
+        }
+        playerBroke.sendPoints(playerReceive, playerBroke.getPoints());
+    }
+
     public void buildHotel(Player player)
     {
         int propertyCount = 0;

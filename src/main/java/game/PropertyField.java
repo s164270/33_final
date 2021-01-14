@@ -348,5 +348,13 @@ public class PropertyField extends Field implements Ownable{
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }
 
+    public int getTotalHouses()
+    {
+        int totalHouses = 0;
+        for(int i = 0; i < neighbor.length; i++) {
+            totalHouses += neighbor[i].getNum_houses();
+        }
+        return totalHouses;
+    }
 
 }

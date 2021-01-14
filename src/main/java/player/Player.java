@@ -247,6 +247,23 @@ public class Player
         }
         return totalPrice;
     }
+    public int getActualWorth() {
+        Ownable temp;
+        int totalPrice = 0;
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            temp = (Ownable) ownedFields.get(i);
+            if(!temp.isPawned())
+                totalPrice += (temp.totalPrice())/2;
+        }
+        return totalPrice;
+    }
+
+    public boolean isBroke(int cost)
+    {
+        return (getActualWorth()+getPoints())<cost;
+    }
+
     public void setDiceSum(int sum) {
         this.diceSum = sum;
     }
