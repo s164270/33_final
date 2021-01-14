@@ -278,7 +278,7 @@ public class Game
             if(!hotelSelection.equals("Tilbage"))
             {
                 PropertyField hotelProperty = (PropertyField)board.getFieldFromString(hotelSelection);
-                if(player.getPoints() < hotelProperty.getHotelPrice()) {
+                if(player.getPoints() < hotelProperty.getHousePrice()) {
                     gui.showMessage("Du har ikke råd til at bygge dette hotel");
                 }
                 else {
