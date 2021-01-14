@@ -237,16 +237,8 @@ public class Game
                     }
                     break;
                 case "Betal dig fri":
-                    if(player.getPoints() < 1000)
-                    {
-                        gui.showMessage("Det har du ikke råd til");
-                        player.sendPoints(null,1000);
-                    }
-                    else
-                    {
-                        player.addPoints(-1000);
-                        player.setInPrison(false);
-                    }
+                    player.sendPoints(null, 1000);
+                    player.setInPrison(false);
                     break;
                 case "Brug chancekort":
                     if(player.getFreePrison())
