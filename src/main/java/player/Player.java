@@ -243,7 +243,7 @@ public class Player
         for (int i = 0; i < ownedFields.size(); i++)
         {
             temp = (Ownable) ownedFields.get(i);
-            totalPrice = temp.totalPrice();
+            totalPrice += temp.totalPrice();
         }
         return totalPrice;
     }
