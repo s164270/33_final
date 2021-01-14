@@ -117,9 +117,10 @@ public class PropertyField extends Field implements Ownable{
 
     @Override
     public int totalPrice() {
-       //LOL
-
-        return cost;
+        if (hotelBuild)
+            return cost + 5 * housePrice;
+        else
+            return cost + num_houses * housePrice;
     }
 
     @Override

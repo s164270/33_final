@@ -236,6 +236,16 @@ public class Player
         return diceSum;
     }
 
+    public int getTotalWorth() {
+        Ownable temp;
+        int totalPrice = 0;
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            temp = (Ownable) ownedFields.get(i);
+            totalPrice = temp.totalPrice();
+        }
+        return totalPrice;
+    }
     public void setDiceSum(int sum) {
         this.diceSum = sum;
     }
