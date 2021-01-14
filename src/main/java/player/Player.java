@@ -23,7 +23,8 @@ public class Player
     private final ArrayList<Field>  ownedFields = new ArrayList<>();
 
     private int diceSum;
-
+    private GUI gui;
+    private Game game;
     private int position = 0;
     private int prisonRolls = 0;
     private Account account;
@@ -60,6 +61,7 @@ public class Player
                     colors
             );
 
+            this.gui = gui;
             Color i = (Color) Color.class.getDeclaredField(col).get(null);
             GUI_Car car = new GUI_Car();
             car.setPrimaryColor(i);
@@ -73,8 +75,9 @@ public class Player
             e.printStackTrace();
         }
     }
-    public Player(String playerName)
+    public Player(String playerName, GUI gui)
     {
+        this.gui = gui;
         this.playerName=playerName;
         account = new Account(30000);
         GUI_Car car = new GUI_Car();
@@ -89,6 +92,11 @@ public class Player
         gui_player = new GUI_Player(playerName, account.getBalance(), car);
     }
 
+    public void setGameRef(Game game)
+    {
+        this.game = game;
+    }
+
     public int getPosition() {
         return position;
     }
@@ -101,12 +109,23 @@ public class Player
         }
         else
         {
-            int temp = account.withdraw(amount);
-            recipient.addPoints(temp);
-            gui_player.setBalance(account.getBalance());
-            if(temp < amount)
+            System.out.println("Actual worth: " + getActualWorth());
+            System.out.println("Amount to send: " + amount);
+
+            if(amount > getActualWorth())
             {
-                broke = true;
+                goingBroke(recipient); //go broke
+            }
+            else if(amount > getPoints())
+            {
+                brokeMenu(amount);
+                addPoints(-amount);
+                recipient.addPoints(amount);
+            }
+            else
+            {
+                addPoints(-amount);
+                recipient.addPoints(amount);
             }
         }
     }
@@ -166,6 +185,69 @@ public class Player
         }
         this.gui_player.setBalance(account.getBalance());
     }
+
+    public void brokeMenu(int cost)
+    {
+        String btnChoice;
+        while (getPoints() < cost)
+        {
+            btnChoice = gui.getUserSelection(getName() + " skal sælge ud af sine ejendomme for at kunne betale "+ cost,
+                    "Pantsæt ejendomme", "Sælg huse", "Sælg hoteller");
+
+            switch (btnChoice)
+            {
+                case "Pantsæt ejendomme":
+                    String[] selection = game.getBoard().getFieldString(getPawnableProperties());
+                    if (selection!= null)
+                    {
+                        String prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
+                        Ownable f = (Ownable) game.getBoard().getFieldFromString(prop);
+                        f.pawnOff();
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
+                    }
+                    break;
+                case "Sælg huse":
+                    game.sellHouses(this);
+                    break;
+                case "Sælg hoteller":
+                    game.sellHotel(this);
+                    break;
+            }
+        }
+    }
+
+
+    public void goingBroke(Player playerReceive)
+    {
+        for (int i = 0; i < getOwnedFields().size(); i++)
+        {
+            if(getOwnedFields().get(i) instanceof PropertyField)
+            {
+                PropertyField prop = (PropertyField) getOwnedFields().get(i);
+                if (prop.isHotelBuild())
+                {
+                    prop.sellHotel();
+                }
+                prop.sellHouses(prop.getTotalHouses());
+            }
+            Ownable field= (Ownable) getOwnedFields().get(i);
+            if (!field.isPawned())
+                field.pawnOff();
+            field.setOwner(playerReceive);
+        }
+        if (!(playerReceive ==null))
+        {
+            playerReceive.addPoints(getPoints());
+            addPoints(-getPoints());
+            broke = true;
+        }
+        else
+            addPoints(-getPoints());
+    }
+
 
     public GUI_Player getGuiPlayer()
     {
@@ -245,7 +327,7 @@ public class Player
             temp = (Ownable) ownedFields.get(i);
             totalPrice += temp.totalPrice();
         }
-        return totalPrice;
+        return totalPrice + getPoints();
     }
     public int getActualWorth() {
         Ownable temp;
@@ -256,7 +338,7 @@ public class Player
             if(!temp.isPawned())
                 totalPrice += (temp.totalPrice())/2;
         }
-        return totalPrice;
+        return totalPrice + getPoints();
     }
 
     public boolean isBroke(int cost)

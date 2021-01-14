@@ -5,6 +5,8 @@ import gui_fields.GUI_Street;
 import gui_main.GUI;
 import player.Player;
 
+import java.awt.*;
+
 public class PropertyField extends Field implements Ownable{
     private int cost;
     private int housePrice;

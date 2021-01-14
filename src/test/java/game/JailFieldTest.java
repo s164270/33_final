@@ -17,7 +17,7 @@ class JailFieldTest {
         jail = new JailField("Fængsel", 1, true);
         visiting = new JailField("På besøg", 0, false);
 
-        p1 = new Player("P1");
+        p1 = new Player("P1", null);
     }
 
     @Test

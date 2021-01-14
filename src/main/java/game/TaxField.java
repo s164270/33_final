@@ -23,11 +23,11 @@ public class TaxField extends Field {
             String option = gui.getUserSelection("Vælg hvad du vil betale af","10%","kr. 4.000");
             {
                 if(option.equals("10%")) {
-                    int taxCost= (int) ((player.getPoints() + player.getTotalWorth())*0.1);
-                    player.addPoints(-taxCost);
+                    int taxCost= (int) ((player.getTotalWorth())*0.1);
+                    player.sendPoints(null, -taxCost);
                     gui.showMessage("Det kostede "+taxCost+" kr.");
                 } else {
-                    player.addPoints(-4000);
+                    player.sendPoints(null, -4000);
                 }
                 return option.equals("10%") ? "Du valgte at betale 10% af din balance" : "Du valgte at betale 4000 kr.";
             }
