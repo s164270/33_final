@@ -59,8 +59,16 @@ public class PropertyField extends Field implements Ownable{
 
     public void setOwner(Player player) {
         owner=player;
-        player.getOwnedFields().add(this);
-        ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        if (owner!= null)
+        {
+            player.getOwnedFields().add(this);
+            ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        }
+        else
+        {
+            ((GUI_Ownable)guiField).setBorder(null);
+            pawned=false;
+        }
     }
 
     public void setPaired(boolean paired) {
@@ -127,6 +135,31 @@ public class PropertyField extends Field implements Ownable{
     public boolean isPawnable()
     {
         return (num_houses==0) && !pawned;
+    }
+
+    @Override
+    public int getRent()
+    {
+        int price=0;
+        if (!pawned)
+        {
+            if (hotelBuild)
+            {
+                price = rent[5];
+            } else
+            {
+                price = rent[num_houses];
+            }
+            if (paired)
+            {
+                price *= 2;
+            }
+        }
+        else
+        {
+            price=0;
+        }
+        return price;
     }
 
     public int getNumHouses() {
@@ -332,18 +365,7 @@ public class PropertyField extends Field implements Ownable{
 
         else if(owner != player)
         {
-            if(hotelBuild) {
-                player.sendPoints(owner, rent[5]);
-            }
-            else if(num_houses > 0) {
-                player.sendPoints(owner, rent[num_houses]);
-            }
-            else if (paired) {
-                player.sendPoints(owner, 2 * rent[num_houses]);
-            }
-            else {
-            player.sendPoints(owner, rent[num_houses]);
-            }
+            player.sendPoints(owner, getRent());
         }
         return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
     }

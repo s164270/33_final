@@ -36,9 +36,23 @@ public class CompanyField extends Field implements Ownable{
 
     public void setOwner(Player player) {
         owner = player;
-        owner.getCompany().add(this);
-        owner.getOwnedFields().add(this);
-        ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        if (owner!= null)
+        {
+            owner.getCompany().add(this);
+            owner.getOwnedFields().add(this);
+            ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        }
+        else
+        {
+            ((GUI_Ownable)guiField).setBorder(null);
+            pawned=false;
+        }
+    }
+
+    @Override
+    public Player getOwner()
+    {
+        return owner;
     }
 
 
@@ -70,7 +84,7 @@ public class CompanyField extends Field implements Ownable{
         }
 
         else if (owner != player) {
-            int rent = player.getDiceSum() * (owner.getCompany().size() == 2 ? 200 : 100);
+            int rent = player.getDiceSum() * getRent();
             player.sendPoints(owner, rent);
             return player.getName() + " skulle betale " + owner.getName() + " "  + rent + " kr.";
         }
@@ -96,6 +110,17 @@ public class CompanyField extends Field implements Ownable{
     public int getPrice()
     {
         return cost;
+    }
+
+    @Override
+    public int getRent()
+    {
+        if(!pawned)
+        {
+            return (owner.getCompany().size() == 2 ? 200 : 100);
+        }
+        else
+            return 0;
     }
 
     @Override

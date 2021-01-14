@@ -2,6 +2,7 @@ package game;
 
 import chancecard.ChanceCards;
 import gui_fields.GUI_Field;
+import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Shipping;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
@@ -202,6 +203,13 @@ public class GameBoard
         guiFields[37] = new GUI_Street("Frederiksberg gade","kr. 7.000 ","","",Color.MAGENTA,Color.BLACK);
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Street("Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
+    }
+    public void blacken()
+    {
+        for (int i = 0; i < NFIELDS; i++)
+        {
+            ((GUI_Ownable)guiFields[i]).setBorder(null);
+        }
     }
 
     public String[] getFieldString(Field[] props) {

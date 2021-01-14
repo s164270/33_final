@@ -41,6 +41,7 @@ public class Game
 
         auction = new Auction(gui, player);
         board.createFields(auction);
+        board.blacken();
 
         gui.showMessage("Okay " + currentPlayer.getName() + ", du starter.");
     }
@@ -68,6 +69,7 @@ public class Game
         board.createChanceFields(chanceCards);
         auction = new Auction(gui, player);
         board.createFields(auction);
+        board.blacken();
 
     }
 
@@ -156,12 +158,50 @@ public class Game
                         }
                         else
                         {
+                            if(board.getField()[player.getPosition()+ dice.getSum() % 40] instanceof PropertyField ||
+                            board.getField()[player.getPosition()+ dice.getSum()% 40] instanceof CompanyField ||
+                            board.getField()[player.getPosition()+ dice.getSum()% 40] instanceof ShippingField)
+                            {
+                                Ownable own= (Ownable) board.getField()[player.getPosition()+ dice.getSum()];
+                                int rent = own.getRent();
+                                if (board.getField()[player.getPosition()+ dice.getSum()] instanceof CompanyField)
+                                    rent *= dice.getSum();
+
+                                if (rent>player.getActualWorth())
+                                {
+                                    goingBroke(player, own.getOwner());
+                                    turnDone=true;
+                                }
+                                else if(rent> player.getPoints())
+                                {
+                                    brokeMenu(player,rent);
+                                }
+                            }
                             board.movePlayer(player, dice.getSum());
                         }
                     }
                     else
                     {
                         mustRoll = false;
+                        if(board.getField()[player.getPosition()+ dice.getSum() % 40] instanceof PropertyField ||
+                                board.getField()[player.getPosition()+ dice.getSum()% 40] instanceof CompanyField ||
+                                board.getField()[player.getPosition()+ dice.getSum()% 40] instanceof ShippingField)
+                        {
+                            Ownable own= (Ownable) board.getField()[player.getPosition()+ dice.getSum()];
+                            int rent = own.getRent();
+                            if (board.getField()[player.getPosition()+ dice.getSum()] instanceof CompanyField)
+                                rent *= dice.getSum();
+
+                            if (rent>player.getActualWorth())
+                            {
+                                goingBroke(player, own.getOwner());
+                                turnDone=true;
+                            }
+                            else if(rent> player.getPoints())
+                            {
+                                brokeMenu(player,rent);
+                            }
+                        }
                         board.movePlayer(player, dice.getSum());
                     }
                     break;
@@ -230,6 +270,15 @@ public class Game
                     if(player.getPoints() < 1000)
                     {
                         gui.showMessage("Det har du ikke råd til");
+                        if (1000>player.getActualWorth())
+                        {
+                            goingBroke(player, null);
+                            turnDone=true;
+                        }
+                        else if(1000> player.getPoints())
+                        {
+                            brokeMenu(player,1000);
+                        }
                     }
                     else
                     {
@@ -311,7 +360,11 @@ public class Game
                 field.pawnOff();
             field.setOwner(playerReceive);
         }
-        playerBroke.sendPoints(playerReceive, playerBroke.getPoints());
+        if (!(playerReceive ==null))
+            playerBroke.sendPoints(playerReceive, playerBroke.getPoints());
+        else
+            playerBroke.addPoints(playerBroke.getPoints());
+
     }
 
     public void buildHotel(Player player)

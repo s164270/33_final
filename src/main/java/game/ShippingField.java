@@ -30,11 +30,26 @@ public class ShippingField extends Field implements Ownable{
 
     }
     public void setOwner(Player player) {
-        owner=player;
-        owner.getShipping().add(this);
-        owner.getOwnedFields().add(this);
-        ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        owner = player;
+        if (owner!= null)
+        {
+            owner.getShipping().add(this);
+            owner.getOwnedFields().add(this);
+            ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+        }
+        else
+        {
+            ((GUI_Ownable)guiField).setBorder(null);
+            pawned=false;
+        }
     }
+
+    @Override
+    public Player getOwner()
+    {
+        return owner;
+    }
+
     public void buyProperty(Player player, int auctionPrice) {
         player.addPoints(-auctionPrice);
         setOwner(player);
@@ -66,7 +81,7 @@ public class ShippingField extends Field implements Ownable{
         }
 
         else if (owner != player) {
-            player.sendPoints(owner, rent[owner.getShipping().size() - 1]);
+            player.sendPoints(owner,getRent() );
             return player.getName() + " landede på " + owner.getName() + "'s felt: " + name + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr";
         }
 
@@ -96,6 +111,15 @@ public class ShippingField extends Field implements Ownable{
     public int getPrice()
     {
         return cost;
+    }
+
+    @Override
+    public int getRent()
+    {
+        if (!pawned)
+            return rent[owner.getShipping().size() - 1];
+        else
+            return 0;
     }
 
     @Override
