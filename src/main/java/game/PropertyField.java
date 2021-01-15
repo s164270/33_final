@@ -103,7 +103,6 @@ public class PropertyField extends Field implements Ownable{
         {
             owner.addPoints(cost/2);
             pawned=true;
-            System.out.println(pawned);
         }
     }
 
