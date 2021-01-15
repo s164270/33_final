@@ -31,6 +31,7 @@ public class ChancePayDouble extends Chance
     @Override
     public void executeChance(Player currentPlayer)
     {
+        gui.displayChanceCard(text);
         String choice = gui.getUserSelection(text,options);
         for (int i = 0; i < board.getGuiFields().length; i++)
         {

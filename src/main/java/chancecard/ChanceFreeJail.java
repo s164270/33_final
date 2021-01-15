@@ -22,7 +22,8 @@ public class ChanceFreeJail extends Chance
     @Override
     public void executeChance(Player currentPlayer)
     {
-        gui.showMessage(text);
+        gui.displayChanceCard(text);
+        // gui.showMessage(text);
         currentPlayer.setFreePrison(true);
     }
 }
