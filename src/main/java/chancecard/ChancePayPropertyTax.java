@@ -26,7 +26,6 @@ public class ChancePayPropertyTax extends Chance
     public ChancePayPropertyTax(GameBoard board, GUI gui, Player[] player, String text, boolean taxType)
     {
         super(board, gui, player, text);
-        this.options=options;
         this.taxType = taxType;
     }
 

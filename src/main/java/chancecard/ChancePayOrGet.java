@@ -32,7 +32,6 @@ public class ChancePayOrGet extends Chance
     public void executeChance(Player currentPlayer)
     {
         gui.displayChanceCard(text);
-      //  gui.showMessage(text);
         currentPlayer.addPoints(money);
     }
 }

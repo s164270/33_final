@@ -31,7 +31,6 @@ public class ChanceGetPaid extends Chance
     public void executeChance(Player currentPlayer)
     {
         gui.displayChanceCard(text);
-       // gui.showMessage(text);
         for (int i = 0; i < player.length; i++) {
             if(player[i] != currentPlayer)
             {

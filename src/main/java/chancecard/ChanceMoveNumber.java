@@ -26,7 +26,7 @@ public class ChanceMoveNumber extends Chance {
 
     @Override
     public void executeChance(Player currentPlayer) {
-        gui.showMessage(text);
+        gui.displayChanceCard(text);
         int dist = (distance);
         if (distance < 0) {
             currentPlayer.setInPrison(true);

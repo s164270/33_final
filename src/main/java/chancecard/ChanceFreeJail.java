@@ -23,7 +23,6 @@ public class ChanceFreeJail extends Chance
     public void executeChance(Player currentPlayer)
     {
         gui.displayChanceCard(text);
-        // gui.showMessage(text);
         currentPlayer.setFreePrison(true);
     }
 }
