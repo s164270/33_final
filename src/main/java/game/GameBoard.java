@@ -178,7 +178,7 @@ public class GameBoard
         guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
         guiFields[13] = new GUI_Street("Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[14] = new GUI_Street("Gl. Kongevej", "kr. 3.200", "", "", Color.PINK, Color.BLACK);
-        guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Grenaa-Hundested", "kr. 4.000", "", "", Color.RED, Color.BLUE);
+        guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH,"Grenaa-Hundested", "kr. 4.000", "", "", Color.RED, Color.BLACK);
         guiFields[16] = new GUI_Street("Bernstorffsvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
         guiFields[17] = new GUI_Shipping(IMAGE_DIR_PATH+"chance.png","Chance", "", "", "", Color.WHITE, Color.BLACK);
         guiFields[18] = new GUI_Street("Hellerupvej", "kr. 3.600", "", "", Color.GRAY, Color.BLACK);
