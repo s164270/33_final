@@ -239,10 +239,12 @@ public class Game
                 case "Betal dig fri":
                     player.sendPoints(null, 1000);
                     player.setInPrison(false);
+                    gui.showMessage(player.getName() + " " +"betalte sig fri" );
                     break;
                 case "Brug chancekort":
                     if(player.getFreePrison())
                     {
+                        gui.showMessage(player.getName() + " " + "brugte sit chancekort");
                         player.setInPrison(false);
                         player.setFreePrison(false);
                     }

@@ -1,8 +1,15 @@
 package game;
 
 import player.Player;
+import gui_main.GUI;
 
 public class StartField extends Field{
+    protected final GUI gui;
+
+    StartField(GUI gui){
+        this.gui = gui;
+    }
+
 
     @Override
     public void visitField(Player player) {
@@ -14,7 +21,7 @@ public class StartField extends Field{
      }
 
     @Override
-    public String landOnField(Player player) {
-        return player.getName() + " landede på start";
+    public void landOnField(Player player) {
+        gui.showMessage(player.getName() + " landede på start");
     }
 }

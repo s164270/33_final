@@ -26,9 +26,9 @@ public abstract class Field {
         this.gui = gui;
     }
 
-    public String landOnField(Player player)
+    public void landOnField(Player player)
     {
-        return player.getName() + " " + "landede på " + name;
+        gui.showMessage(player.getName() + " " + "landede på " + name);
     }
 
     public void visitField(Player player)
