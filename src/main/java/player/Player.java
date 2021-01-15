@@ -109,9 +109,6 @@ public class Player
         }
         else
         {
-            System.out.println("Actual worth: " + getActualWorth());
-            System.out.println("Amount to send: " + amount);
-
             if(amount > getActualWorth())
             {
                 goingBroke(recipient); //go broke

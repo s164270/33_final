@@ -29,9 +29,21 @@ public class ChanceMoveNumber extends Chance {
         gui.showMessage(text);
         int dist = (distance);
         if (distance < 0) {
-            board.movePlayerPosition(currentPlayer, currentPlayer.getPosition()-3);
+            currentPlayer.setInPrison(true);
+            if(currentPlayer.getPosition()+distance<0){
+                board.movePlayerPosition(currentPlayer, 39);
+
+            }
+            else{
+                board.movePlayerPosition(currentPlayer, currentPlayer.getPosition()-3);
+
+            }
+            if(currentPlayer.getPosition()!=10){
+                currentPlayer.setInPrison(false);
+            }
 
         }
+
         else {
             board.movePlayer(currentPlayer, dist);
         }
