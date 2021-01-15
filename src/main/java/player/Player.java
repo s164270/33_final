@@ -242,6 +242,7 @@ public class Player
             addPoints(-getPoints());
 
         broke = true;
+        gui.showMessage(getName() + " er gået fallit og er ude af spillet ");
     }
 
 
