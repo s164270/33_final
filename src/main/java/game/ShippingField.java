@@ -56,16 +56,17 @@ public class ShippingField extends Field implements Ownable{
     }
 
     @Override
-    public String landOnField(Player player) {
+    public void landOnField(Player player) {
         if (owner == null) {
+            gui.showMessage(player.getName() + " landede på  " + "" + guiField.getTitle());
 
-            String option = gui.getUserButtonPressed("Vil du købe " + name + " for " + cost + "?", "Ja", "Nej");
+            String option = gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + " for " + cost + "?", "Ja", "Nej");
             if (option.toLowerCase().equals("ja")) {
                 if (player.getPoints() >= cost) {
                     buyProperty(player);
-                    return player.getName() + " har købt " + name + " for " + cost + " kr.";
+                    gui.showMessage(player.getName() + " har købt " + guiField.getTitle() + " for " + cost + " kr.");
                 } else {
-                    return player.getName() + " har ikke råd til at købe " + name;
+                    gui.showMessage(player.getName() + " har ikke råd til at købe " + guiField.getTitle());
                 }
             } else {
                 auction.startAuction(this);
@@ -73,20 +74,22 @@ public class ShippingField extends Field implements Ownable{
         }
 
         else if (pawned && owner != player) {
-            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat";
+            gui.showMessage(player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat");
+        }
+        else if( owner == player) {
+            gui.showMessage(player.getName() + " landede på sit eget felt" + " " + guiField.getTitle());
         }
 
         else if (owner.isInPrison()) {
-            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel";
+            gui.showMessage(player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel");
         }
 
         else if (owner != player) {
             player.sendPoints(owner,getRent() );
-            return player.getName() + " landede på " + owner.getName() + "'s felt: " + name + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr";
+            gui.showMessage(player.getName() + " landede på " + owner.getName() + "'s felt " + guiField.getTitle() + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr");
         }
 
 
-        return player.getName() + " landede på feltet" + " " + guiField.getTitle();
     }
 
 

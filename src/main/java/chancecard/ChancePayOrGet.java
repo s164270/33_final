@@ -31,7 +31,7 @@ public class ChancePayOrGet extends Chance
     @Override
     public void executeChance(Player currentPlayer)
     {
-    gui.showMessage(text);
-     currentPlayer.addPoints(money);
+        gui.displayChanceCard(text);
+        currentPlayer.addPoints(money);
     }
 }

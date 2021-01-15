@@ -342,15 +342,20 @@ public class PropertyField extends Field implements Ownable{
     }
 
     @Override
-    public String landOnField(Player player) {
-        if(owner == null) //player has to buy the property
+    public void landOnField(Player player) {
+
+        if(owner == null)
         {
+            gui.showMessage(player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle());//player has to buy the property
+
             switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + " for " + cost + "?", "JA", "NEJ"))
             {
                 case "JA":
                     buyProperty(player, cost);
+                    gui.showMessage(player.getName() + " " +  "har købt ejendomsfeltet" + " " + guiField.getTitle());
                     break;
                 case "NEJ":
+                    gui.showMessage("Auktion for at købe" + " " + guiField.getTitle() + " " + "starter");
                     auction.startAuction(this);
                     break;
                 default:
@@ -358,18 +363,23 @@ public class PropertyField extends Field implements Ownable{
             }
         }
         else if (pawned && owner != player) {
-            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat";
+            gui.showMessage(player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi ejendommen er pantsat");
+        }
+        else if( owner == player) {
+            gui.showMessage(player.getName() + " landede på sit eget felt" + " " + guiField.getTitle());
         }
 
         else if (owner.isInPrison()) {
-            return player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel";
+            gui.showMessage(player.getName() + " skal ikke betale leje til " + owner.getName() + " fordi de er i fængsel");
         }
 
         else if(owner != player)
         {
+            gui.showMessage(player.getName()+ " " + "landede på" + " " + getOwner().getName()  + "'s" + " " + " felt " + guiField.getTitle() + " " + "og skal betale kr." + " " + getRent() + " " + "i leje"   );
             player.sendPoints(owner, getRent());
         }
-        return player.getName() + " " +  "landede på ejendomsfeltet" + " " + guiField.getTitle();
+
+
     }
 
     public int getTotalHouses()

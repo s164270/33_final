@@ -15,7 +15,7 @@ class GameTest
     Game game;
     @BeforeEach
     public void beforeEachTestMethod() {
-        game = new Game("player1","player2");
+        game = new Game("player1","player2", "player3");
     }
 
     @AfterEach

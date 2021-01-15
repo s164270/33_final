@@ -19,11 +19,10 @@ public class ChanceFreeJail extends Chance
         super(board, gui, player, text);
     }
 
-
     @Override
     public void executeChance(Player currentPlayer)
     {
-        gui.showMessage(text);
+        gui.displayChanceCard(text);
         currentPlayer.setFreePrison(true);
     }
 }

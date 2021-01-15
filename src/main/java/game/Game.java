@@ -46,7 +46,7 @@ public class Game
         gui.showMessage("Okay " + currentPlayer.getName() + ", du starter.");
     }
 
-    public Game(String playerName1, String playerName2)
+    public Game(String playerName1, String playerName2, String playerName3)
     {
         // class creation for testing
         dice = new DiceCup();
@@ -58,13 +58,16 @@ public class Game
 
         gameOver = false;
 
-        player=new Player[2];
+        player=new Player[3];
         player[0] = new Player(playerName1, gui);
         player[1] = new Player(playerName2, gui);
+        player[2] = new Player(playerName3, gui);
         player[0].setGameRef(this);
         player[1].setGameRef(this);
+        player[2].setGameRef(this);
         gui.addPlayer(player[0].getGuiPlayer());
         gui.addPlayer(player[1].getGuiPlayer());
+        gui.addPlayer(player[2].getGuiPlayer());
         currentPlayer = player[0];
         chanceCards=new ChanceCards(board, gui, player);
         chanceCards.createChance();
@@ -237,20 +240,14 @@ public class Game
                     }
                     break;
                 case "Betal dig fri":
-                    if(player.getPoints() < 1000)
-                    {
-                        gui.showMessage("Det har du ikke råd til");
-                        player.sendPoints(null,1000);
-                    }
-                    else
-                    {
-                        player.addPoints(-1000);
-                        player.setInPrison(false);
-                    }
+                    player.sendPoints(null, 1000);
+                    player.setInPrison(false);
+                    gui.showMessage(player.getName() + " " +"betalte sig fri" );
                     break;
                 case "Brug chancekort":
                     if(player.getFreePrison())
                     {
+                        gui.showMessage(player.getName() + " " + "brugte sit chancekort");
                         player.setInPrison(false);
                         player.setFreePrison(false);
                     }

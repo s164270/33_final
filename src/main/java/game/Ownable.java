@@ -12,6 +12,7 @@ public interface Ownable
     public int getRent();
     public int totalPrice();
     public void setOwner(Player p);
+    public void buyProperty(Player b, int cost);
     public Player getOwner();
 
 }
