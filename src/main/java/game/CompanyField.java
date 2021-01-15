@@ -92,7 +92,7 @@ public class CompanyField extends Field implements Ownable{
         else if (owner != player) {
             int rent = player.getDiceSum() * getRent();
             player.sendPoints(owner, rent);
-            gui.showMessage(player.getName() + " skulle betale " + owner.getName() + " "  + rent + " kr. i leje");
+            gui.showMessage(player.getName() + " landede på  " + owner.getName() + "'s"  + " felt og skulle betale " + owner.getName() + " "  + rent + " kr. i leje");
         }
     }
 

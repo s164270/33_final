@@ -86,7 +86,7 @@ public class ShippingField extends Field implements Ownable{
 
         else if (owner != player) {
             player.sendPoints(owner,getRent() );
-            gui.showMessage(player.getName() + " landede på " + owner.getName() + "'s rederifelt " + guiField.getTitle() + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr");
+            gui.showMessage(player.getName() + " landede på " + owner.getName() + "'s felt " + guiField.getTitle() + " og skal betale " + rent[owner.getShipping().size() - 1] + " kr");
         }
 
 

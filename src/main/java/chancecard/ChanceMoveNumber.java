@@ -7,32 +7,33 @@ import player.Player;
 
 import java.awt.*;
 
-public class ChanceMoveNumber extends Chance
-{
+public class ChanceMoveNumber extends Chance {
     int distance;
 
-    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player)
-    {
-        super(board,gui,player);
+    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player) {
+        super(board, gui, player);
     }
 
-    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text)
-    {
+    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text) {
         super(board, gui, player, text);
     }
 
-    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text, int distance)
-    {
+    public ChanceMoveNumber(GameBoard board, GUI gui, Player[] player, String text, int distance) {
         super(board, gui, player, text);
-        this.distance=distance;
+        this.distance = distance;
     }
 
 
     @Override
-    public void executeChance(Player currentPlayer)
-    {
+    public void executeChance(Player currentPlayer) {
         gui.showMessage(text);
         int dist = (distance);
-        board.movePlayer(currentPlayer,dist);
+        if (distance < 0) {
+            board.movePlayerPosition(currentPlayer, currentPlayer.getPosition()-3);
+
+        }
+        else {
+            board.movePlayer(currentPlayer, dist);
+        }
     }
 }
