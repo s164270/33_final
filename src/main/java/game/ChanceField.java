@@ -20,8 +20,9 @@ public class ChanceField extends Field {
 
     @Override
     public String landOnField(Player player) {
+        //gui.showMessage(player.getName() + " " + "landede på et chancefelt");
         cards.getRandomChance().executeChance(player);
-        return player.getName() + " " + "landede på " + name;
+        return "";
     }
 
 }

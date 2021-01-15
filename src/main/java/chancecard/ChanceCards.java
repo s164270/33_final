@@ -12,7 +12,7 @@ public class ChanceCards
     private GameBoard board;
     private GUI gui;
     private Player[] player;
-    private Chance[] chances= new Chance[33];
+    private Chance[] chances= new Chance[35];
     public ChanceCards(GameBoard board, GUI gui, Player[] player)
     {
         this.board=board;
@@ -57,12 +57,14 @@ public class ChanceCards
         chances[30] = new ChancePayOrGet(board, gui, player,"De har været udenlands og købt for mange smøger, betal kr 200 i told.", -200);
         chances[31] = new ChancePayOrGet(board, gui, player,"Tandlægeregning, betal kr 2000.",-2000);
         chances[32] = new ChanceFreeJail(board, gui, player,"Du løslades uden omkostninger\n Behold dette kort intil du får brug for det.");
+        chances[33] = new ChancePayPropertyTax(board, gui, player,"Oliepiserne er steget og de skal betale kr 500 pr hus og kr 2000 pr hotel.", true);
+        chances[34] = new ChancePayPropertyTax(board, gui, player,"Ejendomsskatten er steget. Ekstraudgifterne er: 800 kr pr hus, 2300 kr pr hotel.", false);
     }
 
     public Chance getRandomChance() {
         final Random random = new Random();
         int number;
-        number = random.nextInt(33);
+        number = random.nextInt(35);
         return chances[number];
     }
 

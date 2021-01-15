@@ -340,6 +340,36 @@ public class Player
         return totalPrice + getPoints();
     }
 
+    public int getHotelCount()
+    {
+        int hotelCount = 0;
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            if(ownedFields.get(i) instanceof PropertyField)
+            {
+                if (((PropertyField) ownedFields.get(i)).isHotelBuild())
+                {
+                    hotelCount++;
+                }
+            }
+        }
+        return hotelCount;
+    }
+
+    public int getHouseCount()
+    {
+        int houseCount = 0;
+        for (int i = 0; i < ownedFields.size(); i++)
+        {
+            if(ownedFields.get(i) instanceof PropertyField)
+            {
+                houseCount += ((PropertyField) ownedFields.get(i)).getNum_houses();
+            }
+        }
+        return houseCount;
+    }
+
+
     public void setDiceSum(int sum) {
         this.diceSum = sum;
     }

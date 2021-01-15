@@ -31,7 +31,8 @@ public class ChanceMoveNumber extends Chance
     @Override
     public void executeChance(Player currentPlayer)
     {
-        gui.showMessage(text);
+        gui.displayChanceCard(text);
+       // gui.showMessage(text);
         int dist = (distance);
         board.movePlayer(currentPlayer,dist);
     }

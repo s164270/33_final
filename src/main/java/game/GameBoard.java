@@ -69,7 +69,7 @@ public class GameBoard
             guiFields[tempPosition].setCar(player.getGuiPlayer(), false);
             guiFields[player.getPosition()].setCar(player.getGuiPlayer(), true);
         }
-        gui.showMessage(msg);
+        //gui.showMessage(msg);
     }
 
     public GUI_Field[] getGuiFields() {
