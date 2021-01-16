@@ -325,7 +325,7 @@ public class PropertyField extends Field implements Ownable{
 
     public void buyProperty(Player player, int price)
     {
-        player.addPoints(-price);
+        player.sendPoints(null, price);
         setOwner(player);
 
         boolean pair =true;
@@ -350,8 +350,17 @@ public class PropertyField extends Field implements Ownable{
             switch (gui.getUserButtonPressed("Vil du købe " + guiField.getTitle() + " for " + cost + "?", "JA", "NEJ"))
             {
                 case "JA":
-                    buyProperty(player, cost);
-                    gui.showMessage(player.getName() + " " +  "har købt ejendomsfeltet" + " " + guiField.getTitle());
+                    if(player.getPoints() >= cost)
+                    {
+                        buyProperty(player, cost);
+                        gui.showMessage(player.getName() + " " +  "har købt ejendomsfeltet" + " " + guiField.getTitle());
+                    }
+                    else
+                    {
+                        gui.showMessage("Du har ikke nok penge på kontoen.");
+                        gui.showMessage("Auktion for at købe" + " " + guiField.getTitle() + " " + "starter");
+                        auction.startAuction(this);
+                    }
                     break;
                 case "NEJ":
                     gui.showMessage("Auktion for at købe" + " " + guiField.getTitle() + " " + "starter");
