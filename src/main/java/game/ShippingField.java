@@ -67,6 +67,7 @@ public class ShippingField extends Field implements Ownable{
                     gui.showMessage(player.getName() + " har købt " + guiField.getTitle() + " for " + cost + " kr.");
                 } else {
                     gui.showMessage(player.getName() + " har ikke råd til at købe " + guiField.getTitle());
+                    auction.startAuction(this);
                 }
             } else {
                 auction.startAuction(this);

@@ -70,6 +70,7 @@ public class CompanyField extends Field implements Ownable{
                     gui.showMessage(player.getName() + " har købt " + name + " for " + cost + " kr.");
                 } else {
                     gui.showMessage(player.getName() + " har ikke råd til at købe " + name);
+                    auction.startAuction(this);
                 }
             } else {
                 auction.startAuction(this);
