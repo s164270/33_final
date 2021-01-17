@@ -202,6 +202,7 @@ public class GameBoard
         guiFields[38] = new GUI_Shipping("","Skat", "", "", "", Color.CYAN, Color.BLACK);
         guiFields[39] = new GUI_Street("Rådhuspladsen","kr. 8.000 ","","",Color.MAGENTA,Color.BLACK);
     }
+
     public void blacken()
     {
         for (int i = 0; i < NFIELDS; i++)
