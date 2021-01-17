@@ -82,7 +82,7 @@ public class PropertyField extends Field implements Ownable{
         {
             player.getOwnedFields().add(this);
             ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
-            guiField.setSubText("kr. " + totalPrice());
+            guiField.setSubText("kr. " + getRent());
         }
         else
         {
@@ -94,7 +94,8 @@ public class PropertyField extends Field implements Ownable{
 
     public void setPaired(boolean paired) {
         this.paired = paired;
-        guiField.setSubText("kr. " + totalPrice());
+        if(paired)
+            guiField.setSubText("kr. " + getRent());
     }
 
     public int getHousePrice() {
@@ -127,6 +128,7 @@ public class PropertyField extends Field implements Ownable{
         {
             owner.addPoints(cost/2);
             pawned=true;
+            guiField.setSubText("kr. " + getRent());
         }
     }
 
@@ -134,6 +136,7 @@ public class PropertyField extends Field implements Ownable{
     public void rebuy() {
         owner.addPoints(- (int) ((cost/2)*1.1));
         pawned=false;
+        guiField.setSubText("kr. " + getRent());
     }
 
     @Override
@@ -353,7 +356,6 @@ public class PropertyField extends Field implements Ownable{
         for (int i = 0; i < neighbor.length; i++)
         {
             pair = pair && neighbor[i].getOwner() == this.getOwner();
-            neighbor[i].setPaired(true);
         }
         for (int i = 0; i < neighbor.length; i++)
         {

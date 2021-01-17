@@ -43,6 +43,7 @@ public class ShippingField extends Field implements Ownable{
 
     }
 
+    @Override
     public void setOwner(Player player) {
         owner = player;
         if (owner!= null)
@@ -50,11 +51,16 @@ public class ShippingField extends Field implements Ownable{
             owner.getShipping().add(this);
             owner.getOwnedFields().add(this);
             ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+            for (int i = 0; i < player.getShipping().size(); i++)
+            {
+                player.getShipping().get(i).guiField.setSubText("kr. " + getRent());
+            }
         }
         else
         {
             ((GUI_Ownable)guiField).setBorder(null);
             pawned=false;
+            guiField.setSubText("kr. " + getPrice());
         }
     }
 
@@ -117,12 +123,14 @@ public class ShippingField extends Field implements Ownable{
     public void pawnOff() {
         owner.addPoints(cost/2);
         pawned=true;
+        guiField.setSubText("kr. " + getRent());
     }
 
     @Override
     public void rebuy() {
         owner.addPoints(- (int) ((cost/2)*1.1));
         pawned=false;
+        guiField.setSubText("kr. " + getRent());
     }
 
     @Override

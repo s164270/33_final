@@ -173,7 +173,7 @@ public class GameBoard
         guiFields[9] = new GUI_Street("Allegade", "kr. 2400", "", "", Color.ORANGE, Color.BLACK);
         guiFields[10] = new GUI_Shipping(IMAGE_DIR_PATH+"inprison.png","I Fængsel", "kr. 1000", "", "", Color.BLACK, Color.WHITE);
         guiFields[11] = new GUI_Street("Frederiksberg Alle","kr. 2.800", "", "", Color.PINK, Color.BLACK);
-        guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"squash.png","Squash", "", "kr. 3.000", "", Color.RED, Color.BLACK);
+        guiFields[12] = new GUI_Shipping(IMAGE_DIR_PATH+"squash.png","Squash", "kr. 3000", "kr. 3.000", "", Color.RED, Color.BLACK);
         guiFields[13] = new GUI_Street("Bulowsvej", "kr. 2.800", "", "", Color.PINK, Color.BLACK);
         guiFields[14] = new GUI_Street("Gl. Kongevej", "kr. 3.200", "", "", Color.PINK, Color.BLACK);
         guiFields[15] = new GUI_Shipping(IMAGE_DIR_PATH+"boat.png","Grenaa-Hundested", "kr. 4.000", "", "", Color.RED, Color.BLACK);
@@ -189,7 +189,7 @@ public class GameBoard
         guiFields[25] = new GUI_Shipping(IMAGE_DIR_PATH+"boat.png","Mols-Linien", "kr. 4000", "", "", Color.BLUE, Color.BLACK);
         guiFields[26] = new GUI_Street("Bredgade","kr. 5.200","","",Color.WHITE,Color.BLACK);
         guiFields[27] = new GUI_Street("Kgs. Nytorv","kr. 5.200","","",Color.WHITE,Color.BLACK);
-        guiFields[28] = new GUI_Shipping(IMAGE_DIR_PATH+"cola.png","Coca Cola","","","",Color.RED,Color.WHITE);
+        guiFields[28] = new GUI_Shipping(IMAGE_DIR_PATH+"cola.png","Coca Cola","kr. 3000","","",Color.RED,Color.WHITE);
         guiFields[29] = new GUI_Street("Østergade","kr. 5.600","","",Color.WHITE,Color.BLACK);
         guiFields[30] = new GUI_Shipping("","De fængsles","","","",Color.BLACK,Color.WHITE);
         guiFields[31] = new GUI_Street("Amagertorv","kr. 6.000","","",Color.YELLOW,Color.BLACK);

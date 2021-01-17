@@ -3,7 +3,7 @@ import game.Game;
 public class Main {
 
     public static void main(String[] args) {
-        boolean DEBUG=true;
+        boolean DEBUG=false;
         if (DEBUG)
         {
             Game game = new Game("player1","player2", "player3");

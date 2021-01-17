@@ -549,6 +549,8 @@ public class Game
                     "send money to player",
                     "send money to bank",
                     "send to prison",
+                    "Pantsæt",
+                    "Genkøb",
                     "start normal game",
                     "end");
 
