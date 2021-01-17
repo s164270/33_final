@@ -1,5 +1,6 @@
 package game;
 
+import gui_main.GUI;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,8 @@ class StartFieldTest {
 
     @BeforeEach
     void setUp() {
-        start = new StartField(start.gui);
+        GUI gui = new GUI();
+        start = new StartField(gui);
         p1 = new Player("P1", null);
     }
 
@@ -26,7 +28,7 @@ class StartFieldTest {
     void visitField() {
         int beforePassing = p1.getPoints();
         start.visitField(p1);
-        assertEquals(p1.getPoints(), beforePassing + 2);
+        assertEquals(p1.getPoints(), beforePassing + 4000);
     }
 
     /*@Test

@@ -24,29 +24,12 @@ class GameTest
     }
 
     @Test
-    void isGameOver()
-    {
-        assertFalse(game.isGameOver());
-        game.getCurrentPlayer().addPoints(-21);
-        game.gameOver();
-        assertTrue(game.isGameOver());
-    }
-
-    @Test
     void rollDice()
     {
         game.rollDice();
         assertEquals("","");
     }
 
-    @Test
-    void gameOver()
-    {
-        assertFalse(game.isGameOver());
-        game.getCurrentPlayer().addPoints(-21);
-        game.gameOver();
-        assertTrue(game.isGameOver());
-    }
 
     @Test
     void getCurrentPlayer()
@@ -55,9 +38,13 @@ class GameTest
         game.changePlayer();
         Player p2 = game.getCurrentPlayer();
         game.changePlayer();
+        Player p3 = game.getCurrentPlayer();
+        game.changePlayer();
         assertTrue(p1== game.getCurrentPlayer());
         game.changePlayer();
         assertTrue(p2== game.getCurrentPlayer());
+        game.changePlayer();
+        assertTrue(p3== game.getCurrentPlayer());
     }
 
     @Test
@@ -67,9 +54,13 @@ class GameTest
         game.changePlayer();
         Player p2 = game.getCurrentPlayer();
         game.changePlayer();
+        Player p3 = game.getCurrentPlayer();
+        game.changePlayer();
         assertTrue(p1== game.getCurrentPlayer());
         game.changePlayer();
         assertTrue(p2== game.getCurrentPlayer());
+        game.changePlayer();
+        assertTrue(p3== game.getCurrentPlayer());
     }
 
 }
