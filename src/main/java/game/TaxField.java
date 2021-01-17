@@ -1,5 +1,6 @@
 package game;
 
+import gui_fields.GUI_Field;
 import gui_main.GUI;
 import player.Player;
 
@@ -37,5 +38,21 @@ public class TaxField extends Field {
             player.sendPoints(null,2000);
             gui.showMessage("Du skal betale ekstraordinær skat på 2000 kr.");
         }
+    }
+
+    @Override
+    public void setGuiField(GUI_Field guiField) {
+        this.guiField = guiField;
+        String description = "";
+        if(this.TaxType)
+        {
+            description="Enten betal 4000 kr eller 10% af alt du ejer i skat";
+        }
+        else
+        {
+            description="Betal 2000 kr i skat";
+        }
+
+        guiField.setDescription(description);
     }
 }

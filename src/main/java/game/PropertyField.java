@@ -1,5 +1,6 @@
 package game;
 
+import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
@@ -55,6 +56,22 @@ public class PropertyField extends Field implements Ownable{
         this.setNeighbors(temp_neighbor);
     }
 
+    @Override
+    public void setGuiField(GUI_Field guiField) {
+        this.guiField = guiField;
+        this.name = guiField.getTitle();
+        String description="Huspris  :  "+housePrice + " kr.<br>";
+        description+= "husleje priser <br>";
+        description += String.format("%d hus %d kr <br>",0,rent[0]);
+        description += String.format("%d hus %d kr <br>",1,rent[1]);
+        for (int i = 2; i < rent.length-1; i++)
+        {
+            description += String.format("%d huse %d kr <br>",i,rent[i]);
+        }
+        description += String.format("1 hotel %d kr <br>",rent[5]);
+        guiField.setDescription(description);
+
+    }
     public Player getOwner() {
         return owner;
     }
@@ -65,16 +82,23 @@ public class PropertyField extends Field implements Ownable{
         {
             player.getOwnedFields().add(this);
             ((GUI_Ownable)guiField).setBorder(player.getGuiPlayer().getCar().getPrimaryColor());
+            guiField.setSubText("kr. " + totalPrice());
         }
         else
         {
             ((GUI_Ownable)guiField).setBorder(null);
+            guiField.setSubText("kr. " + getPrice());
             pawned=false;
         }
     }
 
     public void setPaired(boolean paired) {
         this.paired = paired;
+        guiField.setSubText("kr. " + totalPrice());
+    }
+
+    public int getHousePrice() {
+        return housePrice;
     }
 
     public boolean housesCanBeSold()
@@ -188,28 +212,25 @@ public class PropertyField extends Field implements Ownable{
     public void setNum_houses(int num_houses) {
         this.num_houses = num_houses;
         ((GUI_Street)guiField).setHouses(this.num_houses);
+        guiField.setSubText("kr. " + rent[this.num_houses]);
     }
 
     public boolean isHotelBuild() {
         return hotelBuild;
     }
 
-    public int getHousePrice()
-    {
-        return 2000;
-    }
-
     public void buyHotel()
     {
-        getOwner().addPoints(-getHousePrice());
+        getOwner().addPoints(-housePrice);
         num_houses = 0;
         hotelBuild = true;
         ((GUI_Street)guiField).setHotel(true);
+        guiField.setSubText("kr. " + rent[5]);
     }
 
     public void sellHotel()
     {
-        getOwner().addPoints(getHousePrice() / 2);
+        getOwner().addPoints(housePrice / 2);
         hotelBuild = false;
         ((GUI_Street)guiField).setHotel(false);
         setNum_houses(4);

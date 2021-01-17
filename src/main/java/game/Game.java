@@ -131,10 +131,6 @@ public class Game
         while (!turnDone)
         {
             String btnChoice;
-            String prop;
-            String selection[];
-            Ownable f;
-
             if(player.isInPrison() && mustRoll)
             {
 
@@ -191,30 +187,10 @@ public class Game
                     sellHouses(player);
                     break;
                 case "Pantsæt":
-                    selection = board.getFieldString(player.getPawnableProperties());
-                    if (selection!= null)
-                    {
-                        prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
-                        f = (Ownable) board.getFieldFromString(prop);
-                        f.pawnOff();
-                    }
-                    else
-                    {
-                        gui.showMessage("Du har ingen ejendomme du kan pantsætte");
-                    }
+                    pawnOff(player);
                     break;
                 case "Genkøb":
-                    selection = board.getFieldString(player.getPawnedProperties());
-                    if (selection!= null)
-                    {
-                        prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",selection);
-                        f = (Ownable) board.getFieldFromString(prop);
-                        f.rebuy();
-                    }
-                    else
-                    {
-                        gui.showMessage("Du har ingen pantsatte ejendomme");
-                    }
+                    reBuy(player);
                     break;
                 case "Afslut tur":
                     turnDone = true;
@@ -399,6 +375,41 @@ public class Game
         }
     }
 
+    public void pawnOff(Player player)
+    {
+        String[] selection = board.getFieldString(player.getPawnableProperties());
+        String prop;
+        Ownable o;
+        if (selection!= null)
+        {
+            prop= gui.getUserSelection("Vælg ejendom som du vil pantsætte",selection);
+            o = (Ownable) board.getFieldFromString(prop);
+            o.pawnOff();
+        }
+        else
+        {
+            gui.showMessage("Du har ingen ejendomme du kan pantsætte");
+        }
+
+    }
+
+    public void reBuy(Player player)
+    {
+        String[] selection = board.getFieldString(player.getPawnedProperties());
+        String prop;
+        Ownable o;
+        if (selection!= null)
+        {
+            prop= gui.getUserSelection("Vælg ejendom som du vil genkøbe",selection);
+            o = (Ownable) board.getFieldFromString(prop);
+            o.rebuy();
+        }
+        else
+        {
+            gui.showMessage("Du har ingen pantsatte ejendomme");
+        }
+    }
+
     public void buildHouses(Player player)
     {
         if(player.getPoints() < 1000)
@@ -531,6 +542,12 @@ public class Game
                     "random chance card",
                     "activate cheat dice",
                     "deactivate cheat dice",
+                    "Byg huse",
+                    "Byg hotel",
+                    "Sælg hotel",
+                    "Sælg huse",
+                    "send money to player",
+                    "send money to bank",
                     "send to prison",
                     "start normal game",
                     "end");
@@ -562,6 +579,33 @@ public class Game
                     break;
                 case "random chance card":
                     chanceCards.getRandomChance().executeChance(currentPlayer);
+                    break;
+                case "Byg huse":
+                    buildHouses(currentPlayer);
+                    break;
+                case "Byg hotel":
+                    buildHotel(currentPlayer);
+                    break;
+                case "Sælg hotel":
+                    sellHotel(currentPlayer);
+                    break;
+                case "Sælg huse":
+                    sellHouses(currentPlayer);
+                    break;
+                case "Pantsæt":
+                    pawnOff(currentPlayer);
+                    break;
+                case "Genkøb":
+                    reBuy(currentPlayer);
+                    break;
+                case "send money to player":
+                    int i = gui.getUserInteger("vælg hvor spiller nr (0-2)", 0, 2);
+                    userInt = gui.getUserInteger("vælg hvor mange penge", 0, 1000000000);
+                    currentPlayer.sendPoints(player[i], userInt);
+                    break;
+                case "send money to bank":
+                    userInt = gui.getUserInteger("vælg hvor mange penge", 0, 1000000000);
+                    currentPlayer.sendPoints(null, userInt);
                     break;
                 case "end":
                     turnDone=false;

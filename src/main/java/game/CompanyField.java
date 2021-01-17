@@ -1,5 +1,6 @@
 package game;
 
+import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
@@ -22,6 +23,14 @@ public class CompanyField extends Field implements Ownable{
         this.cost = cost;
         this.auction = auction;
         this.pawned=false;
+
+    }
+    @Override
+    public void setGuiField(GUI_Field guiField) {
+        this.guiField = guiField;
+        String description="Hvis 1 virksomhed ejes betales 100 gange så meget som øjene viser<br>";
+        description +="Hvis 2 virksomhed ejes betales 200 gange så meget som øjene viser<br>";
+        guiField.setDescription(description);
 
     }
     private void buyProperty(Player player) {

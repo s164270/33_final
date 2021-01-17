@@ -6,7 +6,7 @@ import player.Player;
 
 public abstract class Field {
     
-    private String name;
+    protected String name;
     protected GUI_Field guiField;
     protected GUI gui;
 

@@ -1,5 +1,6 @@
 package game;
 
+import gui_fields.GUI_Field;
 import gui_fields.GUI_Ownable;
 import gui_main.GUI;
 import player.Player;
@@ -24,11 +25,24 @@ public class ShippingField extends Field implements Ownable{
         this.auction = auction;
         this.pawned=false;
     }
+
+    @Override
+    public void setGuiField(GUI_Field guiField) {
+        this.guiField = guiField;
+        String description=String.format("leje %d kr <br>",rent[0]);
+        for (int i =2 ; i <=4 ; i++)
+        {
+            description += String.format("hvis %d rederier ejes %d kr <br>",i,rent[i-1]);
+        }
+        guiField.setDescription(description);
+    }
+
     private void buyProperty(Player player) {
         player.addPoints(-cost);
         setOwner(player);
 
     }
+
     public void setOwner(Player player) {
         owner = player;
         if (owner!= null)
